@@ -12,3 +12,7 @@ Timeline of all market and index to show % of companies more successful than mar
 
 test commit ✅
 do whole repo update cycle (connect, clone, edit, save, commit & push, disconnect)
+
+6/5/2025: added equities universe.csv
+6/6/2025: access and connect equities universe.csv and save a var.  -- need to research if can store db in google console.  
+6/7/2025: see how gs did it: create new csv to save historical data to via API. 
