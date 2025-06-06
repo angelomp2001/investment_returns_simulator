@@ -6,4 +6,4 @@ import yfinance as yf
 df = pd.read_csv('Equities Universe - Symbols.csv',
                  index_col=0, parse_dates=True)
 
-print(df.head())
+print(df.index)
