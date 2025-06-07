@@ -14,5 +14,6 @@ test commit ✅
 do whole repo update cycle (connect, clone, edit, save, commit & push, disconnect)
 
 6/5/2025: added equities universe.csv
-6/6/2025: access and connect equities universe.csv and save a var.  -- need to research if can store db in google console.  
-6/7/2025: see how gs did it: create new csv to save historical data to via API. 
+6/6/2025: access and connect equities universe.csv and save a var.  -- need to research if can store db in google console.
+6/7/2025: create google big query studio account, uploaded symbols_universe
+6/7/2025: see how google sheets did it: create new csv to save historical data to via API. 
