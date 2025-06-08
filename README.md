@@ -19,4 +19,7 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 
 6/7/2025: create google big query studio account, uploaded symbols_universe
 
+6/8/2025: connect gbq to vs code. ❌ abandoning this until I get help. 
+update/ get from yfinance save to aapl csv
+
 6/7/2025: see how google sheets did it: create new csv to save historical data to via API. 
