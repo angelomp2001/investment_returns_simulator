@@ -1,5 +1,4 @@
-# get data
-# download and save historical data from yahoo finance
+# libraries
 import pandas as pd
 import yfinance as yf
 
@@ -9,23 +8,18 @@ import yfinance as yf
 # bpd.options.display.progress_bar = None
 # df = bpd.read_gbq("gs://'investment returns simulator'/symbols_universe.csv")
 
+# get inputs (symbols)
+symbols = pd.read_csv('Equities Universe - Symbols.csv',
+                      # series
+                      index_col=0, parse_dates=True, names=['Symbol']).reset_index(drop=False)['Symbol']
 
-df = pd.read_csv('Equities Universe - Symbols.csv',
-                 index_col=0, parse_dates=True)
-print(df.index)
 
+yfinance_data = yf.download(symbols[1], group_by="Symbol",
+                            start='2025-01-02', end='2025-01-03', auto_adjust=True, rounding=True)
 
-# data = yf.download('AAPL', group_by="Symbol",
-#                    start='2025-01-02', end='2025-01-03', auto_adjust=True)
+# clean data
+# flatten multi-index columns
+yfinance_data.columns = [col[1] for col in yfinance_data.columns]
 
-# save to csv
-# data.to_csv('AAPL.csv')
-# aapl = pd.DataFrame(data['AAPL'])
-
-print(pd.read_csv('AAPL.csv', index_col=0, parse_dates=True))
-
-#                          AAPL             AAPL.1              AAPL.2              AAPL.3    AAPL.4
-# Ticker
-# Price                    Open               High                 Low               Close    Volume
-# Date                      NaN                NaN                 NaN                 NaN       NaN
-# 2025-01-02  248.3309608077005  248.5005651105234  241.23808511721737  243.26319885253906  55740700
+# save Close as csv
+yfinance_data['Close'].to_csv(symbols[1] + '.csv')  # [Date, Close]
