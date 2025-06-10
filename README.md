@@ -19,7 +19,10 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 
 6/7/2025: create google big query studio account, uploaded symbols_universe
 
-6/8/2025: connect gbq to vs code. ❌ abandoning this until I get help. 
-update/ get from yfinance save to aapl csv
+6/8/2025: update/ get from yfinance save to aapl csv ✅ connect gbq to vs code. ❌ abandoning this until I get help. 
 
-6/7/2025: see how google sheets did it: create new csv to save historical data to via API. 
+6/9/2025: clean yfinance output and save to csv [Date, Close] ✅ see how google sheets did it.
+
+6/10/2025: save all historical data of one symbol to csv: check for min date, max date, and compare to min/max if query to yfinance. 
+
+
