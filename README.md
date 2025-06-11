@@ -43,6 +43,8 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 
 6/10/2025: save all historical data of one symbol to csv: check for min date, max date, ✅ and compare to min/max if query to yfinance. 
 
-6/11/2025: add start end date to symbols CSV. call start end date. 
+6/11/2025: if symbol file, get start end date.  if no symbol file, create and add start end date to symbols CSV. get yfinance data, and save to symbol csv. log start end date to all_symbols file for next time. ✅
+
+6/12/2025: fill out data based on new dates from user, without repulling existing data.  
 
 
