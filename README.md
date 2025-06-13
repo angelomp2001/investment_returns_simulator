@@ -45,6 +45,8 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 
 6/11/2025: if symbol file, get start end date.  if no symbol file, create and add start end date to symbols CSV. get yfinance data, and save to symbol csv. log start end date to all_symbols file for next time. ✅
 
-6/12/2025: fill out data based on new dates from user, without repulling existing data.  
+6/12/2025: fill out data based on new dates from user, without repulling existing data. and test on yfinance. ✅
+
+6/13/2025: save yfinance_data to csv based on if it's case 0 - 4, or case 5.  
 
 
