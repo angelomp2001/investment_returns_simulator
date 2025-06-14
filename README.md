@@ -11,7 +11,7 @@ This project ventures to simulate any proposed equity portfolio composition, acr
 all possible returns
 X = Start date to date, y = start date to date, z = total portfolio return from start date (x) to end date (y). 
 
-Histogram of total portfolio returns. split by negative returns and positive returns. histogram of start dates and neg return count. barchart of start dates and returns. bar chart of end dates and returns. is there a pattern related to when to start and stop? brief investment horizon? is it more about particular days?
+Histogram of total portfolio returns. split by negative returns and positive returns. histogram of start dates and neg return count. barchart of start dates and returns. bar chart of end dates and returns. is there a pattern related to when to start and stop? brief investment horizon? is it more about particular days? list all common time patterns. 
 
 Statistics:
 Probability of losing money, breaking even, making money.  
