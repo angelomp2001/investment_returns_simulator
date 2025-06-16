@@ -49,10 +49,12 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 
 6/13/2025: save yfinance_data to csv based on if it's case 0 - 4, or case 5.  ✅
 
-6/14/2025: update readme with greater clarity on what the analysis on the time vars will actually be. 
+6/14/2025: update readme with greater clarity on what the analysis on the time vars will actually be. ✅
 
-6/15/2025: research backend dbs: gcp/cloud storage. see Straico. 
+6/15/2025: research backend dbs: gcp/cloud storage. see Straico. Connected google big query to vs code. ✅
 
-6/16/2025: apply medallion data architecture to format code. see notes file. roll up the 2 functions into 1 function, because get_existing_dates is only being called once.  
+6/16/2025: get python files talking to each other.  test all cases again.  start getting data by symbol. 
+
+6/17/2025: apply medallion data architecture to format code. see notes file. roll up the 2 functions into 1 function, because get_existing_dates is only being called once.  
 
 
