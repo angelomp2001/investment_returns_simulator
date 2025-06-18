@@ -55,8 +55,10 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 
 6/16/2025: test all cases again. ✅
 
-6/17/2025: resolve bug: end date is off by 1 sometimes. testing providing multiple symbols. start getting data by symbol. get python files talking to each other.  
+6/17/2025: update readme. ✅
 
-6/18/2025: apply medallion data architecture to format code. see notes file. roll up the 2 functions into 1 function, because get_existing_dates is only being called once.  apply SQLite. 
+6/18/2025: resolve bug: end date is off by 1 sometimes. roll up the 2 functions into 1 function, because get_existing_dates is only being called once. ✅ testing providing multiple symbols. start getting data by symbol. get python files talking to each other.  
+
+6/18/2025: apply medallion data architecture to format code. see notes file.  apply SQLite. 
 
 
