@@ -2,7 +2,7 @@
 import pandas as pd
 import yfinance as yf
 from pathlib import Path
-#from datetime import date
+from datetime import date
 import numpy as np
 
 # trying to use bigframes
@@ -23,12 +23,12 @@ all_symbols_data = pd.read_csv(
 
 
 # select symbol
-symbols = ['APLD','ANVS'] # get symbol(s)
+symbols = ['TSLA','NVDA','META','AMZN','GOOG','MSFT','O','AAPL'] # get symbol(s)
 print(f'symbols: {symbols}')
 
 # user start and end dates
-start_date = '2025-04-01'
-end_date = '2025-05-01'  # date.today().strftime('%Y-%m-%d')
+start_date = '2020-01-01'
+end_date = date.today().strftime('%Y-%m-%d')
 
 # immediately convert to datetime
 start_date = pd.to_datetime(start_date)  # type: timestamp
@@ -222,4 +222,4 @@ def get_yfinance_data(symbols, start_date, end_date):
             print(f'Error getting data from yfinance: {e}')
 
 
-get_yfinance_data(symbols, start_date, end_date)
+# get_yfinance_data(symbols, start_date, end_date)
