@@ -61,7 +61,9 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 
 6/19/2025: apply SQLite. get python files talking to each other. ✅
 
-6/20/2025: make a portfolio (symbols, start, end), create function that queries in SQL portfolio parameters, summing up portfolio returns WHILE appling medallion data architecture to format code. see notes file.  
+6/20/2025: return stock price change via SQL WHILE appling medallion data architecture to format code. ✅
+
+6/21/2025: return portfolio (symbols, start, end) ROI, summing up portfolio returns.  
 
 
 
