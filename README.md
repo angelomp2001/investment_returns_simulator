@@ -63,7 +63,9 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 
 6/20/2025: return stock price change via SQL WHILE appling medallion data architecture to format code. ✅
 
-6/21/2025: return portfolio (symbols, start, end) ROI, summing up portfolio returns.  
+6/21/2025: return portfolio (symbols, start, end) ROI, summing up portfolio returns. 
+
+6/22/2025: make symbol and porfolio ROI table (start x end) and plot surface. 
 
 
 
