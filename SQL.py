@@ -102,29 +102,64 @@ def query_bronze(symbol):
 
 
 def transform_silver(raw_rows):
+    # this function transforms the raw data into 4 key values
     # 2) extract first & last
     start_date, start_price = raw_rows[0]
     end_date,   end_price   = raw_rows[-1]
     return start_date, start_price, end_date, end_price
 
 def aggregate_gold(start_date, start_price, end_date, end_price):
-    # 3) compute percent change
-    pct = (end_price - start_price) / start_price
-    return pct
+    # this function computes the aggregate values from inputs
+    # format vars
+    start_date = pd.to_datetime(start_date)
+    end_date = pd.to_datetime(end_date)
+    # 3) compute aggregate values
+    gain_loss = (end_price - start_price) # gain or loss in investment
+    avg_pct_change = (end_price/start_price) ** (1/(end_date-start_date).days) - 1  # Geometric mean of daily returns
+    return gain_loss, avg_pct_change
 
+def gain_loss(symbols, start_date, end_date):
+    #initialize an empty DataFrame and new row data to store the results
+    df = pd.DataFrame(columns=['symbol', 'start_date_close', 'end_date_close', 'aggregate'])
+    new_rows = []
+    # Loop through each symbol
+    for symbol in symbols:
+        # bronze layer queries the database
+        print(f"Processing {symbol}...")
+        raw_rows = query_bronze(symbol)
 
-# bronze layer queries the database
-raw_rows = query_bronze(symbols[0])
+        # silver layer turns many rows into 4 key values
+        print(f"Transforming {symbol} data...")
+        start_date, start_price, end_date, end_price = transform_silver(raw_rows)
 
-# silver layer turns many rows into 4 key values
-start_date, start_price, end_date, end_price = transform_silver(raw_rows)
+        # gold layer computes the final metric
+        print(f"Aggregating {symbol} data...")
+        aggregate, _ = aggregate_gold(start_date, start_price,
+                                        end_date, end_price)
+        
+        # Append aggregate to df
+        print(f"Appending {symbol} data to DataFrame...")
+        new_rows.append({
+            'symbol': symbol,
+            'start_date_close': start_price,
+            'end_date_close': end_price,
+            'aggregate': aggregate
+        })
+    
+    # Append new rows to the DataFrame
+    print(f"Appending new rows to DataFrame...")
+    df_new_rows = pd.DataFrame(new_rows)
+    df = pd.concat([df, df_new_rows], axis=0)
+    # calculate gain/loss
+    print(f"Calculating gain/loss for portfolio...")
+    gain_loss = df['aggregate'].sum()
+    return df, gain_loss
 
-# gold layer computes the final metric
-percent_change = aggregate_gold(start_date, start_price,
-                                end_date, end_price)
+df, gain_loss = gain_loss(symbols, start_date, end_date)
 
-print(f"{symbols[0]}: {percent_change:.2%} "
-      f"(from {start_date}→{end_date})")
+print("Portfolio: \n", df.head())
+print(f"gain/loss: {gain_loss} " # {aggregate:.2%} " # for percentage
+    f"(from {start_date} → {end_date})")
 
 
 # # Clean up: Remove the database file after use
