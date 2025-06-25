@@ -67,7 +67,8 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 
 6/22/2025: return portfolio (symbols, start, end) ROI, summing up portfolio returns. ✅
 
-6/23/2025: make symbol and porfolio ROI table (start x end) and plot surface. 
+
+6/26/2025: make symbol and porfolio ROI table (start x end) and plot surface. 
 
 
 
