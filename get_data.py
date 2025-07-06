@@ -1,57 +1,27 @@
-# libraries
 import pandas as pd
 import yfinance as yf
 from pathlib import Path
 from datetime import date
 import numpy as np
 
-# trying to use bigframes
-# import bigframes.bigquery
-# import bigframes.pandas as bpd
-# bpd.options.display.progress_bar = None
-# df = bpd.read_gbq("gs://'investment returns simulator'/symbols_universe.csv")
 
-# get inputs
-# get symbols universe
+############################## Information on where data is and how to get it ##############################
 all_symbols_path = Path('Equities Universe - Symbols.csv')
-all_symbols_data = pd.read_csv(
-    all_symbols_path,
-    index_col='symbol',
-    # Explicitly specify columns to parse as dates
-    parse_dates=['start_date', 'end_date']
-)
+all_symbols_data = pd.read_csv(all_symbols_path,index_col='symbol',parse_dates=['start_date', 'end_date'])
 
-
-# select symbol
-symbols = ['TSLA','NVDA','META','AMZN','GOOG','MSFT','O','AAPL'] # get symbol(s)
-print(f'symbols: {symbols}')
-
-# user start and end dates
-start_date = '2020-01-01'
-end_date = date.today().strftime('%Y-%m-%d')
-
-# immediately convert to datetime
-start_date = pd.to_datetime(start_date)  # type: timestamp
-end_date = pd.to_datetime(end_date)  # type: timestamp
-
-# function for getting existing dates from all_symbols csv
-
-
-
-
-
-def get_yfinance_data(symbols, start_date, end_date):
-    print(f'Getting yfinance data for symbols: {symbols} from {start_date} to {end_date}')
-     # get file path
-    for symbol in symbols:
-        print(f'Processing symbol: {symbol}')
+def symbol_data_existing_dates(
+        symbol: str = None
+        ):
+        '''
+        Returns start and end date for existing data
+        '''
+        #initialize vars
+        symbol = symbol if isinstance(symbol, str) else [symbol]
         symbol_file_path = Path(symbol + '.csv')
+        existing_start_date = None
+        existing_end_date = None
+        
 
-        # check what you already have
-        date_ranges = []
-        case = np.nan
-        #existing_start_date, existing_end_date = get_existing_dates(symbol)
-        #def get_existing_dates(symbol):
         if symbol_file_path.exists():
             print(f'file exists')
             for chunk in pd.read_csv(all_symbols_path, index_col=0, chunksize=1):
@@ -60,18 +30,53 @@ def get_yfinance_data(symbols, start_date, end_date):
                         chunk.loc[symbol, 'start_date'])
                     existing_end_date = pd.to_datetime(
                         chunk.loc[symbol, 'end_date'])
-                    print(
-                        f'get_existing_dates(): existing_start_date: {existing_start_date}, existing_end_date: {existing_end_date}')
-                    #return existing_start_date, existing_end_date
         else:
-            print(f'no existing dates')
+            print(f'dates not found')
             existing_start_date = None
             existing_end_date = None
-        # create data mask and save to new csv file
+        return existing_start_date, existing_end_date
 
-        print(
-            f'existing data for {symbol}:, date range:{existing_start_date}, {existing_end_date}')
 
+def get_symbol_data(
+        symbols: list[str] = None,
+        start_date: date = None,
+        end_date: date = None
+        ):
+    '''
+    0. Initialize vars
+    1. Check if data already stored in db
+    2. Define new data data range based on existing data date range
+        case 0: no existing data
+        case 1: start date and end date are before existing range: s---e___es===ee
+        case 2: start date is before existing range: s---es===e===ee
+        case 3: start date and end date are within existing range: es===s===e===ee
+        case 4: start date and end date are after existing range: es===s===ee---e
+        case 5: start date and end date are after existing range: es===ee___s---e
+        case 6: start date is before existing range and end date is after existing range: s---es===ee---e
+    3. Get new data
+        make data mask for incoming data
+        save data mask to csv
+        get data from yfinance
+        clean yfinance data
+        save Close as csv
+    4. Return data
+    '''
+    #Initialize vars
+    symbols = [symbols] if isinstance(symbols, str) else symbols
+    start_date = pd.to_datetime(start_date)  
+    end_date = pd.to_datetime(end_date) 
+    case = np.nan
+    date_ranges = []
+    df = pd.DataFrame()
+
+    # get file path
+    for symbol in symbols:
+
+        #Initialize vars
+        print(f'Processing symbol: {symbol}')
+        symbol_file_path = Path(symbol + '.csv')
+        existing_start_date, existing_end_date = symbol_data_existing_dates(symbol)
+        
         # case 0: no existing data
         if existing_start_date is None or existing_end_date is None:
             new_data_end_date = end_date
@@ -158,8 +163,8 @@ def get_yfinance_data(symbols, start_date, end_date):
 
                 # get data from yfinance
                 yfinance_params = {
-                    'start': start_date,  # [inclusive]
-                    'end': end_date + pd.Timedelta(days=1),  # [exclusive] 
+                    'start': start_date,  # [default inclusive]
+                    'end': end_date + pd.Timedelta(days=1),  # [default exclusive] 
                     'auto_adjust': True,
                     'rounding': True,
                     'group_by': "Symbol"
@@ -186,8 +191,6 @@ def get_yfinance_data(symbols, start_date, end_date):
                     existing_symbol_data.loc[yfinance_data.index, 'Close'] = yfinance_data['Close']
                     existing_symbol_data.to_csv(symbol_file_path, index_label='Date')
                     print(f'existing data index range: {existing_symbol_data.index.min()} to {existing_symbol_data.index.max()}')
-
-
                     
                 except FileNotFoundError:
                     print(f'existing data not found for adding to data mask.')            
@@ -216,10 +219,49 @@ def get_yfinance_data(symbols, start_date, end_date):
                 print(f'new data saved for {symbol} from range: {all_symbols_data.loc[symbol, "start_date"]} to {all_symbols_data.loc[symbol, "end_date"]}')
 
                 # update existing_start_date and existing_end_date for next iteration
-                existing_start_date, existing_end_date = get_existing_dates(symbol)
+                existing_start_date, existing_end_date = symbol_data_existing_dates(symbol)
 
         except Exception as e:
             print(f'Error getting data from yfinance: {e}')
+        
+        "Return data"
+        date_range = pd.date_range(start_date, end_date)
+        for chunk in pd.read_csv(symbol_file_path, index_col=0, chunksize=1):
+            for date in chunk.index:
+                if date in date_range:
+                    df.loc[date, symbol] = chunk.loc[date, 'Close']
+    
+    return df
 
 
-# get_yfinance_data(symbols, start_date, end_date)
+def symbol_data_to_returns_df(
+        df: pd.DataFrame = None,
+        ):
+    '''
+    turning get_data df into portfolio_df
+    '''
+    #initialize vars
+    symbol_prices = df.dropna(axis = 0, how='all')
+    start_date = df.index.min()
+    end_date = df.index.max()
+    symbols = df.columns.tolist()
+    portfolio_df = pd.DataFrame(index=symbol_prices.index, columns=symbol_prices.index, dtype=float).fillna(0.0)
+    date_range = pd.date_range(start_date, end_date)
+    date_range = [date.strftime('%Y-%m-%d') for date in date_range]
+
+
+    # Popuate portfolio_df using df
+    for symbol in symbols:
+        for start in date_range:
+            for end in date_range:
+                if start in symbol_prices.index and end in symbol_prices.index:
+                    if start <= end:
+                        portfolio_df.loc[start, end] +=  symbol_prices.loc[end,symbol] - symbol_prices.loc[start, symbol]
+                
+
+    # Rename the index and columns for clarity
+    portfolio_df.index.name = 'start'
+    portfolio_df.columns.name = 'end'
+
+    return portfolio_df
+

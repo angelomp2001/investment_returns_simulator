@@ -1,6 +1,6 @@
 import sqlite3
 import pandas as pd
-from functions import symbols, get_yfinance_data, start_date, end_date
+from get_data import symbols, get_yfinance_data, start_date, end_date
 from pathlib import Path
 
 # This query selects all columns from the first symbol in the symbols list.
