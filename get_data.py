@@ -9,6 +9,8 @@ import numpy as np
 all_symbols_path = Path('Equities Universe - Symbols.csv')
 all_symbols_data = pd.read_csv(all_symbols_path,index_col='symbol',parse_dates=['start_date', 'end_date'])
 
+chunksize = 1000  # Number of rows per chunk for reading large CSV files
+
 def symbol_data_existing_dates(
         symbol: str = None
         ):
@@ -24,7 +26,7 @@ def symbol_data_existing_dates(
 
         if symbol_file_path.exists():
             print(f'file exists')
-            for chunk in pd.read_csv(all_symbols_path, index_col=0, chunksize=1):
+            for chunk in pd.read_csv(all_symbols_path, index_col=0, chunksize=chunksize):
                 if symbol in chunk.index:
                     existing_start_date = pd.to_datetime(
                         chunk.loc[symbol, 'start_date'])
@@ -226,7 +228,7 @@ def get_symbol_data(
         
         "Return data"
         date_range = pd.date_range(start_date, end_date)
-        for chunk in pd.read_csv(symbol_file_path, index_col=0, chunksize=1):
+        for chunk in pd.read_csv(symbol_file_path, index_col=0, chunksize=chunksize):
             for date in chunk.index:
                 if date in date_range:
                     df.loc[date, symbol] = chunk.loc[date, 'Close']
@@ -235,33 +237,49 @@ def get_symbol_data(
 
 
 def symbol_data_to_returns_df(
-        df: pd.DataFrame = None,
+        portfolio_1: pd.DataFrame = None,
+        market_index: pd.DataFrame = None,
         ):
     '''
     turning get_data df into portfolio_df
     '''
-    #initialize vars
-    symbol_prices = df.dropna(axis = 0, how='all')
-    start_date = df.index.min()
-    end_date = df.index.max()
-    symbols = df.columns.tolist()
-    portfolio_df = pd.DataFrame(index=symbol_prices.index, columns=symbol_prices.index, dtype=float).fillna(0.0)
-    date_range = pd.date_range(start_date, end_date)
-    date_range = [date.strftime('%Y-%m-%d') for date in date_range]
+    # Initialize vars
+    sum_dfs = None
+    
+    for df in [portfolio_1, market_index]:
+        try:
+
+            #initialize vars
+            symbol_prices = df.dropna(axis = 0, how='all')
+            start_date = df.index.min()
+            end_date = df.index.max()
+            symbols = df.columns.tolist()
+            portfolio_df = pd.DataFrame(index=symbol_prices.index, columns=symbol_prices.index, dtype=float).fillna(0.0)
+            date_range = pd.date_range(start_date, end_date)
+            date_range = [date.strftime('%Y-%m-%d') for date in date_range]
 
 
-    # Popuate portfolio_df using df
-    for symbol in symbols:
-        for start in date_range:
-            for end in date_range:
-                if start in symbol_prices.index and end in symbol_prices.index:
-                    if start <= end:
-                        portfolio_df.loc[start, end] +=  symbol_prices.loc[end,symbol] - symbol_prices.loc[start, symbol]
-                
+            # Popuate portfolio_df using df
+            for symbol in symbols:
+                for start in date_range:
+                    for end in date_range:
+                        if start in symbol_prices.index and end in symbol_prices.index:
+                            if start <= end:
+                                portfolio_df.loc[start, end] +=  symbol_prices.loc[end,symbol] - symbol_prices.loc[start, symbol]
+                        
 
-    # Rename the index and columns for clarity
-    portfolio_df.index.name = 'start'
-    portfolio_df.columns.name = 'end'
+            # Rename the index and columns for clarity
+            portfolio_df.index.name = 'start'
+            portfolio_df.columns.name = 'end'
 
-    return portfolio_df
+            # If multiple DataFrames, sum them element-wise; otherwise, use the current one.
+            if sum_dfs is None:
+                sum_dfs = portfolio_df
+            else:
+                sum_dfs = sum_dfs.subtract(portfolio_df, fill_value=0)
+        except Exception as e:
+            print(f'Error processing DataFrame: {e}')
+        
+
+    return sum_dfs
 

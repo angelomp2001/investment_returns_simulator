@@ -4,30 +4,33 @@ import numpy as np
 
 def stats(
         portfolio_df_1: pd.DataFrame = None, # Portfolio
-        portfolio_df_2: pd.DataFrame = None, # Index
+        market_index: pd.DataFrame = None, # Index
         ):
         """
         input: (portfolio_df_1, portfolio_df_2)
-        output: accuracy, precision, recall, f1_score
+        output: same_gain_loss_pct, same_gain_index_gain_pct, same_gain_portfolio_gain_pct, average_same_gain_pct
         """
 
         portfolio_df_1 = portfolio_df_1.applymap(np.sign)
-        portfolio_df_2 = portfolio_df_2.applymap(np.sign)
+        market_index = market_index.applymap(np.sign)
 
+        # drop na
+        portfolio_df_1 = portfolio_df_1.dropna(axis=0, how='all')
+        market_index = market_index.dropna(axis=0, how='all')
         # N (counts)
-        TN = ((portfolio_df_1 == -1) & (portfolio_df_2 == -1)).to_numpy().sum()
-        TP = ((portfolio_df_1 == 1) & (portfolio_df_2 == 1)).to_numpy().sum()
-        FN = ((portfolio_df_1 == 1) & (portfolio_df_2 == -1)).to_numpy().sum()
-        FP = ((portfolio_df_1 == -1) & (portfolio_df_2 == 1)).to_numpy().sum()
+        same_loss = ((portfolio_df_1 == -1) & (market_index == -1)).to_numpy().sum() #TN
+        same_gain = ((portfolio_df_1 == 1) & (market_index == 1)).to_numpy().sum() #TP
+        portfolio_gain = ((portfolio_df_1 == 1) & (market_index == -1)).to_numpy().sum() #FN
+        index_gain = ((portfolio_df_1 == -1) & (market_index == 1)).to_numpy().sum() #FP
 
         #metrics
-        accuracy = (TP + TN) / (TP + TN + FP + FN) if (TP + TN + FP + FN) > 0 else 0
-        precision = TP / (TP + FP) if (TP + FP) > 0 else 0
-        recall = TP / (TP + FN) if (TP + FN) > 0 else 0
-        f1 = 2 / ((1 / precision) + (1 / recall)) if (precision + recall) > 0 else 0
+        same_gain_loss_pct  = (same_gain + same_loss) / (same_gain + same_loss + index_gain + portfolio_gain) if (same_gain + same_loss + index_gain + portfolio_gain) > 0 else 0 # accuracy
+        same_gain_index_gain_pct  = same_gain / (same_gain + index_gain) if (same_gain + index_gain) > 0 else 0 # precision
+        same_gain_portfolio_gain_pct  = same_gain / (same_gain + portfolio_gain) if (same_gain + portfolio_gain) > 0 else 0 # recall
+        average_same_gain_pct  = 2 / ((1 / same_gain_index_gain_pct) + (1 / same_gain_portfolio_gain_pct)) if (same_gain_index_gain_pct + same_gain_portfolio_gain_pct) > 0 else 0 # f1
         
-        print(f'accuracy: {accuracy}')
-        print(f'precision: {precision}')
-        print(f'recall: {recall}')
-        print(f'f1: {f1}')
-        return accuracy, precision, recall, f1
+        print(f'same_gain_loss_pct: {same_gain_loss_pct}')
+        print(f'same_gain_index_gain_pct: {same_gain_index_gain_pct}')
+        print(f'same_gain_portfolio_gain_pct: {same_gain_portfolio_gain_pct}')
+        print(f'average_same_gain_pct: {average_same_gain_pct}')
+        return same_gain_loss_pct, same_gain_index_gain_pct, same_gain_portfolio_gain_pct, average_same_gain_pct

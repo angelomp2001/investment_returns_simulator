@@ -3,19 +3,25 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from pathlib import Path
+from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm
 
 
 def two_d_heatmap(
-        df: pd.DataFrame = None,
+        returns_df: pd.DataFrame = None,
     ):
     "2D heatmap of start to end dates and gains"
-    # Convert the index and columns to datetime for better formatting
-    df.index = pd.to_datetime(df.index)
-    df.columns = pd.to_datetime(df.columns)
 
     # Create the heatmap
     plt.figure(figsize=(12, 8))
-    ax = sns.heatmap(df, annot=True, cmap='PiYG', fmt=".2f", linewidths=0.5)
+
+    # Create a custom colormap: red for negative, white for zero, green for positive.
+    cmap = LinearSegmentedColormap.from_list("custom_cmap", ["red", "white", "green"], N=256)
+
+    # Create a normalization instance that centers at zero.
+    norm = TwoSlopeNorm(vmin=returns_df.min().min(), vcenter=0, vmax=returns_df.max().max())
+
+    # Plot the heatmap
+    ax = sns.heatmap(returns_df, annot=False, cmap=cmap, norm=norm, fmt=".2f", linewidths=0.5)
 
     # Add labels and title
     ax.set_xlabel('End Dates')
