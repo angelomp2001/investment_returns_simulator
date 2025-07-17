@@ -6,29 +6,23 @@ from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.colors as mcolors
 import numpy as np
-from charts import two_d_heatmap, three_d_plot
-from stats import stats
+from charts import timeline
+from stats import compare_returns
 
 
 #pd.set_option('display.max_rows', None)
-start_date = '2020-02-01'
+START_DATE = '2020-02-01'
 end_date = '2020-12-10'
+symbol = 'TSLA'
 
-portfolio = ['MSFT']
-portfolio_df = get_symbol_data(portfolio, start_date, end_date)
-portfolio_returns = symbol_data_to_returns_df(portfolio_df)
-print(f'\nportfolio_df_1:\n{portfolio_returns.head()}')
+TSLA = pd.read_csv(Path(f'tsla.csv'), index_col='Date', parse_dates=True)
+O = pd.read_csv(Path(f'O.csv'), index_col='Date', parse_dates=True)
 
-market_index = ['VOOG']
-market_index_df = get_symbol_data(market_index, start_date, end_date)
-market_index_returns = symbol_data_to_returns_df(market_index_df)
-print(f'\nportfolio_df_2:\n{market_index_returns.head()}')
+symbol_df = pd.DataFrame()
+symbol_df['TSLA'] = pd.DataFrame(TSLA['Close'])
+symbol_df['O'] = pd.DataFrame(O['Close'])
 
-net_returns = symbol_data_to_returns_df(portfolio_df, market_index_df)
-print(f'\nnet_returns:\n{net_returns}')
+timeline(symbol_data=symbol_df, start_date=START_DATE, end_date=end_date,y_axis='change')
 
-stats(portfolio_returns, market_index_returns)
 
-two_d_heatmap(net_returns)
 
-print(f'\n')

@@ -14,6 +14,19 @@ end_date = date.today().strftime('%Y-%m-%d')
 df_1 = get_symbol_data(portfolio_1, start_date, end_date)
 df_2 = get_symbol_data(portfolio_2, start_date, end_date)
 
-stats(df_1, df_2)
+portfolio = ['MSFT']
+portfolio_df = get_symbol_data(portfolio, start_date, end_date)
+portfolio_returns = symbol_data_to_returns_df(portfolio_df)
+print(f'\nportfolio_df_1:\n{portfolio_returns.head()}')
 
-#two_d_heatmap(df)
+market_index = ['VOOG']
+market_index_df = get_symbol_data(market_index, start_date, end_date)
+market_index_returns = symbol_data_to_returns_df(market_index_df)
+print(f'\nportfolio_df_2:\n{market_index_returns.head()}')
+
+net_returns = symbol_data_to_returns_df(portfolio_df, market_index_df)
+print(f'\nnet_returns:\n{net_returns}')
+
+stats(portfolio_returns, market_index_returns)
+
+returns_heatmap(net_returns)

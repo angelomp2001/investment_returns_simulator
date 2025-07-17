@@ -6,7 +6,7 @@ from pathlib import Path
 from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm
 
 
-def two_d_heatmap(
+def returns_heatmap(
         returns_df: pd.DataFrame = None,
     ):
     "2D heatmap of start to end dates and gains"
@@ -73,5 +73,60 @@ def three_d_plot(
     ax.set_yticks(y[0])
     ax.set_yticklabels([item.strftime('%Y-%m-%d') for item in pd.to_datetime(df.columns)], rotation=0)
 
+    plt.tight_layout()
+    plt.show()
+
+
+def timeline(
+    symbol_data: pd.DataFrame = None,
+    start_date: str = None,
+    end_date: str = None,
+    symbol: str = None,
+    y_axis: str = 'close',
+):
+    """
+    Create a timeline change chart for a given symbol data.
+    Shows how the price changes relative to the starting price.
+    """
+    # initialize vars
+    start_date = pd.to_datetime(start_date) if start_date else None
+    end_date = pd.to_datetime(end_date) if end_date else None
+    start_date = start_date if start_date in symbol_data.index else symbol_data.index[0]
+    end_date = end_date if end_date in symbol_data.index else symbol_data.index[-1]
+    
+    symbol_data = symbol_data.dropna(axis=0, how='all')
+    symbol_data = symbol_data.loc[start_date:end_date]
+
+    if symbol is None:
+        column = symbol_data.columns[0]
+    else:
+        column = symbol
+
+    # Slice data for given date range
+    
+
+    if y_axis == 'relative change':
+        starting_price = symbol_data[column].iloc[0]
+        symbol_data[column] = symbol_data[column] / starting_price
+    else:
+        y_axis == 'close'
+    
+    # Plot
+    for col in symbol_data.columns:
+        series = symbol_data[col].copy()
+
+        if y_axis == 'change':
+            starting_price = series.iloc[0]
+            series = series / starting_price
+            #plt.axhline(y=1, color='gray', linestyle='--', linewidth=0.5, alpha=0.5)
+
+        plt.plot(series.index, series, marker='', linestyle='-', label=col)
+
+    plt.title("Price Timeline" + (" (Relative to Start)" if y_axis == 'change' else ""))
+    plt.xlabel("Date")
+    plt.ylabel("Price Ratio" if y_axis == 'change' else "Price")
+    plt.grid(True)
+    plt.xticks(rotation=45)
+    plt.legend()
     plt.tight_layout()
     plt.show()
