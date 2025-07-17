@@ -3,6 +3,7 @@ import yfinance as yf
 from pathlib import Path
 from datetime import date
 import numpy as np
+import datetime as dt
 
 
 ############################## Information on where data is and how to get it ##############################
@@ -239,44 +240,66 @@ def get_symbol_data(
 def symbol_data_to_returns_df(
         portfolio_1: pd.DataFrame = None,
         market_index: pd.DataFrame = None,
+        start_date: str = None,
+        end_date: str = None,
+        value: str = None
         ):
     '''
-    turning get_data df into portfolio_df
+    turning get_data df into returns_df, accounting for multiple dfs: (df(P1/P0) -1)  - (df(P1/P0) -1)
     '''
     # Initialize vars
     sum_dfs = None
     
-    for df in [portfolio_1, market_index]:
+    for df in [portfolio_1]:#, market_index]:
         try:
 
             #initialize vars
             symbol_prices = df.dropna(axis = 0, how='all')
-            start_date = df.index.min()
-            end_date = df.index.max()
+            if start_date is None or end_date is None:
+                start_date = symbol_prices.index.min()
+                end_date = symbol_prices.index.max()
+            else:
+                start_date = pd.to_datetime(start_date)
+                end_date = pd.to_datetime(end_date)
+
+
             symbols = df.columns.tolist()
-            portfolio_df = pd.DataFrame(index=symbol_prices.index, columns=symbol_prices.index, dtype=float).fillna(0.0)
-            date_range = pd.date_range(start_date, end_date)
-            date_range = [date.strftime('%Y-%m-%d') for date in date_range]
+            date_range = symbol_prices.loc[start_date:end_date].index
+
+            returns_df = pd.DataFrame(index=date_range, columns=date_range, dtype=float).fillna(0.0)
+            #date_range = [date.strftime('%Y-%m-%d') for date in date_range]
 
 
-            # Popuate portfolio_df using df
+            # Populate returns_df using df
             for symbol in symbols:
                 for start in date_range:
                     for end in date_range:
                         if start in symbol_prices.index and end in symbol_prices.index:
-                            if start <= end:
-                                portfolio_df.loc[start, end] +=  symbol_prices.loc[end,symbol] - symbol_prices.loc[start, symbol]
+                            if start < end:
+                                if value == 'close': #✅
+                                    returns_df.loc[start, end] += symbol_prices.loc[end,symbol]
+                                elif value == 'change': #✅
+                                    returns_df.loc[start, end] += round(symbol_prices.loc[end,symbol] / symbol_prices.iloc[symbol_prices.index.get_loc(end) - 1][symbol],2) - 1
+                                elif value == None or value == 'relative_change': #✅
+                                    returns_df.loc[start, end] +=  round(symbol_prices.loc[end,symbol] / symbol_prices.loc[start, symbol],2) - 1
+                                elif value == 'change_b': 
+                                    returns_df.loc[start, end] += np.where(
+                                        (round(symbol_prices.loc[end,symbol] / symbol_prices.iloc[symbol_prices.index.get_loc(end) - 1][symbol],0) - 1) > 0, 1, -1)
+                                elif value == 'relative_change_b':
+                                    returns_df.loc[start, end] += np.where(
+                                        (round(symbol_prices.loc[end, symbol] / symbol_prices.loc[start, symbol], 0) - 1) > 0,
+                                          1, -1)
                         
 
             # Rename the index and columns for clarity
-            portfolio_df.index.name = 'start'
-            portfolio_df.columns.name = 'end'
+            returns_df.index.name = 'start'
+            returns_df.columns.name = 'end'
 
             # If multiple DataFrames, sum them element-wise; otherwise, use the current one.
             if sum_dfs is None:
-                sum_dfs = portfolio_df
+                sum_dfs = returns_df
             else:
-                sum_dfs = sum_dfs.subtract(portfolio_df, fill_value=0)
+                sum_dfs = sum_dfs.subtract(returns_df, fill_value=0)
         except Exception as e:
             print(f'Error processing DataFrame: {e}')
         

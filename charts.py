@@ -7,9 +7,14 @@ from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm
 
 
 def returns_heatmap(
-        returns_df: pd.DataFrame = None,
+        returns_df: pd.DataFrame = None
     ):
     "2D heatmap of start to end dates and gains"
+
+    # Create a copy and format the index/columns to show only dates
+    plot_df = returns_df.copy()
+    plot_df.index = plot_df.index.strftime('%Y-%m-%d')
+    plot_df.columns = plot_df.columns.strftime('%Y-%m-%d')
 
     # Create the heatmap
     plt.figure(figsize=(12, 8))
@@ -21,7 +26,7 @@ def returns_heatmap(
     norm = TwoSlopeNorm(vmin=returns_df.min().min(), vcenter=0, vmax=returns_df.max().max())
 
     # Plot the heatmap
-    ax = sns.heatmap(returns_df, annot=False, cmap=cmap, norm=norm, fmt=".2f", linewidths=0.5)
+    ax = sns.heatmap(plot_df, annot=False, cmap=cmap, norm=norm, fmt=".2f", linewidths=0.5)
 
     # Add labels and title
     ax.set_xlabel('End Dates')
@@ -130,3 +135,4 @@ def timeline(
     plt.legend()
     plt.tight_layout()
     plt.show()
+
