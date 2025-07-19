@@ -39,60 +39,80 @@ def compare_returns(
         return same_gain_loss_pct, same_gain_index_gain_pct, same_gain_portfolio_gain_pct, average_same_gain_pct, portfolio_advantage
 
 def stats(
-        symbol_df: pd.DataFrame,
+        symbol_df: pd.DataFrame, #symbol_data
         first_series_symbol: str = None,
         start_date: str = None,
         end_date: str = None,
         ):
-        """
-        input: (symbol_df)
-        output: quantity stats, quality stats
-        """
-        # initialize vars
-        symbol_df = symbol_df.dropna(axis=0, how='all')
+    """
+    input: (symbol_df: DataFrame or Series)
+    output: quantity stats, quality stats
+    """
+    d = 40 # number of consecutive days required to define consistent gain
+    # If symbol_df is a Series, convert it into a DataFrame
+    if isinstance(symbol_df, pd.Series):
+        symbol_df = symbol_df.to_frame()
+    
+    # Ensure that the index is datetime if possible
+    if not pd.api.types.is_datetime64_any_dtype(symbol_df.index):
+        try:
+            symbol_df.index = pd.to_datetime(symbol_df.index)
+        except Exception as e:
+            raise ValueError("Index must be datetime-like or convertible to datetime.") from e
 
-        # if first_series_symbol is provided, rename the first series
-        if first_series_symbol:
-               symbol_df.rename(columns={symbol_df.columns[0]: first_series_symbol}, inplace=True)
-        else:
-               pass
-        
-        if start_date is None or end_date is None:
-            start_date = symbol_df.index[0]
-            end_date = symbol_df.index[-1]
-        else:
-            start_date = pd.to_datetime(start_date)
-            end_date = pd.to_datetime(end_date)
+    # Drop rows with all NaN values
+    symbol_df = symbol_df.dropna(axis=0, how='all')
 
-        # set stats df index
-        stats_index = symbol_df.columns.to_list()
-        # Define dtypes dictionary (columns defined here)
-        stats_dict = {
+    # If first_series_symbol is provided, rename the first series
+    if first_series_symbol:
+        symbol_df.rename(columns={symbol_df.columns[0]: first_series_symbol}, inplace=True)
+    
+    # Set date range bounds if not explicitly provided
+    if start_date is None or end_date is None:
+        start_date = symbol_df.index[0]
+        end_date = symbol_df.index[-1]
+    else:
+        start_date = pd.to_datetime(start_date)
+        end_date = pd.to_datetime(end_date)
+
+    # Subset the symbol_df for the given date range
+    symbol_df = symbol_df.loc[start_date:end_date]
+
+    # set stats df index (each symbol is one column)
+    stats_index = symbol_df.columns.to_list()
+
+    # Define dtypes dictionary (columns defined here)
+    stats_dict = {
+        'n_change': 'Int64',
         'n_gain': 'Int64',
         'gain_ratio': 'float64',
+        'd': 'Int64',
+        'd_gain_b': 'Int64',
+        'd_gain_b_ratio': 'float64',
         'relative_change': 'float64'
-        }
+    }
 
-        # Use the dictionary keys as column names
-        stats_df = pd.DataFrame(
-              index=stats_index,
-              columns=list(stats_dict.keys())  # or dtypes_dict.keys()
-              ).astype(stats_dict)
+    # Create a DataFrame to hold stats for each symbol
+    stats_df = pd.DataFrame(
+        index=stats_index,
+        columns=list(stats_dict.keys())
+    ).astype(stats_dict)
 
-        # get subset of symbol_df for the given date range
-        symbol_df = symbol_df.loc[start_date:end_date]
+    # Create change columns per symbol and calculate the statistics
+    for col in stats_index:
+        symbol_df[f'{col}_change'] = symbol_df[col].pct_change()
+        symbol_df[f'{col}_change_b'] = np.where(symbol_df[f'{col}_change'] > 0, 1, -1)
+        symbol_df[f'{col}_relative_change'] = symbol_df[col] / symbol_df[col].iloc[0]
 
-        # create change columns per symbol
-        for col in stats_df.index:
-            symbol_df[f'{col}_change'] = symbol_df[col].pct_change()
-            symbol_df[f'{col}_change_b'] = np.where(symbol_df[f'{col}_change'] > 0, 1, -1)
-            symbol_df[f'{col}_relative_change'] = symbol_df[col] / symbol_df[col].iloc[0]
+        # Calculate stats
+        stats_df.loc[col, 'n_change'] = len(symbol_df[f'{col}_change'])
+        stats_df.loc[col, 'n_gain'] = (symbol_df[f'{col}_change_b'] > 0).sum()
+        stats_df.loc[col, 'gain_ratio'] = round((symbol_df[f'{col}_change_b'] == 1).sum() / len(symbol_df[f'{col}_change_b']),2)
+        stats_df.loc[col, 'd'] = d
+        stats_df.loc[col, 'd_gain_b'] = (symbol_df[-d:][f'{col}_change_b'] == 1).sum()
+        stats_df.loc[col, 'd_gain_b_ratio'] = round((symbol_df[-d:][f'{col}_change_b'] == 1).sum() / d,2)
+        stats_df.loc[col, 'relative_change'] = round(symbol_df[f'{col}_relative_change'].iloc[-1],2) - 1
 
-            # calculate stats
-            stats_df.loc[col, 'n_gain'] = symbol_df[f'{col}_change_b'].sum()
-            stats_df.loc[col, 'gain_ratio'] = np.where(symbol_df[f'{col}_change_b'] == 1, 1, 0).sum() / len(symbol_df[f'{col}_change_b'])
-            stats_df.loc[col, 'relative_change'] = round(symbol_df[f'{col}_relative_change'].iloc[-1],2) -1
+    print(stats_df)
+    return stats_df
 
-        print(symbol_df.tail())
-        print(stats_df)
-        return stats_df

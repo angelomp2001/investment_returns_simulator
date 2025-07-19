@@ -4,13 +4,15 @@ from pathlib import Path
 from datetime import date
 import numpy as np
 import datetime as dt
+from tqdm import tqdm
+import time
 
 
 ############################## Information on where data is and how to get it ##############################
 all_symbols_path = Path('Equities Universe - Symbols.csv')
 all_symbols_data = pd.read_csv(all_symbols_path,index_col='symbol',parse_dates=['start_date', 'end_date'])
 
-chunksize = 1000  # Number of rows per chunk for reading large CSV files
+chunksize = 10000  # Number of rows per chunk for reading large CSV files
 
 def symbol_data_existing_dates(
         symbol: str = None
@@ -24,15 +26,17 @@ def symbol_data_existing_dates(
         existing_start_date = None
         existing_end_date = None
         
-
         if symbol_file_path.exists():
-            print(f'file exists')
-            for chunk in pd.read_csv(all_symbols_path, index_col=0, chunksize=chunksize):
-                if symbol in chunk.index:
-                    existing_start_date = pd.to_datetime(
-                        chunk.loc[symbol, 'start_date'])
-                    existing_end_date = pd.to_datetime(
-                        chunk.loc[symbol, 'end_date'])
+            df = pd.read_csv(all_symbols_path, index_col=0)
+            existing_start_date = pd.to_datetime(df.loc[symbol, 'start_date'])
+            existing_end_date = pd.to_datetime(df.loc[symbol, 'end_date'])
+
+        # if symbol_file_path.exists():
+        #     #print(f'file exists')
+        #     for chunk in pd.read_csv(all_symbols_path, index_col=0):
+        #         if symbol in chunk.index:
+        #             existing_start_date = pd.to_datetime(chunk.loc[symbol, 'start_date'])
+        #             existing_end_date = pd.to_datetime(chunk.loc[symbol, 'end_date'])
         else:
             print(f'dates not found')
             existing_start_date = None
@@ -47,7 +51,7 @@ def get_symbol_data(
         ):
     '''
     0. Initialize vars
-    1. Check if data already stored in db
+    1. Check if symbol data already stored in db
     2. Define new data data range based on existing data date range
         case 0: no existing data
         case 1: start date and end date are before existing range: s---e___es===ee
@@ -64,107 +68,112 @@ def get_symbol_data(
         save Close as csv
     4. Return data
     '''
-    #Initialize vars
+
+    '0. Initialize vars'
     symbols = [symbols] if isinstance(symbols, str) else symbols
     start_date = pd.to_datetime(start_date)  
     end_date = pd.to_datetime(end_date) 
     case = np.nan
-    date_ranges = []
     df = pd.DataFrame()
+    folder_name = "symbols_data"            # folder where you want to save your files
+    folder_path = Path(folder_name)
+    folder_path.mkdir(exist_ok=True)
 
-    # get file path
-    for symbol in symbols:
-
-        #Initialize vars
-        print(f'Processing symbol: {symbol}')
-        symbol_file_path = Path(symbol + '.csv')
-        existing_start_date, existing_end_date = symbol_data_existing_dates(symbol)
+    # check for existing symbols data df
+    symbols_data_paths = list(Path('.').glob('symbols_data_*.csv'))
+    for each_path in symbols_data_paths:
+        each_symbols_data = pd.read_csv(each_path, index_col='Date', parse_dates=True)
         
-        # case 0: no existing data
+        # Check if all symbols exist as columns in the DataFrame
+        if set(symbols).issubset(each_symbols_data.columns):
+            # Select the data for the specified date range and symbols
+            subset_df = each_symbols_data.loc[start_date:end_date, symbols]
+        
+            # Check if the subset DataFrame is empty (no data in that date range)
+            if subset_df.empty:
+                continue
+            else:
+                df = subset_df
+                return df
+
+    # 1. Check if symbol data already stored in db
+    for symbol in tqdm(
+        symbols, 
+        desc='Getting Data', 
+        unit='symbol', 
+        leave=True,
+        colour='green',  
+        ascii=(" ", "█"),
+        ncols=100
+    ):
+        # initialize loop vars
+        symbol_file_path = Path(symbol + '.csv')
+        date_ranges = []
+        existing_start_date, existing_end_date = symbol_data_existing_dates(symbol)
+
         if existing_start_date is None or existing_end_date is None:
-            new_data_end_date = end_date
-            new_data_start_date = start_date  
-            date_ranges.append((new_data_start_date,new_data_end_date)) # [s, e]
-            case = 0
-            print(
-                f'no existing data:  Case: {case}\n symbol:{symbol} \n new date range: {date_ranges[0][0]}, {date_ranges[0][1]}')
-
-        # case 1: start date and end date are before existing range s---e___es===ee
-        elif start_date < existing_start_date and end_date < existing_start_date:
-            new_data_end_date = existing_start_date
-            new_data_start_date = start_date 
-            date_ranges.append((new_data_start_date, new_data_end_date)) # [s, es)
-            case = 1
-            print(
-                f'no existing data:  Case: {case}\n new date range: {symbol}, {date_ranges[0][0]}, {date_ranges[0][1]}')
-
-        # case 2: start date is before existing range s---es===e===ee
-        elif start_date < existing_start_date and end_date <= existing_end_date:
-            new_data_end_date = existing_start_date
             new_data_start_date = start_date
-            date_ranges.append((new_data_start_date, new_data_end_date))  # [s, es)
-            case = 2
-            print(
-                f'partial existing data:  Case: {case}\n new date range: {symbol}, {date_ranges[0][0]}, {date_ranges[0][1]}')
+            new_data_end_date = end_date
+            date_ranges.append((new_data_start_date, new_data_end_date))
+            case = 0
 
-        # case 3: start date and end date are within existing range es===s===e===ee
+        elif start_date < existing_start_date and end_date < existing_start_date:
+            new_data_start_date = start_date
+            new_data_end_date = existing_start_date
+            date_ranges.append((new_data_start_date, new_data_end_date))
+            case = 1
+
+        elif start_date < existing_start_date and end_date <= existing_end_date:
+            new_data_start_date = start_date
+            new_data_end_date = existing_start_date
+            date_ranges.append((new_data_start_date, new_data_end_date))
+            case = 2
+
         elif start_date >= existing_start_date and end_date <= existing_end_date:
             case = 3
-            print(
-                f'all data already existing:  Case: {case}\n date range:{existing_start_date}, {existing_end_date}')
 
-            # case 4: end date is after existing range es===s===ee---e
         elif start_date >= existing_start_date and end_date > existing_end_date:
             new_data_start_date = existing_end_date + pd.Timedelta(days=1)
             new_data_end_date = end_date
-            date_ranges.append((new_data_start_date, new_data_end_date)) # [s, e]
+            date_ranges.append((new_data_start_date, new_data_end_date))
             case = 4
-            print(
-                f'partial existing data:  Case: {case}\n new date range: {symbol}, {date_ranges[0][0]}, {date_ranges[0][1]}')
 
-        # case 5: start date and end date are after existing range es===ee___s---e
         elif start_date > existing_end_date and end_date > existing_end_date:
             new_data_start_date = existing_end_date + pd.Timedelta(days=1)
             new_data_end_date = end_date
-            date_ranges.append((new_data_start_date, new_data_end_date)) # [s, e]
+            date_ranges.append((new_data_start_date, new_data_end_date))
             case = 5
-            print(
-                f'no existing data:  Case: {case}\n new date range: {symbol}, {date_ranges[0][0]}, {date_ranges[0][1]}')
 
-        # case 6: start date is before existing range and end date is after existing range s---es===ee---e
         elif start_date < existing_start_date and end_date > existing_end_date:
             new_data_start_date = start_date
             new_data_end_date = end_date
-            date_ranges.append(
-                (new_data_start_date, existing_start_date)) # [s, e)
-            date_ranges.append(
-                (existing_end_date + pd.Timedelta(days=1), new_data_end_date))  # [s, e]
+            date_ranges.append((new_data_start_date, existing_start_date))
+            date_ranges.append((existing_end_date + pd.Timedelta(days=1), new_data_end_date))
             case = 6
-            print(
-                f'partial existing data:  Case: {case}\n new date range: {symbol}, {date_ranges[0][0]}, {date_ranges[0][1]}')
-            print(
-                f'partial existing data:  Case: {case}\n new date range: {symbol}, {date_ranges[1][0]}, {date_ranges[1][1]}')
+
+        # print(f'case: {case}')
+        
 
         try:
             for start_date, end_date in date_ranges:
                 # make data mask for incoming data
-                print(f'making data mask for {symbol} from {start_date} to {end_date}')
-                date_range = pd.date_range(min(filter(pd.notnull, [start_date, existing_start_date])), max(filter(pd.notnull, [end_date, existing_end_date])))
+                date_range = pd.date_range(
+                    min(filter(pd.notnull, [start_date, existing_start_date])),
+                    max(filter(pd.notnull, [end_date, existing_end_date]))
+                )
                 df_mask = pd.DataFrame(index=date_range)
-                df_mask['Close'] = np.nan  # creates column with blanks in csv
-                print(f'df_mask new data index range: {df_mask.index.min()} to {df_mask.index.max()}')
+                df_mask['Close'] = np.nan
+
                 try:
                     existing_symbol_data = pd.read_csv(symbol_file_path, index_col='Date', parse_dates=True)
                     df_mask.loc[existing_symbol_data.index, 'Close'] = existing_symbol_data['Close']
-                    print(f'df_mask with existing data (if any) index range: {df_mask.index.min()} to {df_mask.index.max()}')
                 except FileNotFoundError:
-                    print(f'existing data not found for adding to data mask.')            
-                
+                    print(f'existing data not found for {symbol}, creating new file.')
+
                 # save data mask to csv
                 df_mask.to_csv(symbol_file_path, index_label='Date')
-                print(f'df_mask index range saved: {df_mask.index.min()} to {df_mask.index.max()}')
 
-                # get data from yfinance
+                # get and format data from yfinance
                 yfinance_params = {
                     'start': start_date,  # [default inclusive]
                     'end': end_date + pd.Timedelta(days=1),  # [default exclusive] 
@@ -172,137 +181,157 @@ def get_symbol_data(
                     'rounding': True,
                     'group_by': "Symbol"
                 }
-                print(f'getting data from yfinance for {symbol} from {start_date} to {end_date}')
                 yfinance_data = yf.download(symbol, **yfinance_params)
-                # clean yfinance data
+                
                 # flatten multi-index columns
-                print(f'flattening yfinance data columns for {symbol}')
                 yfinance_data.columns = [col[1] for col in yfinance_data.columns]
-                #print(f'yfinance: \nindex: {yfinance_data.index.loc[:5]}\n head: {yfinance_data['Close'].head(5)}')
 
-                # save Close as csv
-                print(f'saving yfinance data for {symbol} to {symbol_file_path}')
-                print(f'data mask is deleted upon saving :(')
+                if yfinance_data.empty:
+                    all_symbols_data = pd.read_csv(all_symbols_path,index_col='symbol',parse_dates=['start_date', 'end_date'])
+                    all_symbols_data = all_symbols_data.drop(symbol, axis=0)
+                    all_symbols_data.to_csv(all_symbols_path, index_label='symbol')
+                    symbol_file_path.unlink()
+                    print('yfinance returned no data. symbol/file deleted')
+                    
 
-                try:
-                    # read existing data and update Close column
-                    print(f'if existing data exists, updating existing data for {symbol} in {symbol_file_path}')
+                else:
+                    # read existing data, update Close column, save as symbol.csv
                     existing_symbol_data = pd.read_csv(symbol_file_path, index_col='Date', parse_dates=True)
-                    # update existing data with new Close values
-                    print(f'updating existing data for {symbol} in {symbol_file_path}')
-                    print(f'existing data index range w/ data mask: {existing_symbol_data.index.min()} to {existing_symbol_data.index.max()}') 
                     existing_symbol_data.loc[yfinance_data.index, 'Close'] = yfinance_data['Close']
                     existing_symbol_data.to_csv(symbol_file_path, index_label='Date')
-                    print(f'existing data index range: {existing_symbol_data.index.min()} to {existing_symbol_data.index.max()}')
-                    
-                except FileNotFoundError:
-                    print(f'existing data not found for adding to data mask.')            
-                    # save data mask to csv
-                    yfinance_data['Close'].to_csv(symbol_file_path)  # [Date, Close]
-
-                # log new data dates in all symbols csv
-                # Assign the minimum date to the DataFrame
-                print(f'updating all_symbols_data for {symbol}: \
-                    \n new date range: {new_data_start_date}, {new_data_end_date}\
-                    \n existing date range: {existing_start_date}, {existing_end_date}')
-                all_symbols_data.loc[symbol, 'start_date'] = min(
-                    filter(pd.notnull, [
+                
+                    # read existing data, update dates columns, save all_symbols.csv
+                    all_symbols_data = pd.read_csv(all_symbols_path,index_col='symbol',parse_dates=['start_date', 'end_date'])
+                    all_symbols_data.loc[symbol, 'start_date'] = min(filter(pd.notnull, [
                         pd.to_datetime(new_data_start_date),
                         pd.to_datetime(existing_start_date)]))
-
-                # Assign the max date to the DataFrame
-                all_symbols_data.loc[symbol, 'end_date'] = max(
-                    filter(pd.notnull, [
-                        pd.to_datetime(new_data_end_date, errors='coerce'), #off by one in case 6
+                    all_symbols_data.loc[symbol, 'end_date'] = max(filter(pd.notnull, [
+                        pd.to_datetime(new_data_end_date, errors='coerce'),
                         pd.to_datetime(existing_end_date, errors='coerce')]))
-                
-                # save all_symbols_data to csv
-                print(f'saving all_symbols_data to {all_symbols_path}')
-                all_symbols_data.to_csv(all_symbols_path, index_label='symbol')
-                print(f'new data saved for {symbol} from range: {all_symbols_data.loc[symbol, "start_date"]} to {all_symbols_data.loc[symbol, "end_date"]}')
+                    all_symbols_data.to_csv(all_symbols_path, index_label='symbol')
 
-                # update existing_start_date and existing_end_date for next iteration
+                #re-get existing dates from now-saved file.  
                 existing_start_date, existing_end_date = symbol_data_existing_dates(symbol)
 
         except Exception as e:
-            print(f'Error getting data from yfinance: {e}')
-        
-        "Return data"
-        date_range = pd.date_range(start_date, end_date)
-        for chunk in pd.read_csv(symbol_file_path, index_col=0, chunksize=chunksize):
-            for date in chunk.index:
-                if date in date_range:
-                    df.loc[date, symbol] = chunk.loc[date, 'Close']
-    
+            print(f'Error getting data from yfinance for {symbol}: {e}')
+            
+
+        # Read and populate final data frame
+         
+        try:
+            symbol_df = pd.read_csv(symbol_file_path, index_col='Date', parse_dates=True)
+            
+            # Ensure index is datetime and sorted
+            symbol_df.index = pd.to_datetime(symbol_df.index)
+            symbol_df = symbol_df.sort_index()
+            
+            df.loc[start_date:end_date, symbol] = symbol_df.loc[start_date:end_date, 'Close'].copy()
+            
+            # Filter to the desired range
+            # filtered_df = symbol_df.loc[start_date:end_date, ['Close']].copy()
+            # filtered_df.columns = [symbol]
+           
+            # # Align index with df (intersect only on dates that exist in both)
+            # valid_dates = df.index.intersection(filtered_df.index)
+            
+            # # Use .loc for batch assignment
+            # df.loc[valid_dates, symbol] = filtered_df.loc[valid_dates, symbol]
+
+        except Exception as e:
+            print(f"Error processing final data for {symbol}: {e}")
+
+    df.to_csv(f'symbols_data/symbols_data_{time.time()}' + '.csv', index_label='Date')
     return df
 
 
+
+import pandas as pd
+import numpy as np
+
 def symbol_data_to_returns_df(
-        portfolio_1: pd.DataFrame = None,
-        market_index: pd.DataFrame = None,
-        start_date: str = None,
-        end_date: str = None,
-        value: str = None
-        ):
-    '''
-    turning get_data df into returns_df, accounting for multiple dfs: (df(P1/P0) -1)  - (df(P1/P0) -1)
-    '''
-    # Initialize vars
-    sum_dfs = None
+    portfolio_1: pd.DataFrame = None,
+    market_index: pd.DataFrame = None,
+    start_date: str = None,
+    end_date: str = None,
+    value: str = None
+):
+    """
+    Computes a returns matrix from one or two DataFrames.
+    If both portfolio_1 and market_index are provided, returns the difference in returns.
+    Each cell (i,j) is the return from date i to date j.
+    """
     
-    for df in [portfolio_1]:#, market_index]:
-        try:
+    def compute_returns(df: pd.DataFrame, value: str, start_date, end_date):
+        df = df.dropna(axis=0, how='all')
 
-            #initialize vars
-            symbol_prices = df.dropna(axis = 0, how='all')
-            if start_date is None or end_date is None:
-                start_date = symbol_prices.index.min()
-                end_date = symbol_prices.index.max()
-            else:
-                start_date = pd.to_datetime(start_date)
-                end_date = pd.to_datetime(end_date)
+        if start_date is None:
+            start_date = df.index.min()
+        else:
+            start_date = pd.to_datetime(start_date)
 
+        if end_date is None:
+            end_date = df.index.max()
+        else:
+            end_date = pd.to_datetime(end_date)
 
-            symbols = df.columns.tolist()
-            date_range = symbol_prices.loc[start_date:end_date].index
+        df = df.loc[start_date:end_date]
+        date_index = df.index
+        n = len(date_index)
+        returns_matrix = np.zeros((n, n))
 
-            returns_df = pd.DataFrame(index=date_range, columns=date_range, dtype=float).fillna(0.0)
-            #date_range = [date.strftime('%Y-%m-%d') for date in date_range]
+        for symbol in df.columns:
+            prices = df[symbol].to_numpy(dtype=float)
 
+            # Generate 2D grids: prices[i, j] = (price at j) / (price at i)
+            start_prices = prices[:, np.newaxis]  # Shape (n,1)
+            end_prices = prices[np.newaxis, :]    # Shape (1,n)
 
-            # Populate returns_df using df
-            for symbol in symbols:
-                for start in date_range:
-                    for end in date_range:
-                        if start in symbol_prices.index and end in symbol_prices.index:
-                            if start < end:
-                                if value == 'close': #✅
-                                    returns_df.loc[start, end] += symbol_prices.loc[end,symbol]
-                                elif value == 'change': #✅
-                                    returns_df.loc[start, end] += round(symbol_prices.loc[end,symbol] / symbol_prices.iloc[symbol_prices.index.get_loc(end) - 1][symbol],2) - 1
-                                elif value == None or value == 'relative_change': #✅
-                                    returns_df.loc[start, end] +=  round(symbol_prices.loc[end,symbol] / symbol_prices.loc[start, symbol],2) - 1
-                                elif value == 'change_b': 
-                                    returns_df.loc[start, end] += np.where(
-                                        (round(symbol_prices.loc[end,symbol] / symbol_prices.iloc[symbol_prices.index.get_loc(end) - 1][symbol],0) - 1) > 0, 1, -1)
-                                elif value == 'relative_change_b':
-                                    returns_df.loc[start, end] += np.where(
-                                        (round(symbol_prices.loc[end, symbol] / symbol_prices.loc[start, symbol], 0) - 1) > 0,
-                                          1, -1)
-                        
+            with np.errstate(divide='ignore', invalid='ignore'):
+                if value == 'close':
+                    contrib = end_prices
+                elif value == 'change':
+                    prev_prices = np.roll(prices, 1)
+                    returns = (prices / prev_prices) - 1
+                    returns[0] = 0  # No previous day for first row
+                    contrib = np.tile(returns, (n, 1))
+                elif value is None or value == 'relative_change':
+                    contrib = (end_prices / start_prices) - 1
+                elif value == 'change_b':
+                    prev_prices = np.roll(prices, 1)
+                    returns = ((prices / prev_prices) - 1) > 0
+                    returns[0] = False
+                    contrib = np.where(np.tile(returns, (n, 1)), 1, -1)
+                elif value == 'relative_change_b':
+                    contrib = np.where((end_prices / start_prices) - 1 > 0, 1, -1)
+                else:
+                    contrib = np.zeros((n, n))
 
-            # Rename the index and columns for clarity
-            returns_df.index.name = 'start'
-            returns_df.columns.name = 'end'
+            contrib = np.nan_to_num(contrib)
+            # Only upper triangle is valid (start < end)
+            mask = np.triu(np.ones((n, n), dtype=bool), k=1)
+            returns_matrix[mask] += contrib[mask]
 
-            # If multiple DataFrames, sum them element-wise; otherwise, use the current one.
-            if sum_dfs is None:
-                sum_dfs = returns_df
-            else:
-                sum_dfs = sum_dfs.subtract(returns_df, fill_value=0)
-        except Exception as e:
-            print(f'Error processing DataFrame: {e}')
-        
+        return pd.DataFrame(
+            returns_matrix,
+            index=date_index,
+            columns=date_index
+        )
 
-    return sum_dfs
+    # Compute returns for each provided DataFrame
+    returns_1 = compute_returns(portfolio_1, value, start_date, end_date) if portfolio_1 is not None else None
+    returns_2 = compute_returns(market_index, value, start_date, end_date) if market_index is not None else None
 
+    if returns_1 is not None and returns_2 is not None:
+        return returns_1.subtract(returns_2, fill_value=0)
+
+    if returns_1 is not None:
+        return returns_1
+    elif returns_2 is not None:
+        return returns_2
+    else:
+        return None
+
+    
+
+    

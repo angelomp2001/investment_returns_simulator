@@ -136,3 +136,80 @@ def timeline(
     plt.tight_layout()
     plt.show()
 
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from collections import Counter
+
+def histogram(
+        data: pd.DataFrame or pd.Series = None,
+        loc_start_date: str = None,
+        loc_end_date: str = None,
+        columns: list = None,
+):
+    '''
+    Input: DataFrame or Series with float or categorical values.
+    Output: Histogram: red (< 0), gray (= 0), green (> 0)
+    '''
+    if data is None:
+        raise ValueError("Data cannot be None")
+
+    # Handle DataFrame
+    if isinstance(data, pd.DataFrame):
+        if columns:
+            data = data[columns]
+        if loc_start_date and loc_end_date:
+            data = data.loc[loc_start_date:loc_end_date]
+        values = data.to_numpy().flatten()
+    elif isinstance(data, pd.Series):
+        if loc_start_date and loc_end_date:
+            data = data.loc[loc_start_date:loc_end_date]
+        values = data.to_numpy()
+    else:
+        raise TypeError("Input must be DataFrame or Series")
+
+    # Remove NaNs
+    values = values[~np.isnan(values)]
+
+    # Check for discrete {-1, 0, 1} style data
+    unique_vals = np.unique(values)
+    is_discrete = np.all(np.isin(unique_vals, [-1, 0, 1]))
+
+    plt.figure(figsize=(8, 6))
+
+    if is_discrete:
+        # Use bar chart for exact categories
+        counts = Counter(values)
+        heights = [counts.get(v, 0) for v in [-1, 0, 1]]
+        colors = ['red', 'gray', 'green']
+        plt.bar([-1, 0, 1], heights, color=colors, edgecolor='black')
+        plt.xticks([-1, 0, 1])
+        plt.xlabel('Value')
+        plt.ylabel('Count')
+        plt.title('Histogram of -1, 0, 1 values')
+    else:
+        # For continuous values, split into bins
+        bins = np.histogram_bin_edges(values, bins='auto')
+        plt.hist(values, bins=bins,
+                 color='gray', edgecolor='black', alpha=0.5, label='All')
+
+        # Overlay red bars for < 0
+        neg_vals = values[values < 0]
+        if len(neg_vals):
+            plt.hist(neg_vals, bins=bins,
+                     color='red', edgecolor='black', alpha=0.7, label='< 0')
+
+        # Overlay green bars for > 0
+        pos_vals = values[values > 0]
+        if len(pos_vals):
+            plt.hist(pos_vals, bins=bins,
+                     color='green', edgecolor='black', alpha=0.7, label='> 0')
+
+        plt.xlabel('Value')
+        plt.ylabel('Frequency')
+        plt.title('Histogram (Red: < 0, Gray: 0, Green: > 0)')
+        plt.legend()
+
+    plt.grid(axis='y')
+    plt.tight_layout()
+    plt.show()
