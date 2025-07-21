@@ -17,23 +17,10 @@ end_date = '2025-07-10'
 # get list of symbols
 all_symbols_path = Path('Equities Universe - Symbols.csv')
 all_symbols_data = pd.read_csv(all_symbols_path,index_col='symbol',parse_dates=['start_date', 'end_date'])
-symbol = all_symbols_data.index.to_list()
+symbol = 'AAPL'
 
-
-
-
-# #check for duplicates in list:
-# print(f'number of symbols: {len(symbol)}')
-# print(f'number of unique symbols: {len(set(symbol))}')
-# print(f'number of duplicates: {len(symbol) - len(set(symbol))}')
-
-# # identify duplicates
-# for i in range(len(symbol)):
-#     for j in range(i + 1, len(symbol)):
-#         if symbol[i] == symbol[j]:
-#             print(f'Duplicate found at index {i} and {j}: {symbol[i]}')
-
+## test: only save symbols_data_xxxx when symbol > 1.
+## test: lookup symbols_data before processing get_symbol_data
 
 data = get_symbol_data(symbol, start_date=START_DATE, end_date=end_date)
-print(data)
-#stats(data, start_date=START_DATE, end_date=end_date)
+

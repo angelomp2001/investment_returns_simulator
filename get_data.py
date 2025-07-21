@@ -22,7 +22,7 @@ def symbol_data_existing_dates(
         '''
         #initialize vars
         symbol = symbol if isinstance(symbol, str) else [symbol]
-        symbol_file_path = Path(symbol + '.csv')
+        symbol_file_path = Path('symbols/' + symbol + '.csv')
         existing_start_date = None
         existing_end_date = None
         
@@ -50,6 +50,9 @@ def get_symbol_data(
         end_date: date = None
         ):
     '''
+    input: symbol, start date, end date.
+    output: symbol.csv, index: start date - end date.  Symbol: price_close
+    output: symbols_data_xxxx, index: start date - end date. cols: (symbols): price_close
     0. Initialize vars
     1. Check if symbol data already stored in db
     2. Define new data data range based on existing data date range
@@ -80,7 +83,7 @@ def get_symbol_data(
     folder_path.mkdir(exist_ok=True)
 
     # check for existing symbols data df
-    symbols_data_paths = list(Path('.').glob('symbols_data_*.csv'))
+    symbols_data_paths = list(Path('.').glob('symbols/symbols_data_*.csv'))
     for each_path in symbols_data_paths:
         each_symbols_data = pd.read_csv(each_path, index_col='Date', parse_dates=True)
         
@@ -97,17 +100,10 @@ def get_symbol_data(
                 return df
 
     # 1. Check if symbol data already stored in db
-    for symbol in tqdm(
-        symbols, 
-        desc='Getting Data', 
-        unit='symbol', 
-        leave=True,
-        colour='green',  
-        ascii=(" ", "█"),
-        ncols=100
-    ):
+    for symbol in symbols:
+        
         # initialize loop vars
-        symbol_file_path = Path(symbol + '.csv')
+        symbol_file_path = Path('symbols/' + symbol + '.csv')
         date_ranges = []
         existing_start_date, existing_end_date = symbol_data_existing_dates(symbol)
 
@@ -155,7 +151,15 @@ def get_symbol_data(
         
 
         try:
-            for start_date, end_date in date_ranges:
+            for start_date, end_date in tqdm(
+                date_ranges,
+                desc='Getting Data', 
+                unit='symbol', 
+                leave=True,
+                colour='green',  
+                ascii=(" ", "█"),
+                ncols=100
+            ):
                 # make data mask for incoming data
                 date_range = pd.date_range(
                     min(filter(pd.notnull, [start_date, existing_start_date])),
