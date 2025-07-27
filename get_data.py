@@ -248,11 +248,6 @@ def get_symbol_data(
     df.to_csv(f'symbols_data/symbols_data_{time.time()}' + '.csv', index_label='Date')
     return df
 
-
-
-import pandas as pd
-import numpy as np
-
 def symbol_data_to_returns_df(
     portfolio_1: pd.DataFrame = None,
     market_index: pd.DataFrame = None,
@@ -264,11 +259,18 @@ def symbol_data_to_returns_df(
     Computes a returns matrix from one or two DataFrames.
     If both portfolio_1 and market_index are provided, returns the difference in returns.
     Each cell (i,j) is the return from date i to date j.
+    portfolio_1: the main portfolio
+    market_index: the market index portfolio_1 is compared gainst, if provided.
+    start_date: start date of comparison
+    end_date: end date of comparison
+    value: what is returned: 'close', 'change', 'relative_change', 'change_b', 'relative_change_b'
     """
     
     def compute_returns(df: pd.DataFrame, value: str, start_date, end_date):
+        # dropna
         df = df.dropna(axis=0, how='all')
 
+        # set start and end dates
         if start_date is None:
             start_date = df.index.min()
         else:
@@ -279,12 +281,14 @@ def symbol_data_to_returns_df(
         else:
             end_date = pd.to_datetime(end_date)
 
+        # initialize vars
         df = df.loc[start_date:end_date]
         date_index = df.index
-        n = len(date_index)
-        returns_matrix = np.zeros((n, n))
+        m = len(date_index)
+        returns_matrix = np.zeros((m, m))
 
         for symbol in df.columns:
+            #vectorize prices
             prices = df[symbol].to_numpy(dtype=float)
 
             # Generate 2D grids: prices[i, j] = (price at j) / (price at i)
@@ -293,27 +297,37 @@ def symbol_data_to_returns_df(
 
             with np.errstate(divide='ignore', invalid='ignore'):
                 if value == 'close':
+                    # contrib will be the close price on that day
                     contrib = end_prices
                 elif value == 'change':
-                    prev_prices = np.roll(prices, 1)
-                    returns = (prices / prev_prices) - 1
+                    # new var which represents previous col (end_date) price
+                    prev_end_date_prices = np.roll(prices, 1)
+                    # calculate returns
+                    returns = (prices / prev_end_date_prices) - 1
                     returns[0] = 0  # No previous day for first row
-                    contrib = np.tile(returns, (n, 1))
+                    # tile the returns 
+                    contrib = np.tile(returns, (m, 1))
                 elif value is None or value == 'relative_change':
+                    # this is the default
                     contrib = (end_prices / start_prices) - 1
                 elif value == 'change_b':
-                    prev_prices = np.roll(prices, 1)
-                    returns = ((prices / prev_prices) - 1) > 0
+                    # new var which represents previous col (end_date) price
+                    prev_end_date_prices = np.roll(prices, 1)
+                    # calculate returns as binary (1= True, 0 <= False)
+                    returns = ((prices / prev_end_date_prices) - 1) > 0
+                    # first value does not exist
                     returns[0] = False
-                    contrib = np.where(np.tile(returns, (n, 1)), 1, -1)
+                    # replace True with 1, False with -1 
+                    contrib = np.where(np.tile(returns, (m, 1)), 1, -1)
                 elif value == 'relative_change_b':
                     contrib = np.where((end_prices / start_prices) - 1 > 0, 1, -1)
                 else:
-                    contrib = np.zeros((n, n))
+                    contrib = np.zeros((m, m))
 
+            # replace nan with 0
             contrib = np.nan_to_num(contrib)
             # Only upper triangle is valid (start < end)
-            mask = np.triu(np.ones((n, n), dtype=bool), k=1)
+            mask = np.triu(np.ones((m, m), dtype=bool), k=1)
             returns_matrix[mask] += contrib[mask]
 
         return pd.DataFrame(
