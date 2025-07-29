@@ -82,3 +82,5 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 7/21/2025: update/ created symbols_data folder to clean up the space. ✅
 
 7/26/2025: working on implementing .pipe() ✅
+
+7/29/2025: fix stats/relative change. it returns -1 always. 
