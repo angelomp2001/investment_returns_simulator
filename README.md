@@ -83,4 +83,4 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 
 7/26/2025: working on implementing .pipe() ✅
 
-7/29/2025: symbol_data_to_returns_df/vecterized df/test results.  fix stats/relative change. it returns -1 always. 
+7/29/2025: symbol_data_to_returns_df/vecterized df/test results. ✅  fix stats/relative change.  it returns -1 always. 
