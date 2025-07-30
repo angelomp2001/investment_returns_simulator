@@ -67,8 +67,24 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 
 6/22/2025: return portfolio (symbols, start, end) ROI, summing up portfolio returns. ✅
 
+7/06/2025: make symbol and porfolio ROI table (start x end) and plot surface. ✅
 
-6/26/2025: make symbol and porfolio ROI table (start x end) and plot surface. 
+7/07/2025: update/ can compare portfolios, outputs binary predictory stats (accu… ✅
 
+7/15/2025: feature/ symbol_data_to_returns how subtracts two dfs if provided. st… ✅
 
+7/16/2025: feature/ added timeline() to plot close. stats() outputs quantity and… ✅
 
+7/17/2025: feature/ added various value options for symbol_data_to_returns_df(),… ✅
+
+7/19/2025: update/ deleted old symbols_data files. ✅
+
+7/21/2025: update/ created symbols_data folder to clean up the space. ✅
+
+7/26/2025: working on implementing .pipe() ✅
+
+7/29/2025: symbol_data_to_returns_df/vecterized df/test results. ✅  define main.py workflow. symbols_stats: faulty values if run after downloading new data, but if you rerun, it's fine.  ⚠️
+
+7/30/2035: update symbols_stats to handle results_df and returns stats that make sense.  
+
+8/01/2025: create histogram function(symbols_df or returns_df)
