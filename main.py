@@ -4,31 +4,26 @@ from datetime import date
 from get_data import get_symbol_data
 from charts import returns_heatmap, histogram
 from get_data import symbol_data_to_returns_df
-from stats import stats
+from stats import symbols_stats
 
 #Parameters
-portfolio_1 = ['TSLA'] #['TSLA','NVDA','META','AMZN','GOOG','MSFT','O','AAPL']
-market_index = ['VOOG'] #['VOOG','VGT','VTI','SPY','QQQ','VOO']
-start_date = '2020-01-01'
+portfolio_1_symbols = ['TSLA', 'NVDA','META']#,'AMZN','GOOG','MSFT','O','AAPL']
+market_index_symbols = ['VOOG'] #['VOOG','VGT','VTI','SPY','QQQ','VOO']
+start_date = '2024-01-01'
 end_date = date.today().strftime('%Y-%m-%d')
 
-# Assuming portfolio_1 and market_index are lists of symbols or data that get_symbol_data can process:
-portfolios = [portfolio_1, market_index]
+# 1. Get data
+portfolio_1 = get_symbol_data(portfolio_1_symbols, start_date=start_date, end_date=end_date)
+market_index = get_symbol_data(market_index_symbols, start_date=start_date, end_date=end_date)
 
+# 2. Get descriptive stats
+symbols_stats(portfolio_1)
 
-# First, convert the list into a DataFrame using the get_symbol_data function
-portfolio = (
-    portfolio
-    .pipe(get_symbol_data, start_date=start_date, end_date=end_date)
-    .pipe(symbol_data_to_returns_df, market_index=market_index, start_date=start_date, end_date=end_date)
-    .pipe(stats)
-)
+# 3. Transform data into all possible returns df
+returns_df = symbol_data_to_returns_df(portfolio_1=portfolio_1, market_index=market_index, start_date=start_date, end_date=end_date, value='relative_change_b')
 
-    # Save the processed DataFrame in the dictionary. You can change the key as needed.
-    processed_dfs[f'portfolio_{i}_df'] = df
+# 4. Visualize Transformation
+returns_heatmap(returns_df)
 
-# Now processed_dfs holds your transformed DataFrames, which you can use as needed:
-portfolio_1_df = processed_dfs['portfolio_1_df']
-portfolio_2_df = processed_dfs['portfolio_2_df']
-
+# Get all possible returns df stats
 

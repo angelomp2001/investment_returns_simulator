@@ -43,7 +43,6 @@ def symbol_data_existing_dates(
             existing_end_date = None
         return existing_start_date, existing_end_date
 
-
 def get_symbol_data(
         symbols: list[str] = None,
         start_date: date = None,
@@ -266,7 +265,12 @@ def symbol_data_to_returns_df(
     value: what is returned: 'close', 'change', 'relative_change', 'change_b', 'relative_change_b'
     """
     
-    def compute_returns(df: pd.DataFrame, value: str, start_date, end_date):
+    def compute_returns(
+            df: pd.DataFrame,
+            start_date: str,
+            end_date: str,
+            value: str
+        ):
         # dropna
         df = df.dropna(axis=0, how='all')
 
@@ -298,7 +302,7 @@ def symbol_data_to_returns_df(
             with np.errstate(divide='ignore', invalid='ignore'):
                 if value == 'close':
                     # contrib will be the close price on that day
-                    contrib = end_prices
+                    contrib = np.tile(end_prices, (m, 1))
                 elif value == 'change':
                     # new var which represents previous col (end_date) price
                     prev_end_date_prices = np.roll(prices, 1)
@@ -325,7 +329,7 @@ def symbol_data_to_returns_df(
                     contrib = np.zeros((m, m))
 
             # replace nan with 0
-            contrib = np.nan_to_num(contrib)
+            # do not implement to not affect future calculations: contrib = np.nan_to_num(contrib)
             # Only upper triangle is valid (start < end)
             mask = np.triu(np.ones((m, m), dtype=bool), k=1)
             returns_matrix[mask] += contrib[mask]
@@ -336,20 +340,16 @@ def symbol_data_to_returns_df(
             columns=date_index
         )
 
-    # Compute returns for each provided DataFrame
-    returns_1 = compute_returns(portfolio_1, value, start_date, end_date) if portfolio_1 is not None else None
-    returns_2 = compute_returns(market_index, value, start_date, end_date) if market_index is not None else None
+    # Calculate returns for each DataFrame
+    portfolio_1_returns = compute_returns(portfolio_1, start_date, end_date, value) if portfolio_1 is not None else None
+    market_index_returns = compute_returns(market_index, start_date, end_date, value) if market_index is not None else None
 
-    if returns_1 is not None and returns_2 is not None:
-        return returns_1.subtract(returns_2, fill_value=0)
+    if portfolio_1_returns is not None and market_index_returns is not None:
+        return portfolio_1_returns.subtract(market_index_returns, fill_value=0)
 
-    if returns_1 is not None:
-        return returns_1
-    elif returns_2 is not None:
-        return returns_2
+    if portfolio_1_returns is not None:
+        return portfolio_1_returns
+    elif market_index_returns is not None:
+        return market_index_returns
     else:
         return None
-
-    
-
-    

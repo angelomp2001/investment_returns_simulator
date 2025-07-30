@@ -4,14 +4,18 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from pathlib import Path
 from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm
+from collections import Counter
 
 
 def returns_heatmap(
         returns_df: pd.DataFrame = None
     ):
-    "2D heatmap of start to end dates and gains"
+    '''
+    input: returns_df.loc[start_date:end_date, symbol]
+    output: 2D heatmap of start to end dates of values
+    '''
 
-    # Create a copy and format the index/columns to show only dates
+    # Create a copy and format start/end to show only dates
     plot_df = returns_df.copy()
     plot_df.index = plot_df.index.strftime('%Y-%m-%d')
     plot_df.columns = plot_df.columns.strftime('%Y-%m-%d')
@@ -23,7 +27,7 @@ def returns_heatmap(
     cmap = LinearSegmentedColormap.from_list("custom_cmap", ["red", "white", "green"], N=256)
 
     # Create a normalization instance that centers at zero.
-    norm = TwoSlopeNorm(vmin=returns_df.min().min(), vcenter=0, vmax=returns_df.max().max())
+    norm = TwoSlopeNorm(vmin=plot_df.min().min(), vcenter=0, vmax=plot_df.max().max())
 
     # Plot the heatmap
     ax = sns.heatmap(plot_df, annot=False, cmap=cmap, norm=norm, fmt=".2f", linewidths=0.5)
@@ -81,7 +85,6 @@ def three_d_plot(
     plt.tight_layout()
     plt.show()
 
-
 def timeline(
     symbol_data: pd.DataFrame = None,
     start_date: str = None,
@@ -135,11 +138,6 @@ def timeline(
     plt.legend()
     plt.tight_layout()
     plt.show()
-
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from collections import Counter
 
 def histogram(
         data: pd.DataFrame or pd.Series = None,
