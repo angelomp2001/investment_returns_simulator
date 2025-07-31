@@ -12,8 +12,8 @@ from stats import symbols_stats, symbols_and_results_stats
 
 
 #pd.set_option('display.max_rows', None)
-START_DATE = '2020-01-01'
-end_date = '2025-07-10'
+START_DATE = '2022-01-01'
+end_date = '2023-07-10'
 
 # get list of symbols
 all_symbols_path = Path('Equities Universe - Symbols.csv')
@@ -34,9 +34,11 @@ returns_df = (
 stats_df = symbols_and_results_stats(data)
 print(stats_df)
 results_stats_df = symbols_and_results_stats(returns_df, label='AAPL')
+print(returns_df.iloc[-1,0])
 print(results_stats_df)
-
-
+returns_heatmap(returns_df)
+histogram(returns_df)
+histogram(data)
 
 
 # create histogram to hand symbols_df and results_df

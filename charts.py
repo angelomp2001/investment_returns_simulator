@@ -152,6 +152,17 @@ def histogram(
     if data is None:
         raise ValueError("Data cannot be None")
 
+    ### incomplete code:
+    # check if results_df
+    is_upper_triangle = (
+        data.shape[0] == data.shape[1]
+        and (data.columns == data.index).all()
+        and pd.api.types.is_datetime64_any_dtype(data.columns)
+    )
+    if not is_upper_triangle:
+        pass
+    ############## 
+    
     # Handle DataFrame
     if isinstance(data, pd.DataFrame):
         if columns:

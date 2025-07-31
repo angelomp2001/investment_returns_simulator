@@ -289,7 +289,7 @@ def symbol_data_to_returns_df(
         df = df.loc[start_date:end_date]
         date_index = df.index
         m = len(date_index)
-        returns_matrix = np.zeros((m, m))
+        returns_matrix = np.zeros((m, m)) # returns_matrix = np.full((m, m), np.nan)
 
         for symbol in df.columns:
             #vectorize prices
@@ -334,6 +334,8 @@ def symbol_data_to_returns_df(
             mask = np.triu(np.ones((m, m), dtype=bool), k=1)
             returns_matrix[mask] += contrib[mask]
 
+        # NaN the lower triangle, not including main diagonal
+        returns_matrix[np.tril_indices(m, -1)] = np.nan
         return pd.DataFrame(
             returns_matrix,
             index=date_index,

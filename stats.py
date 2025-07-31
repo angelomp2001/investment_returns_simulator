@@ -142,7 +142,7 @@ def symbols_and_results_stats(
     import numpy as np
     import pandas as pd
 
-    d = 40  # trailing window for d-day stats
+    t = 40  # trailing window for d-day stats
 
     # Handle Series input
     if isinstance(symbol_df, pd.Series):
@@ -172,31 +172,81 @@ def symbols_and_results_stats(
 
         stats_dict = {}
 
-        # Full upper triangle (excluding diagonal)
-        upper_mask = np.triu(np.ones(symbol_df.shape, dtype=bool), k=0)
+        # Full upper triangle
+        # create upper triangle mask
+        upper_mask = np.triu(np.ones(symbol_df.shape, dtype=bool), k=1) # diagonal not included b/c it's NaN for change values
+        
+        # save upper values of symbol_df
         upper_values = symbol_df.values[upper_mask]
+        
+        # remove NaN
         upper_values_nonan = upper_values[~np.isnan(upper_values)]
 
-        stats_dict['n_change'] = len(upper_values_nonan)
+        # stats: number of values
+        stats_dict['n'] = len(upper_values_nonan)
+
+        # stats: number of change-increase
         stats_dict['n_gain'] = (upper_values_nonan > 0).sum()
-        stats_dict['gain_ratio'] = round(stats_dict['n_gain'] / stats_dict['n_change'], 2) if stats_dict['n_change'] > 0 else np.nan
+
+        # stats: number of change-decrease
+        stats_dict['n_loss'] = (upper_values_nonan <= 0).sum()
+
+        #stats: ratio of change-increase
+        stats_dict['gain_ratio'] = round(stats_dict['n_gain'] / stats_dict['n'], 2) if stats_dict['n'] > 0 else np.nan
 
         # Trailing d-day upper triangle block
-        if d <= symbol_df.shape[0]:
-            trailing_block = symbol_df.values[-d:, -d:]
-            trailing_mask = np.triu(np.ones((d, d), dtype=bool), k=1)
+        if t <= symbol_df.shape[0]:
+            # isolate only start-end days
+            trailing_block = symbol_df.values[-t:, -t:]
+
+            # create upper triangle mask
+            trailing_mask = np.triu(np.ones((t, t), dtype=bool), k=1)
+
+            # extract upper triangle mask values from symbol_df
             trailing_values = trailing_block[trailing_mask]
+
+            # remove NaN
             trailing_values_nonan = trailing_values[~np.isnan(trailing_values)]
 
-            stats_dict['d'] = d
-            stats_dict['d_gain_b'] = (trailing_values_nonan > 0).sum()
-            stats_dict['d_gain_b_ratio'] = round(stats_dict['d_gain_b'] / len(trailing_values_nonan), 2) if len(trailing_values_nonan) > 0 else np.nan
-        else:
-            stats_dict['d'] = d
-            stats_dict['d_gain_b'] = np.nan
-            stats_dict['d_gain_b_ratio'] = np.nan
+            # stats: days scope
+            stats_dict['t'] = t
 
-        stats_dict['relative_change'] = round(upper_values_nonan[-1], 2) - 1 if len(upper_values_nonan) > 0 else np.nan
+            # stats: number of change-increase in days
+            stats_dict['t_gain_sign'] = (trailing_values_nonan > 0).sum()
+
+            #stats: ratio of change-increase in days
+            stats_dict['t_gain_sign_ratio'] = round(stats_dict['t_gain_sign'] / len(trailing_values_nonan), 2) if len(trailing_values_nonan) > 0 else np.nan
+        else:
+            stats_dict['t'] = t
+            stats_dict['t_gain_sign'] = np.nan
+            stats_dict['t_gain_sign_ratio'] = np.nan
+        
+        # stats: relative change
+        # stats_dict['relative_change'] = round(upper_values_nonan[-1], 2) - 1 if len(upper_values_nonan) > 0 else np.nan
+
+        ### test: ####
+        # stats: max number of days between gains (row-wise, in upper triangle)
+        gain_matrix = (symbol_df.values > 0)    # True where gain, otherwise False
+        m = symbol_df.shape[0]
+        max_gap = 0
+        max_gap_coords = None   # (row, start_col, end_col)
+        for row in range(m):
+            gain_indices = np.where(gain_matrix[row, row+1:])[0] + (row+1)
+            if len(gain_indices) >= 2:
+                gaps = np.diff(gain_indices) - 1
+                row_max_gap = gaps.max()
+                if row_max_gap > max_gap:
+                    max_gap = row_max_gap
+                    # Get the first occurrence of the max gap in this row
+                    max_gap_idx = gaps.argmax()
+                    start_col = gain_indices[max_gap_idx]
+                    end_col = gain_indices[max_gap_idx + 1]
+                    max_gap_coords = (row, start_col, end_col)
+        stats_dict['max_days_btwn_gains'] = int(max_gap)
+        stats_dict['max_days_btwn_gains_coords'] = symbol_df.columns[max_gap_coords[1]].strftime('%Y-%m-%d'), symbol_df.columns[max_gap_coords[2]].strftime('%Y-%m-%d')
+        # (row, start_col, end_col)
+
+        # stats: start date of max_days_btwn_gains
 
         return pd.DataFrame([stats_dict], index=[label])
 
@@ -224,9 +274,9 @@ def symbols_and_results_stats(
         'n_change': 'Int64',
         'n_gain': 'Int64',
         'gain_ratio': 'float64',
-        'd': 'Int64',
-        'd_gain_b': 'Int64',
-        'd_gain_b_ratio': 'float64',
+        't': 'Int64',
+        't_gain_sign': 'Int64',
+        't_gain_sign_ratio': 'float64',
         'relative_change': 'float64'
     }
 
@@ -234,15 +284,15 @@ def symbols_and_results_stats(
 
     for col in stats_index:
         symbol_df[f'{col}_change'] = symbol_df[col].pct_change()
-        symbol_df[f'{col}_change_b'] = np.where(symbol_df[f'{col}_change'] > 0, 1, -1)
+        symbol_df[f'{col}_change_sign'] = np.where(symbol_df[f'{col}_change'] > 0, 1, -1)
         symbol_df[f'{col}_relative_change'] = symbol_df[col] / symbol_df[col].iloc[0]
 
         stats_df.loc[col, 'n_change'] = symbol_df[f'{col}_change'].count()
-        stats_df.loc[col, 'n_gain'] = (symbol_df[f'{col}_change_b'] == 1).sum()
+        stats_df.loc[col, 'n_gain'] = (symbol_df[f'{col}_change_sign'] == 1).sum()
         stats_df.loc[col, 'gain_ratio'] = round(stats_df.loc[col, 'n_gain'] / stats_df.loc[col, 'n_change'], 2) if stats_df.loc[col, 'n_change'] > 0 else np.nan
-        stats_df.loc[col, 'd'] = d
-        stats_df.loc[col, 'd_gain_b'] = (symbol_df[f'{col}_change_b'].iloc[-d:] == 1).sum()
-        stats_df.loc[col, 'd_gain_b_ratio'] = round(stats_df.loc[col, 'd_gain_b'] / d, 2)
+        stats_df.loc[col, 't'] = t
+        stats_df.loc[col, 't_gain_sign'] = (symbol_df[f'{col}_change_sign'].iloc[-t:] == 1).sum()
+        stats_df.loc[col, 't_gain_sign_ratio'] = round(stats_df.loc[col, 't_gain_sign'] / t, 2)
         stats_df.loc[col, 'relative_change'] = round(symbol_df[f'{col}_relative_change'].iloc[-1], 2) - 1
 
     return stats_df
