@@ -85,6 +85,6 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 
 7/29/2025: symbol_data_to_returns_df/vecterized df/test results. ✅  define main.py workflow. symbols_stats: faulty values if run after downloading new data, but if you rerun, it's fine.  ⚠️
 
-7/30/2035: update symbols_stats to handle results_df and returns stats that make sense. Can't without histogram first. ✅ target stats: max days between gains, max days within gains.  I'm getting results that are hard to believe.  heatmap of results_df confirm it's correct, but now I'm doubting the heatmap. Also, when I called the new stats on 5 years, and then called the stats on a narrower range to see the results on a heatmap, the stats dates changed! I need to understand why.  
+7/30/2035: update symbols_stats to handle results_df and returns stats that make sense. Can't without histogram first. ✅ target stats: max days between gains, max days within gains.  set results_df to Close for testing.
 
 8/01/2025: create histogram function(symbols_df or returns_df)
