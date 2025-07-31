@@ -26,16 +26,16 @@ data = get_symbol_data(symbol, start_date=START_DATE, end_date=end_date)
 
 returns_df = (
     data
-    .pipe(symbol_data_to_returns_df, value='relative_change_b')
+    .pipe(symbol_data_to_returns_df, value='change')
     #.pipe(returns_stats)
 )
 
 # test: update symbols_stats to handle results_df and returns same info.  
 stats_df = symbols_and_results_stats(data)
 print(stats_df)
-results_stats_df = symbols_and_results_stats(returns_df, label='AAPL')
+#results_stats_df = symbols_and_results_stats(returns_df, label='AAPL')
 print(returns_df.iloc[-1,0])
-print(results_stats_df)
+#print(results_stats_df)
 returns_heatmap(returns_df)
 histogram(returns_df)
 histogram(data)
