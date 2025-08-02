@@ -50,7 +50,7 @@ def symbols_stats(
     output: quantity stats, quality stats
     ### there is an issue when running this function immediately after downloading NEW data.  Fix: run it again. ###
     """
-    d = 40 # number of consecutive days required to define consistent gain
+    d = 60 # number of consecutive days required to define consistent gain
     # If symbol_df is a Series, convert it into a DataFrame
     if isinstance(symbol_df, pd.Series):
         symbol_df = symbol_df.to_frame()
@@ -105,7 +105,7 @@ def symbols_stats(
 
     # Create change columns in symbol_df per symbol and calculate the statistics
     for col in stats_index:
-        symbol_df[f'{col}_change'] = symbol_df[col].pct_change()
+        symbol_df[f'{col}_change'] = symbol_df[col].pct_change(fill_method=None)
         symbol_df[f'{col}_change_b'] = np.where(symbol_df[f'{col}_change'] > 0, 1, -1)
         symbol_df[f'{col}_relative_change'] = symbol_df[col] / symbol_df[col].iloc[0]
 
@@ -126,6 +126,7 @@ def symbols_and_results_stats(
     label: str = None,
     start_date: str = None,
     end_date: str = None,
+    t: int = None
 ):
     """
     Computes stats for time series price data or upper triangle matrix of pairwise changes.
@@ -139,10 +140,9 @@ def symbols_and_results_stats(
     Returns:
         stats_df: DataFrame with summary statistics
     """
-    import numpy as np
-    import pandas as pd
+    print(f't: {t}')
 
-    t = 40  # trailing window for d-day stats
+    t = t  # trailing window for d-day stats
 
     # Handle Series input
     if isinstance(symbol_df, pd.Series):
@@ -168,7 +168,7 @@ def symbols_and_results_stats(
     # If this is an upper triangle matrix of changes or scores
     if is_upper_triangle:
         if not label:
-            label = "upper_triangle"
+            label = "results_df"
 
         stats_dict = {}
 
@@ -220,34 +220,107 @@ def symbols_and_results_stats(
             stats_dict['t'] = t
             stats_dict['t_gain_sign'] = np.nan
             stats_dict['t_gain_sign_ratio'] = np.nan
-        
-        # stats: relative change
-        # stats_dict['relative_change'] = round(upper_values_nonan[-1], 2) - 1 if len(upper_values_nonan) > 0 else np.nan
 
-        ### test: ####
         # stats: max number of days between gains (row-wise, in upper triangle)
+        # create a matrix where the gains will be
         gain_matrix = (symbol_df.values > 0)    # True where gain, otherwise False
+        
+        # get number of rows
         m = symbol_df.shape[0]
+
+        # initialize var that will log the max gap between days of gains
         max_gap = 0
+
+        # initialize var that will log the start and end date of max_gap
         max_gap_coords = None   # (row, start_col, end_col)
+
+        # loop through each row to collect max days btwn gains
         for row in range(m):
-            gain_indices = np.where(gain_matrix[row, row+1:])[0] + (row+1)
+            # save indices of gains relative to slice
+            slice_indices = np.where(gain_matrix[row, row+1:])[0]
+
+            # adjust slice index to match gains matrix index
+            gain_indices = slice_indices + (row+1)
+
+            # ensure there are 2+ gains in order to calculate a distance
             if len(gain_indices) >= 2:
+                # distance between gain indices.  0 days = consecutive days. 
                 gaps = np.diff(gain_indices) - 1
+                # print(f'gaps: {gaps}') = [0 0 0 0 0 ...]
+                # save biggest gap between days
                 row_max_gap = gaps.max()
+
+                # save row max gap as max gap if it's bigger than max gap 
+                # print(f'row_max_gap: {row_max_gap}') = 0
                 if row_max_gap > max_gap:
                     max_gap = row_max_gap
-                    # Get the first occurrence of the max gap in this row
+                    
+                    # Get the index of max gap
                     max_gap_idx = gaps.argmax()
+
+                    # lookup max gap index in gain indices to get/save start col of the max gap
                     start_col = gain_indices[max_gap_idx]
+
+                    # look up the index after the max gap index in gain indices and save it as the end col of first max gap 
                     end_col = gain_indices[max_gap_idx + 1]
+
+                    # save row, start col, and end col, as location of the max gap
                     max_gap_coords = (row, start_col, end_col)
+                    
+        # the largest number of days between gain days
         stats_dict['max_days_btwn_gains'] = int(max_gap)
-        stats_dict['max_days_btwn_gains_coords'] = symbol_df.columns[max_gap_coords[1]].strftime('%Y-%m-%d'), symbol_df.columns[max_gap_coords[2]].strftime('%Y-%m-%d')
-        # (row, start_col, end_col)
 
-        # stats: start date of max_days_btwn_gains
+        # the corresponding start and end date of the largest number of days between gain days
+        if max_gap_coords:
+            _, max_start_date, max_end_date = max_gap_coords
+            stats_dict['max_days_btwn_gains_coords'] = (\
+            symbol_df.columns[max_start_date].strftime('%Y-%m-%d'),
+            symbol_df.columns[max_end_date].strftime('%Y-%m-%d')
+            )
+        else:
+            stats_dict['max_days_btwn_gains_coords'] = (None, None)
 
+        
+        # stats: max number of consecutive days of gains (row-wise in upper triangle)
+
+        max_streak = 0                  # overall max streak length
+        current_streak = 0              # streak counter for current row
+        max_streak_coords = None        # will hold (row, start_col, end_col) of max streak
+
+        for row in range(m):
+            streak_start = None
+            current_streak = 0
+
+            # iterate across upper triangle (cols after current row)
+            for col in range(row + 1, m):
+                if gain_matrix[row, col]:  # True if there's a gain
+                    if current_streak == 0:
+                        streak_start = col  # mark beginning of a streak
+                    current_streak += 1
+
+                    # update max streak if needed
+                    if current_streak > max_streak:
+                        max_streak = current_streak
+                        max_streak_coords = (row, streak_start, col)
+                else:
+                    current_streak = 0  # reset streak if no gain
+
+        # translate max streak indices to dates
+        if max_streak_coords:
+            _, start_col, end_col = max_streak_coords
+            max_streak_start_date = symbol_df.columns[start_col].strftime('%Y-%m-%d')
+            max_streak_end_date = symbol_df.columns[end_col].strftime('%Y-%m-%d')
+        else:
+            max_streak_start_date = None
+            max_streak_end_date = None
+
+        # largest number of consecutive days of gains
+        stats_dict['max_consecutive_days_of_gains'] = int(max_streak)
+
+        # the corresponding start and end date of the largest number of consecutive days of gains
+        stats_dict['max_consecutive_days_of_gains_coords'] = (max_streak_start_date, max_streak_end_date)
+
+        # return stats as df.
         return pd.DataFrame([stats_dict], index=[label])
 
     # === Handle time series format ===
@@ -274,25 +347,82 @@ def symbols_and_results_stats(
         'n_change': 'Int64',
         'n_gain': 'Int64',
         'gain_ratio': 'float64',
+        'relative_change': 'float64',
         't': 'Int64',
         't_gain_sign': 'Int64',
         't_gain_sign_ratio': 'float64',
-        'relative_change': 'float64'
+        't_relative_change': 'float64',
+        't_harmonic_mean': 'float64',
+        't_rank_harmonic_mean': 'Int64'
     }
 
     stats_df = pd.DataFrame(index=stats_index, columns=list(stats_dtypes.keys())).astype(stats_dtypes)
 
+    ## test 1/2
+    # Prepare new columns in a dictionary
+    change_cols = {}
+    change_sign_cols = {}
+    relative_change_cols = {}
+
     for col in stats_index:
-        symbol_df[f'{col}_change'] = symbol_df[col].pct_change()
-        symbol_df[f'{col}_change_sign'] = np.where(symbol_df[f'{col}_change'] > 0, 1, -1)
-        symbol_df[f'{col}_relative_change'] = symbol_df[col] / symbol_df[col].iloc[0]
+        pct_change = symbol_df[col].pct_change(fill_method=None)
+        change_sign = np.where(pct_change > 0, 1, -1)
+        rel_change = symbol_df[col] / symbol_df[col].iloc[0]
+
+        change_cols[f'{col}_change'] = pct_change
+        change_sign_cols[f'{col}_change_sign'] = change_sign
+        relative_change_cols[f'{col}_relative_change'] = rel_change
+
+        # test 2/2
+    # Concatenate all at once
+    new_cols_df = pd.DataFrame({**change_cols, **change_sign_cols, **relative_change_cols}, index=symbol_df.index)
+    # Join with symbol_df only once (copy recommended for defragmenting)
+    symbol_df = pd.concat([symbol_df, new_cols_df], axis=1).copy()
+    print(symbol_df['CRCL'].describe())
+
+
+    for col in stats_index:
+        # symbol_df[f'{col}_change'] = symbol_df[col].pct_change()
+        # symbol_df[f'{col}_change_sign'] = np.where(symbol_df[f'{col}_change'] > 0, 1, -1)
+        # symbol_df[f'{col}_relative_change'] = symbol_df[col] / symbol_df[col].iloc[0]
 
         stats_df.loc[col, 'n_change'] = symbol_df[f'{col}_change'].count()
         stats_df.loc[col, 'n_gain'] = (symbol_df[f'{col}_change_sign'] == 1).sum()
-        stats_df.loc[col, 'gain_ratio'] = round(stats_df.loc[col, 'n_gain'] / stats_df.loc[col, 'n_change'], 2) if stats_df.loc[col, 'n_change'] > 0 else np.nan
+
+        stats_df.loc[col, 'gain_ratio'] = (
+        round(stats_df.loc[col, 'n_gain'] / stats_df.loc[col, 'n_change'], 2)
+        if stats_df.loc[col, 'n_change'] > 0 else np.nan
+    )
+        stats_df.loc[col, 'relative_change'] = round(symbol_df[f'{col}_relative_change'].iloc[-1], 2) - 1
         stats_df.loc[col, 't'] = t
         stats_df.loc[col, 't_gain_sign'] = (symbol_df[f'{col}_change_sign'].iloc[-t:] == 1).sum()
         stats_df.loc[col, 't_gain_sign_ratio'] = round(stats_df.loc[col, 't_gain_sign'] / t, 2)
-        stats_df.loc[col, 'relative_change'] = round(symbol_df[f'{col}_relative_change'].iloc[-1], 2) - 1
+
+        # assuming input is symbol_df
+        print(f"{col}-1: {symbol_df[f'{col}_relative_change'].iloc[-1]}")
+        print(f"{col}_-t: {symbol_df[f'{col}_relative_change'].iloc[-t]}")
+        stats_df.loc[col, 't_relative_change'] = round(symbol_df[f'{col}_relative_change'].iloc[-1], 2) / round(symbol_df[f'{col}_relative_change'].iloc[-t],2) - 1
+                
+        # === harmonic mean of trailing change sign ratio ===
+        # === harmonic mean of t_gain_sign and t_relative_change ===
+        t_gain_sign = stats_df.loc[col, 't_gain_sign']
+        t_relative_change = stats_df.loc[col, 't_relative_change']
+        if t_gain_sign > 0 and t_relative_change > 0:
+            harmonic_mean = 2 / ((1 / t_gain_sign) + (1 / t_relative_change))
+            stats_df.loc[col, 't_harmonic_mean'] = round(harmonic_mean, 4)
+        else:
+            stats_df.loc[col, 't_harmonic_mean'] = 0.0
+
+
+
+    # Rank harmonic_mean (1 = best)
+    stats_df['t_rank_harmonic_mean'] = stats_df['t_harmonic_mean'].rank(method='min', ascending=False).astype('Int64')
+
+    #sort
+    stats_df = stats_df.sort_values('t_rank_harmonic_mean')
+
+    #print
+    print(stats_df.head(30))
+    print(list(stats_df.head(50).index))
 
     return stats_df

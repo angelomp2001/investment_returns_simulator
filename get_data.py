@@ -99,6 +99,11 @@ def get_symbol_data(
                 return df
 
     # 1. Check if symbol data already stored in db
+
+    # initialize 
+    series_dict = {}
+
+
     for symbol in symbols:
         
         # initialize loop vars
@@ -154,7 +159,7 @@ def get_symbol_data(
                 date_ranges,
                 desc='Getting Data', 
                 unit='symbol', 
-                leave=True,
+                leave=False,
                 colour='green',  
                 ascii=(" ", "█"),
                 ncols=100
@@ -229,8 +234,10 @@ def get_symbol_data(
             symbol_df.index = pd.to_datetime(symbol_df.index)
             symbol_df = symbol_df.sort_index()
             
-            df.loc[start_date:end_date, symbol] = symbol_df.loc[start_date:end_date, 'Close'].copy()
-            
+            # trying to replace this line with dict. 
+            # df.loc[start_date:end_date, symbol] = symbol_df.loc[start_date:end_date, 'Close'].copy()
+            series_dict[symbol] = symbol_df.loc[start_date:end_date, 'Close'].copy()
+
             # Filter to the desired range
             # filtered_df = symbol_df.loc[start_date:end_date, ['Close']].copy()
             # filtered_df.columns = [symbol]
@@ -244,6 +251,10 @@ def get_symbol_data(
         except Exception as e:
             print(f"Error processing final data for {symbol}: {e}")
 
+    # Create new DataFrame with all columns at once
+    df = pd.DataFrame(series_dict)
+
+    # save
     df.to_csv(f'symbols_data/symbols_data_{time.time()}' + '.csv', index_label='Date')
     return df
 
@@ -262,7 +273,7 @@ def symbol_data_to_returns_df(
     market_index: the market index portfolio_1 is compared gainst, if provided.
     start_date: start date of comparison
     end_date: end date of comparison
-    value: what is returned: 'close', 'change', 'relative_change', 'change_b', 'relative_change_b'
+    value: what is returned: 'close', 'change', 'relative_change', 'change_sign', 'relative_change_sign'
     """
     
     def compute_returns(
@@ -314,7 +325,7 @@ def symbol_data_to_returns_df(
                 elif value is None or value == 'relative_change':
                     # this is the default
                     contrib = (end_prices / start_prices) - 1
-                elif value == 'change_b':
+                elif value == 'change_sign':
                     # new var which represents previous col (end_date) price
                     prev_end_date_prices = np.roll(prices, 1)
                     # calculate returns as binary (1= True, 0 <= False)
@@ -323,7 +334,7 @@ def symbol_data_to_returns_df(
                     returns[0] = False
                     # replace True with 1, False with -1 
                     contrib = np.where(np.tile(returns, (m, 1)), 1, -1)
-                elif value == 'relative_change_b':
+                elif value == 'relative_change_sign':
                     contrib = np.where((end_prices / start_prices) - 1 > 0, 1, -1)
                 else:
                     contrib = np.zeros((m, m))
