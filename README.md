@@ -87,4 +87,6 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 
 7/30/2035: update symbols_stats to handle results_df and returns stats that make sense. Can't without histogram first. ✅ target stats: max days between gains, max days within gains.  set results_df to Close for testing.
 
-8/01/2025: create histogram function(symbols_df or returns_df)
+8/2/2025: target stats: max days between gains, max days within gains.✅
+
+8/03/2025: create histogram function(symbols_df or returns_df), create timeline of relative gains
