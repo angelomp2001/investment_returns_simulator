@@ -23,7 +23,7 @@ portfolio_1 = get_symbol_data(portfolio_1_symbols, start_date=start_date, end_da
 market_index = get_symbol_data(market_index_symbols, start_date=start_date, end_date=end_date)
 
 # 2. Get descriptive stats
-symbols_and_results_stats(portfolio_1)
+symbols_and_results_stats(portfolio_1, t=60)
 
 
 # 3. Transform data into all possible returns df
@@ -33,4 +33,4 @@ returns_df = symbol_data_to_returns_df(portfolio_1=portfolio_1, market_index=mar
 # returns_heatmap(returns_df)
 
 # Get all possible returns df stats
-symbols_and_results_stats(returns_df, t=34)
+symbols_and_results_stats(returns_df, t=60)
