@@ -5,8 +5,7 @@ from datetime import date
 import numpy as np
 import datetime as dt
 from tqdm import tqdm
-import time
-
+import logging
 
 ############################## Information on where data is and how to get it ##############################
 all_symbols_path = Path('Equities Universe - Symbols.csv')
@@ -59,7 +58,7 @@ def get_symbol_data(
         case 1: start date and end date are before existing range: s---e___es===ee
         case 2: start date is before existing range: s---es===e===ee
         case 3: start date and end date are within existing range: es===s===e===ee
-        case 4: start date and end date are after existing range: es===s===ee---e
+        case 4: start date is aftet exsting start date and end date is after existing range: es===s===ee---e
         case 5: start date and end date are after existing range: es===ee___s---e
         case 6: start date is before existing range and end date is after existing range: s---es===ee---e
     3. Get new data
@@ -70,7 +69,7 @@ def get_symbol_data(
         save Close as csv
     4. Return data
     '''
-
+    
     '0. Initialize vars'
     symbols = [symbols] if isinstance(symbols, str) else symbols
     start_date = pd.to_datetime(start_date)  
@@ -96,6 +95,7 @@ def get_symbol_data(
                 continue
             else:
                 df = subset_df
+                print(f'data found in {each_path}')
                 return df
 
     # 1. Check if symbol data already stored in db
@@ -103,14 +103,15 @@ def get_symbol_data(
     # initialize 
     series_dict = {}
 
-
+    print(f'\nstart date: {start_date}, end date: {end_date}')
     for symbol in symbols:
         
         # initialize loop vars
         symbol_file_path = Path('symbols/' + symbol + '.csv')
         date_ranges = []
         existing_start_date, existing_end_date = symbol_data_existing_dates(symbol)
-
+        
+        # symbol: ANGO, start date: 2024-01-01, end date: 2025-08-17
         if existing_start_date is None or existing_end_date is None:
             new_data_start_date = start_date
             new_data_end_date = end_date
@@ -133,11 +134,13 @@ def get_symbol_data(
             case = 3
 
         elif start_date >= existing_start_date and end_date > existing_end_date:
-            new_data_start_date = existing_end_date + pd.Timedelta(days=1)
-            new_data_end_date = end_date
+            print(f'existing start date: {existing_start_date}, existing end date: {existing_end_date}')
+            # 2024-01-01 >= 2020-01-01 and 2025-08-17 > 2025-08-17
+            new_data_start_date = existing_end_date + pd.Timedelta(days=1)  # new start date = 8/17/2025 + 1 = 8/18/2025 (today) 
+            new_data_end_date = end_date # new end date = end date = 8/18/2025 - 1 = 8/17/2025 (yesterday)
             date_ranges.append((new_data_start_date, new_data_end_date))
-            case = 4
-
+            case = 4 # es===s===ee---e
+            
         elif start_date > existing_end_date and end_date > existing_end_date:
             new_data_start_date = existing_end_date + pd.Timedelta(days=1)
             new_data_end_date = end_date
@@ -149,9 +152,7 @@ def get_symbol_data(
             new_data_end_date = end_date
             date_ranges.append((new_data_start_date, existing_start_date))
             date_ranges.append((existing_end_date + pd.Timedelta(days=1), new_data_end_date))
-            case = 6
-
-        # print(f'case: {case}')
+            case = 6    
         
 
         try:
@@ -165,18 +166,23 @@ def get_symbol_data(
                 ncols=100
             ):
                 # make data mask for incoming data
+                # get min and max dates
                 date_range = pd.date_range(
                     min(filter(pd.notnull, [start_date, existing_start_date])),
                     max(filter(pd.notnull, [end_date, existing_end_date]))
                 )
+                # make df of nan
                 df_mask = pd.DataFrame(index=date_range)
                 df_mask['Close'] = np.nan
 
                 try:
+                    # get existing data
                     existing_symbol_data = pd.read_csv(symbol_file_path, index_col='Date', parse_dates=True)
+
+                    # apply exiting data to mask
                     df_mask.loc[existing_symbol_data.index, 'Close'] = existing_symbol_data['Close']
                 except FileNotFoundError:
-                    print(f'existing data not found for {symbol}, creating new file.')
+                    print(f'\nexisting data not found for {symbol}, creating new file.')
 
                 # save data mask to csv
                 df_mask.to_csv(symbol_file_path, index_label='Date')
@@ -189,16 +195,17 @@ def get_symbol_data(
                     'rounding': True,
                     'group_by': "Symbol"
                 }
+                
                 yfinance_data = yf.download(symbol, **yfinance_params)
                 
                 # flatten multi-index columns
                 yfinance_data.columns = [col[1] for col in yfinance_data.columns]
 
                 if yfinance_data.empty:
-                    all_symbols_data = pd.read_csv(all_symbols_path,index_col='symbol',parse_dates=['start_date', 'end_date'])
-                    all_symbols_data = all_symbols_data.drop(symbol, axis=0)
-                    all_symbols_data.to_csv(all_symbols_path, index_label='symbol')
-                    symbol_file_path.unlink()
+                    #all_symbols_data = pd.read_csv(all_symbols_path,index_col='symbol',parse_dates=['start_date', 'end_date'])
+                    #all_symbols_data = all_symbols_data.drop(symbol, axis=0)
+                    #all_symbols_data.to_csv(all_symbols_path, index_label='symbol')
+                    #symbol_file_path.unlink()
                     print('yfinance returned no data. symbol/file deleted')
                     
 
@@ -206,6 +213,7 @@ def get_symbol_data(
                     # read existing data, update Close column, save as symbol.csv
                     existing_symbol_data = pd.read_csv(symbol_file_path, index_col='Date', parse_dates=True)
                     existing_symbol_data.loc[yfinance_data.index, 'Close'] = yfinance_data['Close']
+                    existing_symbol_data = existing_symbol_data.sort_index()
                     existing_symbol_data.to_csv(symbol_file_path, index_label='Date')
                 
                     # read existing data, update dates columns, save all_symbols.csv
@@ -255,7 +263,7 @@ def get_symbol_data(
     df = pd.DataFrame(series_dict)
 
     # save
-    df.to_csv(f'symbols_data/symbols_data_{time.time()}' + '.csv', index_label='Date')
+    df.to_csv(f'symbols_data/symbols_data_{date.today().strftime('%Y-%m-%d')}' + '.csv', index_label='Date')
     return df
 
 def symbol_data_to_returns_df(
