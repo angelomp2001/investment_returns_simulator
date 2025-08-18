@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import time as time
 
 
 def compare_returns(
@@ -140,8 +141,6 @@ def symbols_and_results_stats(
     Returns:
         stats_df: DataFrame with summary statistics
     """
-    print(f't: {t}')
-
     t = t  # trailing window for d-day stats
 
     # Handle Series input
@@ -344,10 +343,13 @@ def symbols_and_results_stats(
 
     stats_index = symbol_df.columns.to_list()
     stats_dtypes = {
+        'start_date': 'datetime64[ns]',
+        'end_date': 'datetime64[ns]',
         'n_change': 'Int64',
         'n_gain': 'Int64',
         'gain_ratio': 'float64',
         'relative_change': 'float64',
+        'date_trailing_end': 'datetime64[ns]',
         't': 'Int64',
         't_gain_sign': 'Int64',
         't_gain_sign_ratio': 'float64',
@@ -358,7 +360,7 @@ def symbols_and_results_stats(
 
     stats_df = pd.DataFrame(index=stats_index, columns=list(stats_dtypes.keys())).astype(stats_dtypes)
 
-    ## test 1/2
+
     # Prepare new columns in a dictionary
     change_cols = {}
     change_sign_cols = {}
@@ -373,19 +375,17 @@ def symbols_and_results_stats(
         change_sign_cols[f'{col}_change_sign'] = change_sign
         relative_change_cols[f'{col}_relative_change'] = rel_change
 
-        # test 2/2
     # Concatenate all at once
     new_cols_df = pd.DataFrame({**change_cols, **change_sign_cols, **relative_change_cols}, index=symbol_df.index)
     # Join with symbol_df only once (copy recommended for defragmenting)
     symbol_df = pd.concat([symbol_df, new_cols_df], axis=1).copy()
-    print(symbol_df['CRCL'].describe())
+    #print(symbol_df['CRCL'].describe())
 
 
     for col in stats_index:
-        # symbol_df[f'{col}_change'] = symbol_df[col].pct_change()
-        # symbol_df[f'{col}_change_sign'] = np.where(symbol_df[f'{col}_change'] > 0, 1, -1)
-        # symbol_df[f'{col}_relative_change'] = symbol_df[col] / symbol_df[col].iloc[0]
 
+        stats_df.loc[col, 'start_date'] = symbol_df.index[0]
+        stats_df.loc[col, 'end_date'] = symbol_df.index[-1]
         stats_df.loc[col, 'n_change'] = symbol_df[f'{col}_change'].count()
         stats_df.loc[col, 'n_gain'] = (symbol_df[f'{col}_change_sign'] == 1).sum()
 
@@ -394,14 +394,18 @@ def symbols_and_results_stats(
         if stats_df.loc[col, 'n_change'] > 0 else np.nan
     )
         stats_df.loc[col, 'relative_change'] = round(symbol_df[f'{col}_relative_change'].iloc[-1], 2) - 1
+        stats_df.loc[col, 'date_trailing_end'] = symbol_df.index[-t]
         stats_df.loc[col, 't'] = t
         stats_df.loc[col, 't_gain_sign'] = (symbol_df[f'{col}_change_sign'].iloc[-t:] == 1).sum()
         stats_df.loc[col, 't_gain_sign_ratio'] = round(stats_df.loc[col, 't_gain_sign'] / t, 2)
 
         # assuming input is symbol_df
-        print(f"{col}-1: {symbol_df[f'{col}_relative_change'].iloc[-1]}")
-        print(f"{col}_-t: {symbol_df[f'{col}_relative_change'].iloc[-t]}")
-        stats_df.loc[col, 't_relative_change'] = round(symbol_df[f'{col}_relative_change'].iloc[-1], 2) / round(symbol_df[f'{col}_relative_change'].iloc[-t],2) - 1
+        # Calculate the relative change
+        relative_change = round(symbol_df[f'{col}_relative_change'].iloc[-1], 2) / round(symbol_df[f'{col}_relative_change'].iloc[-t], 2) - 1
+
+        # Check if the result is NaN or infinite, and set to 0 if true
+        stats_df.loc[col, 't_relative_change'] = relative_change if not (np.isinf(relative_change) or np.isnan(relative_change)) else 0
+        
                 
         # === harmonic mean of trailing change sign ratio ===
         # === harmonic mean of t_gain_sign and t_relative_change ===
@@ -422,7 +426,12 @@ def symbols_and_results_stats(
     stats_df = stats_df.sort_values('t_rank_harmonic_mean')
 
     #print
+    print(symbol_df.index[0].strftime('%Y-%m-%d'))
+    print(symbol_df.index[-t].strftime('%Y-%m-%d'))
     print(stats_df.head(30))
     print(list(stats_df.head(50).index))
+
+    # save
+    stats_df.to_csv(f'stats_data/stats_data_{time.time()}' + '.csv', index_label='Symbol')
 
     return stats_df

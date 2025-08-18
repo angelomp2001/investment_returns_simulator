@@ -82,7 +82,7 @@ def get_symbol_data(
     folder_path.mkdir(exist_ok=True)
 
     # check for existing symbols data df
-    symbols_data_paths = list(Path('.').glob('symbols/symbols_data_*.csv'))
+    symbols_data_paths = list(Path('.').glob('symbols_data/symbols_data_*.csv'))
     for each_path in symbols_data_paths:
         each_symbols_data = pd.read_csv(each_path, index_col='Date', parse_dates=True)
         
@@ -270,7 +270,7 @@ def symbol_data_to_returns_df(
     If both portfolio_1 and market_index are provided, returns the difference in returns.
     Each cell (i,j) is the return from date i to date j.
     portfolio_1: the main portfolio
-    market_index: the market index portfolio_1 is compared gainst, if provided.
+    market_index: the market index portfolio_1 is compared against, if provided.
     start_date: start date of comparison
     end_date: end date of comparison
     value: what is returned: 'close', 'change', 'relative_change', 'change_sign', 'relative_change_sign'
