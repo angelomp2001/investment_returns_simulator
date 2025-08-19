@@ -369,7 +369,8 @@ def symbols_and_results_stats(
     for col in stats_index:
         pct_change = symbol_df[col].pct_change(fill_method=None)
         change_sign = np.where(pct_change > 0, 1, -1)
-        rel_change = symbol_df[col] / symbol_df[col].iloc[0]
+        rel_change = symbol_df[col] / symbol_df[col][symbol_df[col].first_valid_index()]
+
 
         change_cols[f'{col}_change'] = pct_change
         change_sign_cols[f'{col}_change_sign'] = change_sign
@@ -384,7 +385,7 @@ def symbols_and_results_stats(
 
     for col in stats_index:
 
-        stats_df.loc[col, 'start_date'] = symbol_df.index[0]
+        stats_df.loc[col, 'start_date'] = symbol_df[col].first_valid_index()
         stats_df.loc[col, 'end_date'] = symbol_df.index[-1]
         stats_df.loc[col, 'n_change'] = symbol_df[f'{col}_change'].count()
         stats_df.loc[col, 'n_gain'] = (symbol_df[f'{col}_change_sign'] == 1).sum()

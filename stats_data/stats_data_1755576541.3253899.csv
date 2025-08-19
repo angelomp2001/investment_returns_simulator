@@ -1,0 +1,4 @@
+Symbol,start_date,end_date,n_change,n_gain,gain_ratio,relative_change,date_trailing_end,t,t_gain_sign,t_gain_sign_ratio,t_relative_change,t_harmonic_mean,t_rank_harmonic_mean
+RDDT,2024-03-21,2025-08-15,351,179,0.51,3.8899999999999997,2025-06-20,40,24,0.6,0.7717391304347827,0.6751,1
+INBX,2024-05-29,2025-08-15,304,151,0.5,0.8600000000000001,2025-06-20,40,24,0.6,0.5630252100840338,0.5809,2
+WW,2025-06-27,2025-08-15,34,18,0.53,0.17999999999999994,2025-06-20,40,18,0.45,0.0,0.0,3
