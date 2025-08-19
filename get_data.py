@@ -104,7 +104,14 @@ def get_symbol_data(
     series_dict = {}
 
     print(f'\nstart date: {start_date}, end date: {end_date}')
-    for symbol in symbols:
+    for symbol in tqdm(
+                symbols,
+                desc='Getting Data', 
+                unit='symbol', 
+                leave=False,
+                colour='green',  
+                ascii=(" ", "█"),
+                ncols=100):
         
         # initialize loop vars
         symbol_file_path = Path('symbols/' + symbol + '.csv')
@@ -134,7 +141,7 @@ def get_symbol_data(
             case = 3
 
         elif start_date >= existing_start_date and end_date > existing_end_date:
-            print(f'existing start date: {existing_start_date}, existing end date: {existing_end_date}')
+            
             # 2024-01-01 >= 2020-01-01 and 2025-08-17 > 2025-08-17
             new_data_start_date = existing_end_date + pd.Timedelta(days=1)  # new start date = 8/17/2025 + 1 = 8/18/2025 (today) 
             new_data_end_date = end_date # new end date = end date = 8/18/2025 - 1 = 8/17/2025 (yesterday)
@@ -154,17 +161,9 @@ def get_symbol_data(
             date_ranges.append((existing_end_date + pd.Timedelta(days=1), new_data_end_date))
             case = 6    
         
-
+        print(f'\ncase: {case}, new start date: {date_ranges}, new end date: {date_ranges}, \nexisting start date: {existing_start_date}, existing end date: {existing_end_date}')
         try:
-            for start_date, end_date in tqdm(
-                date_ranges,
-                desc='Getting Data', 
-                unit='symbol', 
-                leave=False,
-                colour='green',  
-                ascii=(" ", "█"),
-                ncols=100
-            ):
+            for start_date, end_date in date_ranges:
                 # make data mask for incoming data
                 # get min and max dates
                 date_range = pd.date_range(

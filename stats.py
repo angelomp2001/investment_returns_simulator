@@ -409,10 +409,10 @@ def symbols_and_results_stats(
                 
         # === harmonic mean of trailing change sign ratio ===
         # === harmonic mean of t_gain_sign and t_relative_change ===
-        t_gain_sign = stats_df.loc[col, 't_gain_sign']
+        t_gain_sign_ratio = stats_df.loc[col, 't_gain_sign_ratio']
         t_relative_change = stats_df.loc[col, 't_relative_change']
-        if t_gain_sign > 0 and t_relative_change > 0:
-            harmonic_mean = 2 / ((1 / t_gain_sign) + (1 / t_relative_change))
+        if t_gain_sign_ratio > 0 and t_relative_change > 0:
+            harmonic_mean = 2 / ((1 / t_gain_sign_ratio) + (1 / t_relative_change))
             stats_df.loc[col, 't_harmonic_mean'] = round(harmonic_mean, 4)
         else:
             stats_df.loc[col, 't_harmonic_mean'] = 0.0

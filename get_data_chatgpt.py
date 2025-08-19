@@ -281,7 +281,7 @@ def _delete_symbol_from_metadata_and_file(symbol: str, meta_path: Path, symbol_d
     fp = _symbol_file_path(symbol, symbol_dir)
     if fp.exists():
         try:
-            fp.unlink()
+            pass #fp.unlink()
         except Exception:
             pass
 
@@ -330,7 +330,7 @@ def get_symbol_data(
     *,
     symbol_dir: Path | str = "symbols",
     combined_dir: Path | str = "symbols_data",
-    metadata_path: Path | str = "symbols/all_symbols.csv",
+    metadata_path: Path | str = "Equity Universe - Symbols.csv",
 ) -> pd.DataFrame:
     """
     High-level pipeline:
