@@ -20,7 +20,7 @@ end_date = (date.today()-pd.Timedelta(days=1)).strftime('%Y-%m-%d')
 t = 60 - 20 # same as spreadsheet
 
 # 1. Get data
-portfolio_1 = get_symbol_data(['WW', 'RDDT', 'INBX'], start_date=start_date, end_date=end_date)
+portfolio_1 = get_symbol_data(all_symbols, start_date=start_date, end_date=end_date)
 market_index = get_symbol_data('VOOG', start_date=start_date, end_date=end_date)
 
 # 2. Get descriptive stats
