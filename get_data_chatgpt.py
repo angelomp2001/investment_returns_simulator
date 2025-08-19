@@ -313,7 +313,7 @@ def _assemble_dataframe(series_dict: Dict[str, pd.Series]) -> pd.DataFrame:
 
 def _save_combined_snapshot(df: pd.DataFrame, combined_dir: Path) -> Path:
     """Save combined dataframe to symbols_data/symbols_data_<timestamp>.csv and return the path."""
-    ts = f"{time.time():.0f}"
+    ts = f"{date.today().strftime('%Y-%m-%d')}"
     out_path = combined_dir / f"symbols_data_{ts}.csv"
     df.to_csv(out_path, index_label="Date")
     return out_path
