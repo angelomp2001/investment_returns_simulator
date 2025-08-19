@@ -91,4 +91,6 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 
 8/17/2025: add save feature to symbols_and_results_stats(). ✅ bug: symbols_data isn't updating under old code, but it does under new code.  and so end_date is stuck at 7/10/2025, which throws off the training window ⚠️ 
 
-8/18/2025: Switched to class version of get_data() by chatgpt. ✅ bug: stats(): start_date and end_date are the same per symbol, but should be dependent on symbol data. Create get() for reading saved stats_df.  create histogram function(symbols_df, returns_df, stats_df), create timeline of relative gains
+8/18/2025: Switched to class version of get_data() by chatgpt. ✅ bug: stats(): start_date and end_date are the same per symbol, but should be dependent on symbol data.✅
+
+8/19/2025: create histogram function(symbols_df, returns_df, stats_df), create timeline of relative gains.
