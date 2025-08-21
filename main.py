@@ -1,7 +1,7 @@
 from pathlib import Path
 import pandas as pd
 from datetime import date
-from get_data import symbol_data_to_returns_df
+from symbols_df_to_returns_df import symbols_df_to_returns_df
 from get_data_chatgpt import get_symbol_data
 from charts import returns_heatmap, histogram
 from stats import symbols_and_results_stats
@@ -28,7 +28,7 @@ symbols_and_results_stats(portfolio_1, t=t)
 
 
 # 3. Transform data into all possible returns df
-returns_df = symbol_data_to_returns_df(portfolio_1=portfolio_1, start_date=start_date, end_date=end_date, value='relative_change_sign')
+returns_df = symbols_df_to_returns_df(portfolio_1=portfolio_1, start_date=start_date, end_date=end_date, value='relative_change_sign')
 
 # 4. Visualize Transformation
 # returns_heatmap(returns_df)

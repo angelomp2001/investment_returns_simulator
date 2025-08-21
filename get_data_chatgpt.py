@@ -19,7 +19,7 @@ from tqdm.auto import tqdm
 # Input normalization & cache
 # ----------------------------
 
-def _normalize_inputs(
+def _standardize_inputs(
     symbols: Iterable[str] | str,
     start_date: date | str | pd.Timestamp,
     end_date: date | str | pd.Timestamp,
@@ -344,7 +344,7 @@ def get_symbol_data(
     metadata_path = Path(metadata_path)
     _ensure_dirs(symbol_dir, combined_dir)
 
-    symbols, start_ts, end_ts = _normalize_inputs(symbols, start_date, end_date)
+    symbols, start_ts, end_ts = _standardize_inputs(symbols, start_date, end_date)
 
     # 1) Fast path: reuse a cached combined file if it already covers the need.
     cached = _find_cached_combined(symbols, start_ts, end_ts, combined_dir)
