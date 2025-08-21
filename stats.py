@@ -319,8 +319,10 @@ def symbols_and_results_stats(
         # the corresponding start and end date of the largest number of consecutive days of gains
         stats_dict['max_consecutive_days_of_gains_coords'] = (max_streak_start_date, max_streak_end_date)
 
-        # return stats as df.
-        return pd.DataFrame([stats_dict], index=[label])
+        # return stats as df
+        stats_df = pd.Series([stats_dict], index=[label])
+        print(stats_df)
+        return stats_df
 
     # === Handle time series format ===
 

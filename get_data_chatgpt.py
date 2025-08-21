@@ -274,7 +274,7 @@ def _delete_symbol_from_metadata_and_file(symbol: str, meta_path: Path, symbol_d
             meta = pd.read_csv(meta_path, index_col="symbol", parse_dates=["start_date", "end_date"])
             if symbol in meta.index:
                 meta = meta.drop(symbol, axis=0)
-                meta.to_csv(meta_path, index_label="symbol")
+                # meta.to_csv(meta_path, index_label="symbol")
         except Exception:
             pass
     # Delete symbol file

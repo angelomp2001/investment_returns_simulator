@@ -15,7 +15,7 @@ all_symbols = all_symbols_data.index
 #Parameters
 portfolio_1_symbols = ['CRCL' ,'TSLA', 'NVDA','META','AMZN','GOOG','MSFT','O','AAPL']
 market_index_symbols = ['VOOG'] #['VOOG','VGT','VTI','SPY','QQQ','VOO']
-start_date = '2024-01-01'
+start_date = '2020-01-01'
 end_date = (date.today()-pd.Timedelta(days=1)).strftime('%Y-%m-%d')
 t = 60 - 20 # same as spreadsheet
 
@@ -28,7 +28,7 @@ symbols_and_results_stats(portfolio_1, t=t)
 
 
 # 3. Transform data into all possible returns df
-returns_df = symbol_data_to_returns_df(portfolio_1=portfolio_1, market_index=market_index, start_date=start_date, end_date=end_date, value='relative_change_sign')
+returns_df = symbol_data_to_returns_df(portfolio_1=portfolio_1, start_date=start_date, end_date=end_date, value='relative_change_sign')
 
 # 4. Visualize Transformation
 # returns_heatmap(returns_df)
