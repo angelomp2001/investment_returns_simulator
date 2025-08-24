@@ -102,7 +102,7 @@ def _standardize_output(np_array: np.array, index: pd.DatetimeIndex) -> pd.DataF
 def time_series_to_returns_df(
         time_series_1: pd.Series | pd.DataFrame,
         time_series_2: pd.Series = None,
-        value: str
+        value: str = 'relative_change_sign'
 ):
     '''
     converts time series symbols data to a returns df in four scenarios:
@@ -128,7 +128,6 @@ def time_series_to_returns_df(
     #returns_df = returns_df.subtract(time_series_2_returns, fill_value=0) if time_series_2 is not None else returns_df
 
     return returns_df
-
 
 'old function'
 def symbols_df_to_returns_df(

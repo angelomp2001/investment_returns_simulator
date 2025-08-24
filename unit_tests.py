@@ -1,6 +1,7 @@
 import pandas as pd
 from pathlib import Path
-from get_data import get_symbol_data, symbol_data_to_returns_df
+from get_data import get_symbol_data
+from symbols_df_to_returns_df import time_series_to_returns_df
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm
 from mpl_toolkits.mplot3d import Axes3D
@@ -28,24 +29,6 @@ test_of_all_symbols = all_symbols_data.index[:30]
 
 data = get_symbol_data(test_of_all_symbols, start_date=START_DATE, end_date=end_date)
 
-# returns_df = symbol_data_to_returns_df(portfolio_1=data, market_index=None, start_date=START_DATE, end_date=end_date, value='relative_change_b')
-
-# returns_df = (
-#     data
-#     .pipe(symbol_data_to_returns_df, value='relative_change')
-#     #.pipe(returns_stats)
-# )
-
-# # test: update symbols_stats to handle results_df and returns same info.  
-# stats_df = symbols_and_results_stats(data, t=60)
-# print(stats_df)
-
-# results_stats_df = symbols_and_results_stats(returns_df, t=60)
-
-# print(results_stats_df)
-#returns_heatmap(returns_df)
-#histogram(returns_df)
-#histogram(data)
-
-
-# create histogram to hand symbols_df and results_df
+returns_df = time_series_to_returns_df(time_series_1=data,time_series_2=None, value='relative_change_sign')
+print(returns_df.head())
+#
