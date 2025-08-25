@@ -93,12 +93,12 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 
 8/18/2025: Switched to class version of get_data() by chatgpt. ✅ bug: stats(): start_date and end_date are the same per symbol, but should be dependent on symbol data.✅
 
-8/19/2025: work on documentation. 
+8/19/2025: work on documentation. ✅
 
-8/20/2025: work on documentation. 
+8/20/2025: work on documentation.  ✅
 
-8/21/2025: refactor symbols_to_returnsdf().  
+8/21/2025: refactor symbols_to_returnsdf().   ✅
 
-8/22/2025: refactor stats()
+8/22/2025: refactor stats() 
 
 8/23/2025: charts: timeline (symbols, returns_df, stats_df), histogram function(symbols_df, returns_df, stats_df), scatterplot(stats_df).
