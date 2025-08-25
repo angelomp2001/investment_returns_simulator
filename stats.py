@@ -161,20 +161,17 @@ def _standardize_inputs(results_df: pd.DataFrame | pd.Series) -> pd.DataFrame:
     return label, results_df
 
 ''' helper function '''
-def _get_results_df_values(results_df: pd.DataFrame)-> np.array:
+def _get_results_df_values(results_df: pd.DataFrame, flat: bool = True) -> np.ndarray:
     '''Extract values from the upper triangle of a results df.'''
     # vectorize
-    matrix = results_df.values
+    matrix = results_df.to_numpy()
 
-    # create mask of values
-    mask = np.triu(np.ones(matrix.shape, dtype=bool), k=1)
-    
-    # save values
-    values = matrix[mask]
-
-    # dropna
-    values = values[~np.isnan(values)]
-    return values
+    if flat:
+        mask = np.triu(np.ones(matrix.shape, dtype=bool), k=1)
+        values = matrix[mask]
+        return values[~np.isnan(values)]
+    else:
+        return matrix
 
 ''' helper function '''
 def _calc_n_stats(values: np.ndarray) -> dict:
@@ -203,15 +200,17 @@ def _calc_btwn_gains_stats(matrix: np.ndarray, dates: pd.Index) -> tuple[int, tu
     coords: tuple[str, str] = (None, None)
 
     # Process each row using scipy.ndimage.label
-    for row_idx, row in enumerate(gain_matrix):
+    for row_idx in range(gain_matrix.shape[0]):
+        row = gain_matrix[row_idx, :]        # guarantee a 1D slice
+        subrow = row[row_idx + 1:]           # only future dates (upper triangle)
 
         # Label contiguous runs of True (gains)
-        labeled, n_labels = ndimage.label(row[row_idx+1:])  # only consider upper triangle (future dates)
+        labeled, n_labels = ndimage.label(subrow)
 
         if n_labels >= 2:
             # Find the indices of the first element in each run
             run_starts = ndimage.find_objects(labeled)
-            gain_indices = np.array([sl.start + row_idx + 1 for sl in run_starts])
+            gain_indices = np.array([sl[0].start + row_idx + 1 for sl in run_starts])
 
             # Compute gaps between consecutive runs (days between gains)
             gaps = np.diff(gain_indices) - 1
@@ -243,25 +242,25 @@ def _calc_wthn_gains_stats(matrix: np.ndarray, dates: pd.Index) -> tuple[int, tu
     streak_distribution: list[int] = []
 
     # Process each row using scipy.ndimage.label
-    for row_idx, row in enumerate(gain_matrix):
-        # Only consider future dates (upper triangle)
-        subrow = row[row_idx + 1:]
+    for row_idx in range(gain_matrix.shape[0]):
+        row = gain_matrix[row_idx, :]        # guarantee a 1D slice
+        subrow = row[row_idx + 1:]           # only future dates (upper triangle)
 
-        # Label contiguous runs of True values (gains)
+        # Label contiguous runs of True (gains)
         labeled, n_labels = ndimage.label(subrow)
 
         if n_labels > 0:
             # For each contiguous run, measure its length
             run_slices = ndimage.find_objects(labeled)
             for sl in run_slices:
-                streak_len = sl.stop - sl.start
+                streak_len = sl[0].stop - sl[0].start
                 streak_distribution.append(streak_len)
 
                 # Update global max and coordinates if this streak is the longest so far
                 if streak_len > max_streak:
                     max_streak = streak_len
-                    start = row_idx + 1 + sl.start
-                    end = row_idx + 1 + sl.stop - 1
+                    start = row_idx + 1 + sl[0].start
+                    end = row_idx + 1 + sl[0].stop - 1
                     coords = (
                         dates[start].strftime("%Y-%m-%d"),
                         dates[end].strftime("%Y-%m-%d"),
@@ -269,6 +268,7 @@ def _calc_wthn_gains_stats(matrix: np.ndarray, dates: pd.Index) -> tuple[int, tu
 
     return int(max_streak), coords, streak_distribution
 
+'orchestrator'
 def symbols_and_results_stats(
     results_df: pd.DataFrame
 ) -> pd.DataFrame:
@@ -280,19 +280,20 @@ def symbols_and_results_stats(
     if label is not 'results_df':
         raise ValueError("Currently only supports results df.")
 
-    # get values from results_df
-    values = _get_results_df_values(results_df)
-    
-    # get values from results_df
-    stats_dict = _calc_n_stats(values)
+    # flat values for distributional stats
+    values_flat = _get_results_df_values(results_df, flat=True)
 
-    # get max gap between gains, and the dates it occures
-    max_gap, max_gap_dates, _ = _calc_btwn_gains_stats(matrix=values, dates=results_df.index)
+    # full matrix for gap/streak stats
+    values_full = _get_results_df_values(results_df, flat=False)
+
+    stats_dict = _calc_n_stats(values_flat)
+
+    max_gap, max_gap_dates, _ = _calc_btwn_gains_stats(matrix=values_full, dates=results_df.index)
     stats_dict["max_days_btwn_gains"] = max_gap
     stats_dict["max_days_btwn_gains_coords"] = max_gap_dates
 
     # get max streak of gains, and the dates it occures
-    max_streak, max_streak_dates, _ = _calc_wthn_gains_stats(matrix=values, dates=results_df.index)
+    max_streak, max_streak_dates, _ = _calc_wthn_gains_stats(matrix=values_full, dates=results_df.index)
     stats_dict["max_consecutive_days_of_gains"] = max_streak
     stats_dict["max_consecutive_days_of_gains_coords"] = max_streak_dates
 

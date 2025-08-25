@@ -31,4 +31,5 @@ data = get_symbol_data(test_of_all_symbols, start_date=start_date, end_date=end_
 
 returns_df = time_series_to_returns_df(time_series_1=data,time_series_2=None, value='relative_change_sign')
 
-symbols_and_results_stats(results_df=returns_df)
+stats_df = symbols_and_results_stats(results_df=returns_df)
+print(stats_df)
