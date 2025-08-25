@@ -1,6 +1,6 @@
 import pandas as pd
 from pathlib import Path
-from get_data import get_symbol_data
+from get_data_chatgpt import get_symbol_data
 from symbols_df_to_returns_df import time_series_to_returns_df
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm
@@ -14,9 +14,9 @@ import datetime as dt
 
 
 #pd.set_option('display.max_rows', None)
-end_date = '2023-07-10'
-START_DATE = dt.datetime.strptime(end_date, '%Y-%m-%d') - dt.timedelta(days=90)
-print(START_DATE)
+end_date = dt.datetime.today() - dt.timedelta(days=1)
+day_range = 60 - 20 # same as spreadsheet
+start_date = end_date - dt.timedelta(days=day_range)
 
 # get list of symbols
 all_symbols_path = Path('Equities Universe - Symbols.csv')
@@ -27,8 +27,8 @@ print(all_symbols_data.index[:30])
 
 test_of_all_symbols = all_symbols_data.index[:30]
 
-data = get_symbol_data(test_of_all_symbols, start_date=START_DATE, end_date=end_date)
+data = get_symbol_data(test_of_all_symbols, start_date=start_date, end_date=end_date)
 
 returns_df = time_series_to_returns_df(time_series_1=data,time_series_2=None, value='relative_change_sign')
-print(returns_df.head())
-#
+
+symbols_and_results_stats(results_df=returns_df)

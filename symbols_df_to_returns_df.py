@@ -33,7 +33,7 @@ def _standardize_input(input_object: pd.DataFrame | pd.Series) -> pd.DataFrame:
     return output_df
     
 'helper'
-def _calculate_values(df: pd.DataFrame, value: str) -> pd.DataFrame:
+def _calculate_values(df: pd.DataFrame, value: str) -> np.array:
         '''
         calculate desired values using df. 
         df: provided input values

@@ -13,6 +13,12 @@ import numpy as np
 import pandas as pd
 import yfinance as yf
 from tqdm.auto import tqdm
+import logging
+
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG)
+
 
 
 # ----------------------------
@@ -50,9 +56,10 @@ def _find_cached_combined(
         except Exception:
             continue
         if set(symbols).issubset(df.columns):
-            subset = df.loc[start:end, symbols]
-            if not subset.empty:
-                return subset
+            if df.index.min() <= start and df.index.max() >= end:            
+                subset = df.loc[start:end, symbols]
+                if not subset.empty:
+                    return subset
     return None
 
 
