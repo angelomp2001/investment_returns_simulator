@@ -16,8 +16,8 @@ from tqdm.auto import tqdm
 import logging
 
 
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.DEBUG)
+#logger = logging.getLogger(__name__)
+#logging.basicConfig(level=logging.DEBUG)
 
 
 

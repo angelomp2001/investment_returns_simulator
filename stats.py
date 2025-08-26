@@ -268,7 +268,7 @@ def _calc_wthn_gains_stats(matrix: np.ndarray, dates: pd.Index) -> tuple[int, tu
 
     return int(max_streak), coords, streak_distribution
 
-'orchestrator'
+'''orchestrator'''
 def symbols_and_results_stats(
     results_df: pd.DataFrame
 ) -> pd.DataFrame:

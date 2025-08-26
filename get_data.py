@@ -5,7 +5,7 @@ from datetime import date
 import numpy as np
 import datetime as dt
 from tqdm import tqdm
-import logging
+# import logging
 
 ############################## Information on where data is and how to get it ##############################
 all_symbols_path = Path('Equities Universe - Symbols.csv')

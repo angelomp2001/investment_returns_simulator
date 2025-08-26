@@ -33,61 +33,71 @@ def _standardize_input(input_object: pd.DataFrame | pd.Series) -> pd.DataFrame:
     return output_df
     
 'helper'
-def _calculate_values(df: pd.DataFrame, value: str) -> np.array:
-        '''
-        calculate desired values using df. 
-        df: provided input values
-        value: desired output values: 'close', 'change', 'relative_change', 'change_sign', 'relative_change_sign'
-        '''
-        # vectorize df
-        prices = df.to_numpy(dtype=float)
-        
-        # get input dimensions
-        date_range, n_symbol = prices.shape
+def _calculate_values(df: pd.DataFrame, value: str, chunk_size: int = 100) -> np.array:
+    '''
+    calculate desired values using df. 
+    df: provided input values
+    value: desired output values: 
+           'close', 'change', 'relative_change', 'change_sign', 'relative_change_sign'
+    '''
+    # vectorize df
+    prices = df.to_numpy(dtype=np.float32)   # use float32 to cut memory in half
+    
+    # get input dimensions
+    date_range, n_symbol = prices.shape
 
-        # write mask of values (upper triangle only)
-        contrib = np.triu(np.ones((date_range, date_range), dtype=bool), k=1)
+    # Upper triangle index pairs
+    i_idx, j_idx = np.triu_indices(date_range, k=1)
 
-        # Upper triangle index pairs
-        i_idx, j_idx = np.triu_indices(date_range, k=1)
+    # Initialize output upper-triangle matrix
+    matrix = np.zeros((date_range, date_range), dtype=np.float32)
 
-        with np.errstate(divide='ignore', invalid='ignore'):
-            if value == 'close':
-                # end price only depends on j
-                contrib = prices[j_idx, :]
+    with np.errstate(divide='ignore', invalid='ignore'):
+        if value == 'close':
+            # end price only depends on j
+            for start in range(0, n_symbol, chunk_size):
+                end = min(start + chunk_size, n_symbol)
+                contrib = prices[j_idx, start:end]
+                matrix[i_idx, j_idx] += contrib.sum(axis=1)
 
-            elif value == 'change':
-                prev_prices = np.roll(prices, 1, axis=0)
-                returns = (prices / prev_prices) - 1
-                returns[0, :] = 0
-                contrib = returns[j_idx, :]
+        elif value == 'change':
+            prev_prices = np.roll(prices, 1, axis=0)
+            returns = (prices / prev_prices) - 1
+            returns[0, :] = 0
+            for start in range(0, n_symbol, chunk_size):
+                end = min(start + chunk_size, n_symbol)
+                contrib = returns[j_idx, start:end]
+                matrix[i_idx, j_idx] += contrib.sum(axis=1)
 
-            elif value is None or value == 'relative_change':
-                contrib = (prices[j_idx, :] / prices[i_idx, :]) - 1
+        elif value is None or value == 'relative_change':
+            for start in range(0, n_symbol, chunk_size):
+                end = min(start + chunk_size, n_symbol)
+                contrib = (prices[j_idx, start:end] / prices[i_idx, start:end]) - 1
+                matrix[i_idx, j_idx] += contrib.sum(axis=1)
 
-            elif value == 'change_sign':
-                prev_prices = np.roll(prices, 1, axis=0)
-                returns = (prices / prev_prices) - 1
-                returns[0, :] = 0
-                contrib = np.where(returns[j_idx, :] > 0, 1, -1)
+        elif value == 'change_sign':
+            prev_prices = np.roll(prices, 1, axis=0)
+            returns = (prices / prev_prices) - 1
+            returns[0, :] = 0
+            for start in range(0, n_symbol, chunk_size):
+                end = min(start + chunk_size, n_symbol)
+                contrib = np.where(returns[j_idx, start:end] > 0, 1, -1)
+                matrix[i_idx, j_idx] += contrib.sum(axis=1)
 
-            elif value == 'relative_change_sign':
-                contrib = np.where((prices[j_idx, :] / prices[i_idx, :]) - 1 > 0, 1, -1)
+        elif value == 'relative_change_sign':
+            for start in range(0, n_symbol, chunk_size):
+                end = min(start + chunk_size, n_symbol)
+                contrib = np.where((prices[j_idx, start:end] / prices[i_idx, start:end]) - 1 > 0, 1, -1)
+                matrix[i_idx, j_idx] += contrib.sum(axis=1)
 
-            else:
-                contrib = np.zeros((len(i_idx), n_symbol))
+        else:
+            # fallback (matrix stays zeros)
+            pass
 
-        # create output df
-        # Initialize the upper triangle matrix
-        matrix = np.zeros((date_range, date_range))
+    # Fill lower triangle with NaN
+    matrix[np.tril_indices(date_range, -1)] = np.nan
 
-        # Sum across symbols (axis=1) into final upper-triangle matrix
-        matrix[i_idx, j_idx] = contrib.sum(axis=1)
-
-        # Fill lower triangle with NaN
-        matrix[np.tril_indices(date_range, -1)] = np.nan
-
-        return matrix
+    return matrix
 
 'helper'
 def _standardize_output(np_array: np.array, index: pd.DatetimeIndex) -> pd.DataFrame:
