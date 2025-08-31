@@ -99,6 +99,10 @@ do whole repo update cycle (connect, clone, edit, save, commit & push, disconnec
 
 8/21/2025: refactor symbols_to_returnsdf().   ✅
 
-8/22/2025: refactor stats() 
+8/25/2025: refactor stats() ✅ charts: timeline (symbols, returns_df, stats_df), histogram function(symbols_df, returns_df, stats_df), scatterplot(stats_df).
 
-8/23/2025: charts: timeline (symbols, returns_df, stats_df), histogram function(symbols_df, returns_df, stats_df), scatterplot(stats_df).
+8/26/2025: documentation.  Update requirements doc. learn tkinter.  
+
+8/27/2025: update documentation. learn tkinter.  
+
+8/28/2025: update documentation. learn tkinter.  
