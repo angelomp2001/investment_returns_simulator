@@ -277,7 +277,7 @@ def symbols_and_results_stats(
     """
     label, results_df = _standardize_inputs(results_df)
 
-    if label is not 'results_df':
+    if label != 'results_df':
         raise ValueError("Currently only supports results df.")
 
     # flat values for distributional stats

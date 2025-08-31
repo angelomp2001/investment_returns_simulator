@@ -55,6 +55,11 @@ def _find_cached_combined(
             df = pd.read_csv(p, index_col="Date", parse_dates=True)
         except Exception:
             continue
+        if start is None:
+            start = df.index.min()
+        if end is None:
+            end = df.index.max()
+        
         if set(symbols).issubset(df.columns):
             if df.index.min() <= start and df.index.max() >= end:            
                 subset = df.loc[start:end, symbols]
@@ -332,12 +337,12 @@ def _save_combined_snapshot(df: pd.DataFrame, combined_dir: Path) -> Path:
 
 def get_symbol_data(
     symbols: List[str] | str,
-    start_date: date | str | pd.Timestamp,
-    end_date: date | str | pd.Timestamp,
+    start_date: date | str | pd.Timestamp | None = None,
+    end_date: date | str | pd.Timestamp | None = None,
     *,
     symbol_dir: Path | str = "symbols",
     combined_dir: Path | str = "symbols_data",
-    metadata_path: Path | str = "Equity Universe - Symbols.csv",
+    metadata_path: Path | str = "Equities Universe - Symbols.csv",
 ) -> pd.DataFrame:
     """
     High-level pipeline:
@@ -417,3 +422,7 @@ def get_symbol_data(
     # 4) Save a combined snapshot and return.
     _save_combined_snapshot(df, combined_dir)
     return df
+
+if __name__ == "__main__":
+    test = get_symbol_data('VOOG')
+    print(test)
