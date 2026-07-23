@@ -340,8 +340,8 @@ def get_symbol_data(
     start_date: date | str | pd.Timestamp | None = None,
     end_date: date | str | pd.Timestamp | None = None,
     *,
-    symbol_dir: Path | str = "symbols",
-    combined_dir: Path | str = "symbols_data",
+    symbol_dir: Path | str = "data/symbols",
+    combined_dir: Path | str = "data/symbols_data",
     metadata_path: Path | str = "Equities Universe - Symbols.csv",
 ) -> pd.DataFrame:
     """
