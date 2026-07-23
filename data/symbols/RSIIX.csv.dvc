@@ -1,0 +1,5 @@
+outs:
+- md5: 0b2a28815e68295f3b6b16d6bfd56d0f
+  size: 37540
+  hash: md5
+  path: RSIIX.csv

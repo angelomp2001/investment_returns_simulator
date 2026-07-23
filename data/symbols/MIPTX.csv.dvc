@@ -1,0 +1,5 @@
+outs:
+- md5: 65579c6e12d7f9b6e46600139d796f7f
+  size: 39170
+  hash: md5
+  path: MIPTX.csv

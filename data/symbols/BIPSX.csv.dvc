@@ -1,0 +1,5 @@
+outs:
+- md5: 0e62f9401bd9a6edd7095a24afbbf2a2
+  size: 39191
+  hash: md5
+  path: BIPSX.csv

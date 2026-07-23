@@ -1,0 +1,5 @@
+outs:
+- md5: 3bc0ef5ff7a758d3e966a5530653e2b5
+  size: 39177
+  hash: md5
+  path: FIATX.csv

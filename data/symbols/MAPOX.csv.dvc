@@ -1,0 +1,5 @@
+outs:
+- md5: 45dfd593000e5c536c7ba144519b6f20
+  size: 39831
+  hash: md5
+  path: MAPOX.csv

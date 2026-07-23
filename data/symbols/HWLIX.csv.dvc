@@ -1,0 +1,5 @@
+outs:
+- md5: 52dfd5a08ddd64f13c459a5a14696bd3
+  size: 39175
+  hash: md5
+  path: HWLIX.csv

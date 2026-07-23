@@ -1,0 +1,5 @@
+outs:
+- md5: 59ea47b7f2e648cb0c4b297e00c1c84f
+  size: 38073
+  hash: md5
+  path: CERPX.csv

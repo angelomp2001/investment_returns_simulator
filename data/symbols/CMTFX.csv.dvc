@@ -1,0 +1,5 @@
+outs:
+- md5: 6d0f65e502bb951ad9e67ac51a687b62
+  size: 39456
+  hash: md5
+  path: CMTFX.csv

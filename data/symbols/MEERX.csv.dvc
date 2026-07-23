@@ -1,0 +1,5 @@
+outs:
+- md5: 91a5106ef044f2d4c166d4923cc817b9
+  size: 36648
+  hash: md5
+  path: MEERX.csv

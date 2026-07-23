@@ -1,0 +1,5 @@
+outs:
+- md5: 25481244e9f51e084dd9eaf9a537a8a1
+  size: 39171
+  hash: md5
+  path: TEGIX.csv

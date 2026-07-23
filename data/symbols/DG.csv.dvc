@@ -1,0 +1,5 @@
+outs:
+- md5: 619d0358300ff41a4a9f7773ecb8192b
+  size: 40606
+  hash: md5
+  path: DG.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 8ff534ded1f3096817f8c33736595f97
+  size: 39385
+  hash: md5
+  path: CAMT.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 62aa8f1d4f464db52c1bd9fec3f1c89a
+  size: 39101
+  hash: md5
+  path: APSGX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: f6f0eb47496aa3c7c6c03c859accd300
+  size: 40130
+  hash: md5
+  path: NVMI.csv

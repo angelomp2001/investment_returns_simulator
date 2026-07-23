@@ -1,0 +1,5 @@
+outs:
+- md5: 8eff28f7dd101090f7ff24b28c67aa48
+  size: 39168
+  hash: md5
+  path: CSRSX.csv

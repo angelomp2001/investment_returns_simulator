@@ -1,0 +1,5 @@
+outs:
+- md5: aa5355a578a0872dc59623e9a3b18e8c
+  size: 39165
+  hash: md5
+  path: FOBAX.csv

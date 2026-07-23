@@ -1,0 +1,5 @@
+outs:
+- md5: c7e9453d4c45dc8a930d115a78e430cf
+  size: 40693
+  hash: md5
+  path: MMT.csv

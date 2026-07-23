@@ -1,0 +1,5 @@
+outs:
+- md5: 95e82aa0f135a84d2a3ffbe3ac434d33
+  size: 39161
+  hash: md5
+  path: CNC.csv

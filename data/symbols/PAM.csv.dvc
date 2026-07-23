@@ -1,0 +1,5 @@
+outs:
+- md5: 5bf9b20e6e6a41c40f13777cadd37f26
+  size: 39123
+  hash: md5
+  path: PAM.csv

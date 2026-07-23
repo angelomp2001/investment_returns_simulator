@@ -1,0 +1,5 @@
+outs:
+- md5: 56650cad16062925594d9137954afd91
+  size: 39118
+  hash: md5
+  path: ACWDX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 6efee809a4e99da03f973a81824f596d
+  size: 40815
+  hash: md5
+  path: AWK.csv

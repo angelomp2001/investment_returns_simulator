@@ -1,0 +1,5 @@
+outs:
+- md5: bd4f8cf9ea1fd05c081fc24e35c3aa7f
+  size: 40828
+  hash: md5
+  path: SHW.csv

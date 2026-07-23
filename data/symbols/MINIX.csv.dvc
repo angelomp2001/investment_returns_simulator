@@ -1,0 +1,5 @@
+outs:
+- md5: 072c8f9ef40dffa94c2311c75cf96df0
+  size: 39163
+  hash: md5
+  path: MINIX.csv

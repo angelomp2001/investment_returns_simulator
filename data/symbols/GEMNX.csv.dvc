@@ -1,0 +1,5 @@
+outs:
+- md5: e12bb0211c6bc610c3fe65bd2dc816cf
+  size: 38880
+  hash: md5
+  path: GEMNX.csv

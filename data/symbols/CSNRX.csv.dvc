@@ -1,0 +1,5 @@
+outs:
+- md5: f3b7b42426512bcd1e75ebfcc662509c
+  size: 39152
+  hash: md5
+  path: CSNRX.csv

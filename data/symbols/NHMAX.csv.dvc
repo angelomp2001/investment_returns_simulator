@@ -1,0 +1,5 @@
+outs:
+- md5: 81faee5cf89774410500d4a1c0d64835
+  size: 39158
+  hash: md5
+  path: NHMAX.csv

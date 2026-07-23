@@ -1,0 +1,5 @@
+outs:
+- md5: f20f78eb7beb9083b54335e07b65fe57
+  size: 38296
+  hash: md5
+  path: CAAP.csv

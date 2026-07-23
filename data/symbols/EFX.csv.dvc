@@ -1,0 +1,5 @@
+outs:
+- md5: 2bb085e4e61802855bde7b61fda509f6
+  size: 40839
+  hash: md5
+  path: EFX.csv

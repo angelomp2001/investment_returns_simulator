@@ -1,0 +1,5 @@
+outs:
+- md5: 26451be97dbf2775e313d7a8eefed7d7
+  size: 39184
+  hash: md5
+  path: HOG.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: e4443629327adb1bfcbc92ae53b00b4d
+  size: 40222
+  hash: md5
+  path: DLTR.csv

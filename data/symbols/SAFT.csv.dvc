@@ -1,0 +1,5 @@
+outs:
+- md5: 8ef79430285a06c6fff86bd405dfedb0
+  size: 39164
+  hash: md5
+  path: SAFT.csv

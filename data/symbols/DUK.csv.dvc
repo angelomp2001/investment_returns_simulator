@@ -1,0 +1,5 @@
+outs:
+- md5: 17f8a5c5a32e34bd69199f48bb265a70
+  size: 39699
+  hash: md5
+  path: DUK.csv

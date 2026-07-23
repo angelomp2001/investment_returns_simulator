@@ -1,0 +1,5 @@
+outs:
+- md5: 939b2812ef6dd03249744ae59567c0de
+  size: 39280
+  hash: md5
+  path: KB.csv

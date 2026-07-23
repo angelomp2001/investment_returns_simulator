@@ -1,0 +1,5 @@
+outs:
+- md5: ca707cfdd081c1ac1835cf456e39fcd1
+  size: 40804
+  hash: md5
+  path: STZ.csv

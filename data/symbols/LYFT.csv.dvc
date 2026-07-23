@@ -1,0 +1,5 @@
+outs:
+- md5: 32b2b3821295ba6c9de630df1b7606a9
+  size: 39083
+  hash: md5
+  path: LYFT.csv

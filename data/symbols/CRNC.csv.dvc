@@ -1,0 +1,5 @@
+outs:
+- md5: 6469b57257e20f0c99ebc2d67ff09a56
+  size: 38947
+  hash: md5
+  path: CRNC.csv

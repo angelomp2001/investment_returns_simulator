@@ -1,0 +1,5 @@
+outs:
+- md5: 4c3f8eebdc91bd06785ba76ba09ef4b3
+  size: 38810
+  hash: md5
+  path: PIGWX.csv

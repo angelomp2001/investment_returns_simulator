@@ -1,0 +1,5 @@
+outs:
+- md5: 0f94a4d84be3c1817da0e6548032ff0d
+  size: 39224
+  hash: md5
+  path: ALCFX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: f788d1cd28a673e428175dd296a423aa
+  size: 39184
+  hash: md5
+  path: PACOX.csv

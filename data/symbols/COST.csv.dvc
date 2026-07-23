@@ -1,0 +1,5 @@
+outs:
+- md5: 78066850838e814f7888990f3ba9f2ec
+  size: 40894
+  hash: md5
+  path: COST.csv

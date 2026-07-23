@@ -1,0 +1,5 @@
+outs:
+- md5: f183a0f4d7c8212cddfb7dd83351078a
+  size: 36319
+  hash: md5
+  path: HNST.csv

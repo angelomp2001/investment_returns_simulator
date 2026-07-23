@@ -1,0 +1,5 @@
+outs:
+- md5: 9e82c22e0bc100d1197ea6c24f994b72
+  size: 39180
+  hash: md5
+  path: CISIX.csv

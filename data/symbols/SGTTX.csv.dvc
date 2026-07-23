@@ -1,0 +1,5 @@
+outs:
+- md5: ce5d8412e7736df9546e65f17f4ce566
+  size: 39325
+  hash: md5
+  path: SGTTX.csv

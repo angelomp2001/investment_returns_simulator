@@ -1,0 +1,5 @@
+outs:
+- md5: 6bf9219576b9e4798f7667b739119d93
+  size: 39192
+  hash: md5
+  path: BLUEX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: c17427557837bd3bb1274abb211cdf46
+  size: 37529
+  hash: md5
+  path: SVRA.csv

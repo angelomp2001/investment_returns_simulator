@@ -1,0 +1,5 @@
+outs:
+- md5: 1742dca3cd3ec8a2f3b09b936c58c424
+  size: 39058
+  hash: md5
+  path: INDIX.csv

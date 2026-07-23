@@ -1,0 +1,5 @@
+outs:
+- md5: 680cb030fe3785f51601be4ed0c0e592
+  size: 39166
+  hash: md5
+  path: GRC.csv

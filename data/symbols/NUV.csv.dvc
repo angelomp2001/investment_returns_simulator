@@ -1,0 +1,5 @@
+outs:
+- md5: 983037e91271e91193932db93f5def9c
+  size: 37563
+  hash: md5
+  path: NUV.csv

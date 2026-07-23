@@ -1,0 +1,5 @@
+outs:
+- md5: bd697eff84aee15fa151ef1d45e44cec
+  size: 40587
+  hash: md5
+  path: DRI.csv

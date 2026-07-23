@@ -1,0 +1,5 @@
+outs:
+- md5: 3c78ad953e9011411e4659c81fc3abec
+  size: 40806
+  hash: md5
+  path: SMX.csv

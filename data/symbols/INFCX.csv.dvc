@@ -1,0 +1,5 @@
+outs:
+- md5: 0256287f3e00aa008bce07fa31e4d5f2
+  size: 38945
+  hash: md5
+  path: INFCX.csv

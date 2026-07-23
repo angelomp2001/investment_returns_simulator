@@ -1,0 +1,5 @@
+outs:
+- md5: 286cc10cbaf42cac96883cb76c9600f6
+  size: 39166
+  hash: md5
+  path: CNPSX.csv

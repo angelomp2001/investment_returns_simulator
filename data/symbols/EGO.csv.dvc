@@ -1,0 +1,5 @@
+outs:
+- md5: dce331fcbfac330eb66c5bbca7722761
+  size: 38588
+  hash: md5
+  path: EGO.csv

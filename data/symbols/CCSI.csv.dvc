@@ -1,0 +1,5 @@
+outs:
+- md5: 22e133af142d32b058417f61e718d543
+  size: 37004
+  hash: md5
+  path: CCSI.csv

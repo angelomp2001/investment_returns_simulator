@@ -1,0 +1,5 @@
+outs:
+- md5: 419b89727643bed02032b0ed8bfb66c3
+  size: 39174
+  hash: md5
+  path: MGTIX.csv

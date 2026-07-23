@@ -1,0 +1,5 @@
+outs:
+- md5: aa315d7aa5959365b423d7b84f2a7ac1
+  size: 39151
+  hash: md5
+  path: CHEF.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: f0899102b9515e1bb8742951197ea716
+  size: 39173
+  hash: md5
+  path: GMOEX.csv

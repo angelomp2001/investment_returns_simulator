@@ -1,0 +1,5 @@
+outs:
+- md5: 73d58f071b8033e531a3e849b2a63a5a
+  size: 39095
+  hash: md5
+  path: ADX.csv

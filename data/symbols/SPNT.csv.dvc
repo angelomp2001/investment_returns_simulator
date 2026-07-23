@@ -1,0 +1,5 @@
+outs:
+- md5: 7817233320a51bfa331a1871d8a8755a
+  size: 38386
+  hash: md5
+  path: SPNT.csv

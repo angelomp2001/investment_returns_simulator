@@ -1,0 +1,5 @@
+outs:
+- md5: 0a612a2f033e8199cefd6a7b9d6978cd
+  size: 39169
+  hash: md5
+  path: BMY.csv

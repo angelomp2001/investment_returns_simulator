@@ -1,0 +1,5 @@
+outs:
+- md5: a6de0ef79d919f115fd0228b574af592
+  size: 39960
+  hash: md5
+  path: ORCL.csv

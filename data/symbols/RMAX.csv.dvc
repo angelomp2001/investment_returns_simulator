@@ -1,0 +1,5 @@
+outs:
+- md5: b277fd0a228e9a2b963bb4e3835c22e9
+  size: 38672
+  hash: md5
+  path: RMAX.csv

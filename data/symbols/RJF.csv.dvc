@@ -1,0 +1,5 @@
+outs:
+- md5: ca45d52cb068f54dc02d2bb4b7f9c84b
+  size: 40096
+  hash: md5
+  path: RJF.csv

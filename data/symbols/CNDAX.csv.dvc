@@ -1,0 +1,5 @@
+outs:
+- md5: 8096906444d6513055b64e8b5da8f502
+  size: 38067
+  hash: md5
+  path: CNDAX.csv

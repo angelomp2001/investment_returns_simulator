@@ -1,0 +1,5 @@
+outs:
+- md5: 5a7b6633b820b78f370a14be2da5d963
+  size: 39160
+  hash: md5
+  path: RYCOX.csv

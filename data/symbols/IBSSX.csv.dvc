@@ -1,0 +1,5 @@
+outs:
+- md5: 16fb6b64ab4a4385f24e2eae1fc4e492
+  size: 39353
+  hash: md5
+  path: IBSSX.csv

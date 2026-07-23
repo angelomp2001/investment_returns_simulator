@@ -1,0 +1,5 @@
+outs:
+- md5: 0132c665e6990dec5f9348ad0ade082b
+  size: 39192
+  hash: md5
+  path: TAP.csv

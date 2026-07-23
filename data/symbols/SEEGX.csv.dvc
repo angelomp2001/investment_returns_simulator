@@ -1,0 +1,5 @@
+outs:
+- md5: e90a4de6cc094a5e2b8823f91ee04b94
+  size: 39181
+  hash: md5
+  path: SEEGX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: db4e1a10f13b9d455b60b9352d1810b2
+  size: 39126
+  hash: md5
+  path: EVDIX.csv

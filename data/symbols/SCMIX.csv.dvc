@@ -1,0 +1,5 @@
+outs:
+- md5: e1e24b778a7bc4992cb5f388c29d3dc2
+  size: 40165
+  hash: md5
+  path: SCMIX.csv

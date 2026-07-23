@@ -1,0 +1,5 @@
+outs:
+- md5: 8f00a6fb07131a3017ff90b123ac42f3
+  size: 39063
+  hash: md5
+  path: APHTX.csv

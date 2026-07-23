@@ -1,0 +1,5 @@
+outs:
+- md5: 549b534059af756a9ca40cdd6bdc430f
+  size: 39149
+  hash: md5
+  path: FSIDX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: ea9674fd2da665323312523b1b94e265
+  size: 39555
+  hash: md5
+  path: NVDA.csv

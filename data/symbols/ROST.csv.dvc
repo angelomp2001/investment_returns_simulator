@@ -1,0 +1,5 @@
+outs:
+- md5: 25f5df5c29e72f9525d071f52ca52ee2
+  size: 40423
+  hash: md5
+  path: ROST.csv

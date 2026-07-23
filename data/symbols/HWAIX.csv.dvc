@@ -1,0 +1,5 @@
+outs:
+- md5: 8efd4daac0beb531eb9b83ce4b24bc90
+  size: 39172
+  hash: md5
+  path: HWAIX.csv

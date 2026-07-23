@@ -1,0 +1,5 @@
+outs:
+- md5: 78b14965817ab4d7a53a59688c00a1ec
+  size: 40353
+  hash: md5
+  path: ARE.csv

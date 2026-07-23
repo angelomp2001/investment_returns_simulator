@@ -1,0 +1,5 @@
+outs:
+- md5: 4a1245f2ce72f0090bad52273904ce77
+  size: 36074
+  hash: md5
+  path: SMR.csv

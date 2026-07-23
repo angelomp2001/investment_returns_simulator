@@ -1,0 +1,5 @@
+outs:
+- md5: 5ba30f6cef6e44a12bd5dd9dffa8d6a4
+  size: 38050
+  hash: md5
+  path: SPTN.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 8a813e249ed9b76722c03d6536f9fc40
+  size: 36570
+  hash: md5
+  path: CMCRX.csv

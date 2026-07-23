@@ -1,0 +1,5 @@
+outs:
+- md5: 58941901a46e8daccc95ea3d700ff7fb
+  size: 39136
+  hash: md5
+  path: NSSC.csv

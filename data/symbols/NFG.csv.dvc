@@ -1,0 +1,5 @@
+outs:
+- md5: 96c85a78b2b17b24c1e8b482e76ef9dc
+  size: 39192
+  hash: md5
+  path: NFG.csv

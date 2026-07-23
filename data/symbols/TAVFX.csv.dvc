@@ -1,0 +1,5 @@
+outs:
+- md5: 15ae678c6a239aa62d7a5955cf049c0d
+  size: 39168
+  hash: md5
+  path: TAVFX.csv

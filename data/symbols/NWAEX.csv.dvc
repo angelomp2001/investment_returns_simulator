@@ -1,0 +1,5 @@
+outs:
+- md5: 49255efdf8a9b26107019ab6bd0c5b1c
+  size: 38955
+  hash: md5
+  path: NWAEX.csv

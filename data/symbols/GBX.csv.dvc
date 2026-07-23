@@ -1,0 +1,5 @@
+outs:
+- md5: 8502a483b295abaaceee580413c0bf4b
+  size: 39169
+  hash: md5
+  path: GBX.csv

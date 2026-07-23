@@ -1,0 +1,5 @@
+outs:
+- md5: 1096c3a6ea72749fafd816bd56056a84
+  size: 39135
+  hash: md5
+  path: DNSMX.csv

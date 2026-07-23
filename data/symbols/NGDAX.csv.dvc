@@ -1,0 +1,5 @@
+outs:
+- md5: 497a7e272e13dd97781c5d6b9b69729f
+  size: 39176
+  hash: md5
+  path: NGDAX.csv

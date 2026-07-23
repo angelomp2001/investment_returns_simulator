@@ -1,0 +1,5 @@
+outs:
+- md5: 5481fa115bfba35a8d53f8e65f6d59bf
+  size: 39181
+  hash: md5
+  path: DAL.csv

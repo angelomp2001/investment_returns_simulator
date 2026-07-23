@@ -1,0 +1,5 @@
+outs:
+- md5: 0ccce0bdb06350dfad3d236eabe1c2ac
+  size: 39169
+  hash: md5
+  path: GIS.csv

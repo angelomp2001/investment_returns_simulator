@@ -1,0 +1,5 @@
+outs:
+- md5: 143e0408a379ed82a1b7177153f5211e
+  size: 39187
+  hash: md5
+  path: GISOX.csv

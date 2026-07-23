@@ -1,0 +1,5 @@
+outs:
+- md5: bc6ada95a1ce6e7966398bf84021859c
+  size: 39129
+  hash: md5
+  path: MOS.csv

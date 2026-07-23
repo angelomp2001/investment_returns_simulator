@@ -1,0 +1,5 @@
+outs:
+- md5: 76f4e4fa77916992a1d8800a08e233a7
+  size: 40049
+  hash: md5
+  path: DINRF.csv

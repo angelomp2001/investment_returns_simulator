@@ -1,0 +1,5 @@
+outs:
+- md5: 601205a9e4f2d9f7f9c209190b59c279
+  size: 38231
+  hash: md5
+  path: HRTG.csv

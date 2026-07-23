@@ -1,0 +1,5 @@
+outs:
+- md5: 33436e650f3e60e870ec1fa0037fb550
+  size: 37520
+  hash: md5
+  path: SCIIX.csv

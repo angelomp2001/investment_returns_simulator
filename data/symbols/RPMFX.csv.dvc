@@ -1,0 +1,5 @@
+outs:
+- md5: 50acfa7c4f36e376a9eb60e11f123eb0
+  size: 38906
+  hash: md5
+  path: RPMFX.csv

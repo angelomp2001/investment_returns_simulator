@@ -1,0 +1,5 @@
+outs:
+- md5: a79dc85b228edb1bc85568d3d231c924
+  size: 40817
+  hash: md5
+  path: LMT.csv

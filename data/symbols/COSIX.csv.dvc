@@ -1,0 +1,5 @@
+outs:
+- md5: 44d92cffb3c5f34f08c668fe4f0d156e
+  size: 39168
+  hash: md5
+  path: COSIX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: f9114a5cc6479e0cef91a28fda239105
+  size: 40819
+  hash: md5
+  path: ROK.csv

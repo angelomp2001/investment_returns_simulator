@@ -1,0 +1,5 @@
+outs:
+- md5: ddc06b6eb955cd7096c83516dfa3d717
+  size: 39841
+  hash: md5
+  path: ASDEX.csv

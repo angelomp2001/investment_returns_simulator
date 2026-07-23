@@ -1,0 +1,5 @@
+outs:
+- md5: 967120810a53cdbf94035a363a845ab6
+  size: 37550
+  hash: md5
+  path: QUAD.csv

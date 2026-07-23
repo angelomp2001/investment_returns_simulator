@@ -1,0 +1,5 @@
+outs:
+- md5: 5e6a9f80c582ebf52b4a59ddba5116a9
+  size: 39154
+  hash: md5
+  path: AGCTX.csv

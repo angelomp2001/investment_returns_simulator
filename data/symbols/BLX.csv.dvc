@@ -1,0 +1,5 @@
+outs:
+- md5: fbd5b14420cf1958e59b10ce9f95c4d4
+  size: 39030
+  hash: md5
+  path: BLX.csv

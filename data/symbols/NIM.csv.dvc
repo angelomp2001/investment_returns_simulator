@@ -1,0 +1,5 @@
+outs:
+- md5: b0c6a29202af21687bf38e27a8a5ff2c
+  size: 37528
+  hash: md5
+  path: NIM.csv

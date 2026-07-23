@@ -1,0 +1,5 @@
+outs:
+- md5: 5b8aa190881e62f6e1bffbe78ca7e55d
+  size: 38477
+  hash: md5
+  path: INGN.csv

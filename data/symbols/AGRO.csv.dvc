@@ -1,0 +1,5 @@
+outs:
+- md5: c1d532eb2abf8c8769ccd576f0bbb562
+  size: 37944
+  hash: md5
+  path: AGRO.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 0396de27d0cd14b94e8d8cc059f53837
+  size: 39138
+  hash: md5
+  path: CMP.csv

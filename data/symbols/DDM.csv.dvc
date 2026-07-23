@@ -1,0 +1,5 @@
+outs:
+- md5: 07f7faf0f64481e7ea5001cce701706b
+  size: 39247
+  hash: md5
+  path: DDM.csv

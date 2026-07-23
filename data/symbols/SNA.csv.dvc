@@ -1,0 +1,5 @@
+outs:
+- md5: b1ba1144e42edfc73c8543ebf9e6a697
+  size: 40809
+  hash: md5
+  path: SNA.csv

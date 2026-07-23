@@ -1,0 +1,5 @@
+outs:
+- md5: 9ce44accf69d5b98078f43c2525f80b7
+  size: 39187
+  hash: md5
+  path: JDBAX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 8068bdbcb00cbe5063090db99d545711
+  size: 39175
+  hash: md5
+  path: CSX.csv

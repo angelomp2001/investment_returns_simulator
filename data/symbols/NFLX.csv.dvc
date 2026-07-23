@@ -1,0 +1,5 @@
+outs:
+- md5: ffb3def96274ff1f4492e7811b9dc644
+  size: 40761
+  hash: md5
+  path: NFLX.csv

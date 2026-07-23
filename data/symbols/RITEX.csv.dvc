@@ -1,0 +1,5 @@
+outs:
+- md5: 8129e37c74d23b042a3dc5f9015646b7
+  size: 37530
+  hash: md5
+  path: RITEX.csv

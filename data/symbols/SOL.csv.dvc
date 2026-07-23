@@ -1,0 +1,5 @@
+outs:
+- md5: 7483ab3258b60c998c1ce177335bbd2a
+  size: 36729
+  hash: md5
+  path: SOL.csv

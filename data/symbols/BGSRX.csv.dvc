@@ -1,0 +1,5 @@
+outs:
+- md5: f32d579691a3e7e8c83249a5235397d2
+  size: 39180
+  hash: md5
+  path: BGSRX.csv

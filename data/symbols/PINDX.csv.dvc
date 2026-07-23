@@ -1,0 +1,5 @@
+outs:
+- md5: 102ccc2cb7c2cb11fa9b58ce1b8cc688
+  size: 39065
+  hash: md5
+  path: PINDX.csv

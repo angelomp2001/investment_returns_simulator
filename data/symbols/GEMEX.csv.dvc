@@ -1,0 +1,5 @@
+outs:
+- md5: 2d2b6bc2dd2ab8a197f21ec0fa5c3dee
+  size: 39146
+  hash: md5
+  path: GEMEX.csv

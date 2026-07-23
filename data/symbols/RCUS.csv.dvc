@@ -1,0 +1,5 @@
+outs:
+- md5: a600977ade19a3076593e77928deaa89
+  size: 39010
+  hash: md5
+  path: RCUS.csv

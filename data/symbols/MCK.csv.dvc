@@ -1,0 +1,5 @@
+outs:
+- md5: b8c1e85c4e9636cc83f7df7101c0b69b
+  size: 40813
+  hash: md5
+  path: MCK.csv

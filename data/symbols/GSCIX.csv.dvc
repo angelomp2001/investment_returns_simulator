@@ -1,0 +1,5 @@
+outs:
+- md5: 3288cdc8cfc849a8fd135050e1a0f7b9
+  size: 39178
+  hash: md5
+  path: GSCIX.csv

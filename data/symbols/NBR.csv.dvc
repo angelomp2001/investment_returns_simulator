@@ -1,0 +1,5 @@
+outs:
+- md5: dc342dec7fd826b8448bdda34d8852a7
+  size: 39670
+  hash: md5
+  path: NBR.csv

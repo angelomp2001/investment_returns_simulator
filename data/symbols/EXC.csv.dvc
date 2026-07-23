@@ -1,0 +1,5 @@
+outs:
+- md5: 0268d6a5c0a6663ed48e46b21e6c709e
+  size: 39183
+  hash: md5
+  path: EXC.csv

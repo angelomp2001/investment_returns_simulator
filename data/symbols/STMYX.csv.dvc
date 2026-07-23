@@ -1,0 +1,5 @@
+outs:
+- md5: 01d3500eaa82218fc8f9d6b5d47a030f
+  size: 39189
+  hash: md5
+  path: STMYX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: a4de2aa9060edf7381bce57f659d64c2
+  size: 38992
+  hash: md5
+  path: ARCC.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: a37b3d6739a94bf2a15fb2000daa5d61
+  size: 39167
+  hash: md5
+  path: ITRN.csv

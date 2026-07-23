@@ -1,0 +1,5 @@
+outs:
+- md5: 1af5d3af96a4eb641870dd3aacdec9de
+  size: 39409
+  hash: md5
+  path: DODBX.csv

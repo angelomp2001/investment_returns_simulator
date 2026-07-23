@@ -1,0 +1,5 @@
+outs:
+- md5: 14b720ff7fce31069adafea146452cf9
+  size: 39181
+  hash: md5
+  path: PARLX.csv

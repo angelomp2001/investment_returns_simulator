@@ -1,0 +1,5 @@
+outs:
+- md5: a8b2e64bed15c28b06ec388f5c7c8924
+  size: 39200
+  hash: md5
+  path: NCIGX.csv

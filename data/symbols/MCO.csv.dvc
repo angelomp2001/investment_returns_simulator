@@ -1,0 +1,5 @@
+outs:
+- md5: 721fb4a4d6dabb410fc3afa42fa8266a
+  size: 40820
+  hash: md5
+  path: MCO.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 3e3636978499b615176f224129d73e4e
+  size: 40258
+  hash: md5
+  path: CCI.csv

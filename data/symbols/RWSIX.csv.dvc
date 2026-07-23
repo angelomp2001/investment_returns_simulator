@@ -1,0 +1,5 @@
+outs:
+- md5: 88ec1566e39437fd576a22c7a1d37e64
+  size: 39142
+  hash: md5
+  path: RWSIX.csv

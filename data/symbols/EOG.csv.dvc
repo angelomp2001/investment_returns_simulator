@@ -1,0 +1,5 @@
+outs:
+- md5: 3e93bb59b1d310982b0e784bf2232708
+  size: 40205
+  hash: md5
+  path: EOG.csv

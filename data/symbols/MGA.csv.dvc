@@ -1,0 +1,5 @@
+outs:
+- md5: a72f295a50ebc82b91b6b51f391467ac
+  size: 39189
+  hash: md5
+  path: MGA.csv

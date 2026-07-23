@@ -1,0 +1,5 @@
+outs:
+- md5: 18f1f38edc490c0940546718ac571420
+  size: 39120
+  hash: md5
+  path: CSDAX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 993183105015a687ecf0563c4b281c5e
+  size: 32645
+  hash: md5
+  path: CRCL.csv

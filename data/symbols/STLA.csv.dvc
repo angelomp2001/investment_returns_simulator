@@ -1,0 +1,5 @@
+outs:
+- md5: 3b849a32ccae93c816f29947848bac17
+  size: 38598
+  hash: md5
+  path: STLA.csv

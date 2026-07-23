@@ -1,0 +1,5 @@
+outs:
+- md5: c7750d60c8b32dca30e72f2cfa6da1c6
+  size: 39176
+  hash: md5
+  path: KIFAX.csv

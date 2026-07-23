@@ -1,0 +1,5 @@
+outs:
+- md5: 192063df1ab15d3343371eea591e05c2
+  size: 36320
+  hash: md5
+  path: DDI.csv

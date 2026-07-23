@@ -1,0 +1,5 @@
+outs:
+- md5: 8d4bdcd0942b5e3fde2639f59456a0a4
+  size: 40822
+  hash: md5
+  path: BSPIX.csv

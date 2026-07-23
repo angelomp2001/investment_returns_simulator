@@ -1,0 +1,5 @@
+outs:
+- md5: 797ad2d92f4d564f8432ca10acc50888
+  size: 40253
+  hash: md5
+  path: SPG.csv

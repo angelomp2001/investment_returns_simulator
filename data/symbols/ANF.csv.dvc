@@ -1,0 +1,5 @@
+outs:
+- md5: 72dc5fffd0f493d9a74d88320e9b684e
+  size: 39453
+  hash: md5
+  path: ANF.csv

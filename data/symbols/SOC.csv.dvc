@@ -1,0 +1,5 @@
+outs:
+- md5: b9031deef0898a82f6f886682dc31712
+  size: 37071
+  hash: md5
+  path: SOC.csv

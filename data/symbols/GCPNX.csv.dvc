@@ -1,0 +1,5 @@
+outs:
+- md5: 81bdf819d1e59945f9cf24ea8fddb3b1
+  size: 39178
+  hash: md5
+  path: GCPNX.csv

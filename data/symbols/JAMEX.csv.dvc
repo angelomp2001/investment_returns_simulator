@@ -1,0 +1,5 @@
+outs:
+- md5: 01b8964e06ca27925773feea1ac5808f
+  size: 39194
+  hash: md5
+  path: JAMEX.csv

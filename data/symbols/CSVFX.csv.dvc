@@ -1,0 +1,5 @@
+outs:
+- md5: 3fd315f6c5211c979139e44997a5825f
+  size: 39180
+  hash: md5
+  path: CSVFX.csv

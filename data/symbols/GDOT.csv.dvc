@@ -1,0 +1,5 @@
+outs:
+- md5: 15a73d9ecd5ef519930f08ec98bad5f5
+  size: 38847
+  hash: md5
+  path: GDOT.csv

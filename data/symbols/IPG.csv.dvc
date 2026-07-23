@@ -1,0 +1,5 @@
+outs:
+- md5: 33e9351c3c8f356a03718250a57f0cef
+  size: 38071
+  hash: md5
+  path: IPG.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 7fdebc84b1777a28508b9ff4beb2ef89
+  size: 40418
+  hash: md5
+  path: NUE.csv

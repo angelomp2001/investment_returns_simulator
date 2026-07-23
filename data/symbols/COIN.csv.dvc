@@ -1,0 +1,5 @@
+outs:
+- md5: d92b03cbfa59a6760e1fee6da5ac73ad
+  size: 38504
+  hash: md5
+  path: COIN.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 873a1bc4f0ae4e1e3d958e81c5de32f1
+  size: 39154
+  hash: md5
+  path: BIIEX.csv

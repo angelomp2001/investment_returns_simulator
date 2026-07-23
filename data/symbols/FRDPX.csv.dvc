@@ -1,0 +1,5 @@
+outs:
+- md5: 02d9a56b29f99ff14c1133f402d7bc7e
+  size: 39187
+  hash: md5
+  path: FRDPX.csv

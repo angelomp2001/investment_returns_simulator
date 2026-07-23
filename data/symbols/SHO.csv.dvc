@@ -1,0 +1,5 @@
+outs:
+- md5: 8899be2a25ead17483482e7806f931e9
+  size: 38231
+  hash: md5
+  path: SHO.csv

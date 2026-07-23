@@ -1,0 +1,5 @@
+outs:
+- md5: f0bcf38d52bebab2f9e057d6a2e1e382
+  size: 40503
+  hash: md5
+  path: RSG.csv

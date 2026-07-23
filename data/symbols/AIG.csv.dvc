@@ -1,0 +1,5 @@
+outs:
+- md5: f79a35df905d684b1e9238f74f6e6b3e
+  size: 39152
+  hash: md5
+  path: AIG.csv

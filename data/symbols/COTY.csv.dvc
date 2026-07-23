@@ -1,0 +1,5 @@
+outs:
+- md5: 53b9d1adf8bb6ee64899e40fc0f3e5d1
+  size: 38014
+  hash: md5
+  path: COTY.csv

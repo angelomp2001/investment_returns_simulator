@@ -1,0 +1,5 @@
+outs:
+- md5: 43b3bdd22d8168d9aeae2a96ffbf6655
+  size: 38084
+  hash: md5
+  path: PARCX.csv

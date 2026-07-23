@@ -1,0 +1,5 @@
+outs:
+- md5: 25895f85ab29e026b00a03cb5de68ced
+  size: 40706
+  hash: md5
+  path: ALTFX.csv

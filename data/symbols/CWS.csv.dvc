@@ -1,0 +1,5 @@
+outs:
+- md5: 90073ccd3872704dff228de484c4d47a
+  size: 39177
+  hash: md5
+  path: CWS.csv

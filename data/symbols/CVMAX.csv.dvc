@@ -1,0 +1,5 @@
+outs:
+- md5: b78c255adb0cb2dacdf227bb21806fce
+  size: 39187
+  hash: md5
+  path: CVMAX.csv

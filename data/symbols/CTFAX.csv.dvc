@@ -1,0 +1,5 @@
+outs:
+- md5: 2ad502d2aca3a077832358f556739479
+  size: 39202
+  hash: md5
+  path: CTFAX.csv

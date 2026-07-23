@@ -1,0 +1,5 @@
+outs:
+- md5: 7d37ac12007ad2b531aedc3b5b829421
+  size: 39471
+  hash: md5
+  path: SBUX.csv

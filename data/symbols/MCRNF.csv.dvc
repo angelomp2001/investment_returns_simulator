@@ -1,0 +1,5 @@
+outs:
+- md5: b70c89c990c4fcedee7fc9ec05e721d4
+  size: 40299
+  hash: md5
+  path: MCRNF.csv

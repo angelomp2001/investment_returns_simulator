@@ -1,0 +1,5 @@
+outs:
+- md5: 15ea99e8e85c544acc3cccccf9575ba4
+  size: 37528
+  hash: md5
+  path: CITEX.csv

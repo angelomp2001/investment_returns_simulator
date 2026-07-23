@@ -1,0 +1,5 @@
+outs:
+- md5: 2723e62da82c815496f6de3867e5999f
+  size: 38351
+  hash: md5
+  path: FPI.csv

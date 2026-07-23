@@ -1,0 +1,5 @@
+outs:
+- md5: d4616ee77efc22598efb5c1f752b7e1d
+  size: 38540
+  hash: md5
+  path: ANGO.csv

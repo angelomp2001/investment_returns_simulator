@@ -1,0 +1,5 @@
+outs:
+- md5: 95563592fa8ed7597208656e3ea1e4d8
+  size: 39169
+  hash: md5
+  path: CMCSA.csv

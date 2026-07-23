@@ -1,0 +1,5 @@
+outs:
+- md5: 6774f536b6bfa1f37fc963a22e3a45c0
+  size: 38976
+  hash: md5
+  path: FSCEX.csv

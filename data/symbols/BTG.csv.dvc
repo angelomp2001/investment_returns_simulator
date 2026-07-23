@@ -1,0 +1,5 @@
+outs:
+- md5: c10fdfde1a08c578c881a78198cbd865
+  size: 40640
+  hash: md5
+  path: BTG.csv

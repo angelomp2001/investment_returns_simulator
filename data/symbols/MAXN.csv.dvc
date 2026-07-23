@@ -1,0 +1,5 @@
+outs:
+- md5: 06b0c46f58a0c577812eecb11020564a
+  size: 37831
+  hash: md5
+  path: MAXN.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: cb8932ef2faabefd84325f4a55e096e7
+  size: 36215
+  hash: md5
+  path: CFLT.csv

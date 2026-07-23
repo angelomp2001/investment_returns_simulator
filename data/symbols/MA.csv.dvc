@@ -1,0 +1,5 @@
+outs:
+- md5: d401fcdc1b4441400dd7b5fd2b9ae358
+  size: 40829
+  hash: md5
+  path: MA.csv

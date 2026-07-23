@@ -1,0 +1,5 @@
+outs:
+- md5: 03ac4d43d91aa85dc2e39d8b94a9e273
+  size: 39195
+  hash: md5
+  path: NOSIX.csv

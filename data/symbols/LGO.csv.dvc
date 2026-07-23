@@ -1,0 +1,5 @@
+outs:
+- md5: 01b4f7cd9249e5831855f360f12a8aa9
+  size: 37532
+  hash: md5
+  path: LGO.csv

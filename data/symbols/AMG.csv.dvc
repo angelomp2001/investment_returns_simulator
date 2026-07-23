@@ -1,0 +1,5 @@
+outs:
+- md5: c3a9628bc4bb1712ecd24df2f2b22838
+  size: 40571
+  hash: md5
+  path: AMG.csv

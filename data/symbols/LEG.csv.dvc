@@ -1,0 +1,5 @@
+outs:
+- md5: 881e13224cfa8d4ba7f61bb32038a7a1
+  size: 38925
+  hash: md5
+  path: LEG.csv

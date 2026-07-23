@@ -1,0 +1,5 @@
+outs:
+- md5: 90c106b1c65608b38cbc1deff4c425e7
+  size: 40810
+  hash: md5
+  path: BSPGX.csv

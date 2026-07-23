@@ -1,0 +1,5 @@
+outs:
+- md5: 9894a9a385bb4d650f0babff0f3bcd16
+  size: 39159
+  hash: md5
+  path: GOFIX.csv

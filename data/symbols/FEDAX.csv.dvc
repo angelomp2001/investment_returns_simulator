@@ -1,0 +1,5 @@
+outs:
+- md5: f2601b6e0e8d52fb2e9a930441505df2
+  size: 39125
+  hash: md5
+  path: FEDAX.csv

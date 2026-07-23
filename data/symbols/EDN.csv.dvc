@@ -1,0 +1,5 @@
+outs:
+- md5: d2e03a6bf1e8e568373032803ef8d775
+  size: 38238
+  hash: md5
+  path: EDN.csv

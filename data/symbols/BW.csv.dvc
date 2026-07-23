@@ -1,0 +1,5 @@
+outs:
+- md5: 41fea3aec8fcef685540f0b0b56e74a9
+  size: 37697
+  hash: md5
+  path: BW.csv

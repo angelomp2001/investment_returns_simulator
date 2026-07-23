@@ -1,0 +1,5 @@
+outs:
+- md5: f15823cd5172e96bc283d4c79b475d7e
+  size: 39159
+  hash: md5
+  path: SNOIX.csv

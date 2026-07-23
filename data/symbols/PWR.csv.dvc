@@ -1,0 +1,5 @@
+outs:
+- md5: 31215dbe8ec7da3b33d51c1735b4603a
+  size: 40389
+  hash: md5
+  path: PWR.csv

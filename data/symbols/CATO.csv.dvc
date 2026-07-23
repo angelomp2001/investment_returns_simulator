@@ -1,0 +1,5 @@
+outs:
+- md5: 5fc81c0bfdacc74f46cad8dbf182a451
+  size: 40233
+  hash: md5
+  path: CATO.csv

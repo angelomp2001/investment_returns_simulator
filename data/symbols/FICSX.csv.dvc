@@ -1,0 +1,5 @@
+outs:
+- md5: 5e6335c0112455c9de477e138314adc4
+  size: 39158
+  hash: md5
+  path: FICSX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: a17b94495dbbcb8af07d2868ed5fa6d7
+  size: 40321
+  hash: md5
+  path: GRMN.csv

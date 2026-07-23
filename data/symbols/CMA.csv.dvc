@@ -1,0 +1,5 @@
+outs:
+- md5: 8e4a49a4943af50bde3435ea2fc4bc28
+  size: 38056
+  hash: md5
+  path: CMA.csv

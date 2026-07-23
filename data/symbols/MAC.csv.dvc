@@ -1,0 +1,5 @@
+outs:
+- md5: 44cd7c80c71f9aac904b03f528e30369
+  size: 38761
+  hash: md5
+  path: MAC.csv

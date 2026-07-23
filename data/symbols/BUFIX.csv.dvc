@@ -1,0 +1,5 @@
+outs:
+- md5: 5467d5511d7b4e76966b4ed33dcef24b
+  size: 39179
+  hash: md5
+  path: BUFIX.csv

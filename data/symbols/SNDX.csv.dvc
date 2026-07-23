@@ -1,0 +1,5 @@
+outs:
+- md5: e78dfc6d5d5ea156e6f7fd59bce1cf3b
+  size: 39045
+  hash: md5
+  path: SNDX.csv

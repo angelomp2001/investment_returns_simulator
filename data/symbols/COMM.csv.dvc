@@ -1,0 +1,5 @@
+outs:
+- md5: ae05a88b488fa5a6e8f0e22881a7b21e
+  size: 37102
+  hash: md5
+  path: COMM.csv

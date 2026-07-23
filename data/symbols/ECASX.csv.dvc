@@ -1,0 +1,5 @@
+outs:
+- md5: 0c662c28acc1ba6e1e3e9af7f15149b5
+  size: 39163
+  hash: md5
+  path: ECASX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 7b1a886eb25c82fef2c0b479136df801
+  size: 39181
+  hash: md5
+  path: MCHP.csv

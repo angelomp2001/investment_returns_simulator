@@ -1,0 +1,5 @@
+outs:
+- md5: 868bf16441d8f5976c9eb7bfdc43dd92
+  size: 36288
+  hash: md5
+  path: DOUG.csv

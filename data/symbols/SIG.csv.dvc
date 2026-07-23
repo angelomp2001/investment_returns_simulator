@@ -1,0 +1,5 @@
+outs:
+- md5: e5d43a1e3d52720e7574a7154042de64
+  size: 39179
+  hash: md5
+  path: SIG.csv

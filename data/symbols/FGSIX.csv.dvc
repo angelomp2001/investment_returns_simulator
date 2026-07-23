@@ -1,0 +1,5 @@
+outs:
+- md5: 35fca16a6adfbe52683e3fc77ae90cc0
+  size: 39177
+  hash: md5
+  path: FGSIX.csv

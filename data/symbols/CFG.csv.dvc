@@ -1,0 +1,5 @@
+outs:
+- md5: 9f03852f71d6f64905068e43f2f3d201
+  size: 39184
+  hash: md5
+  path: CFG.csv

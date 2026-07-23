@@ -1,0 +1,5 @@
+outs:
+- md5: 190a3001f7502b8f02a2168fcfff1cad
+  size: 37535
+  hash: md5
+  path: MFG.csv

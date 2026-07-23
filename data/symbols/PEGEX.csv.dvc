@@ -1,0 +1,5 @@
+outs:
+- md5: 72e15fd3ca4cebcaa5bd9bf77c35bbda
+  size: 39163
+  hash: md5
+  path: PEGEX.csv

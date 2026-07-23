@@ -1,0 +1,5 @@
+outs:
+- md5: 89a191b109e206eb7681cc6cb66027e8
+  size: 39140
+  hash: md5
+  path: NOV.csv

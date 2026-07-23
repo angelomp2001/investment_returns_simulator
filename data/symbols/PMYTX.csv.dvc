@@ -1,0 +1,5 @@
+outs:
+- md5: eae6438c573051e593521a5aa63ae06e
+  size: 39200
+  hash: md5
+  path: PMYTX.csv

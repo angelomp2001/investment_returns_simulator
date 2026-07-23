@@ -1,0 +1,5 @@
+outs:
+- md5: deef42d7619222eb629588083445abad
+  size: 37064
+  hash: md5
+  path: DOLE.csv

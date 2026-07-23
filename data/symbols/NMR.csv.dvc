@@ -1,0 +1,5 @@
+outs:
+- md5: 7bdedd58e0a78f8b154b025f1a7b8995
+  size: 37538
+  hash: md5
+  path: NMR.csv

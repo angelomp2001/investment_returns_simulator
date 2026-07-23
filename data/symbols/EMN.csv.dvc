@@ -1,0 +1,5 @@
+outs:
+- md5: 1fe2d0578d4d41d3837294bd457e7b1e
+  size: 39331
+  hash: md5
+  path: EMN.csv

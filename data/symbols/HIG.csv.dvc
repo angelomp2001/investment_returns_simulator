@@ -1,0 +1,5 @@
+outs:
+- md5: 3ea33900430437557e96cf1a7c9fc750
+  size: 39682
+  hash: md5
+  path: HIG.csv

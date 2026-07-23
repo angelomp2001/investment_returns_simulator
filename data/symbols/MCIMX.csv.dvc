@@ -1,0 +1,5 @@
+outs:
+- md5: dd8676f0c169a9473d093f154b808c60
+  size: 39147
+  hash: md5
+  path: MCIMX.csv

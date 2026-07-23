@@ -1,0 +1,5 @@
+outs:
+- md5: 6933919be3a4e6d9518eac9b98fec514
+  size: 37188
+  hash: md5
+  path: NYC.csv

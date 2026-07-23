@@ -1,0 +1,5 @@
+outs:
+- md5: 02d735d577d4a9f35e2dccf212421b28
+  size: 39800
+  hash: md5
+  path: APO.csv

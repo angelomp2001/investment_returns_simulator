@@ -1,0 +1,5 @@
+outs:
+- md5: 5ef9de139d763bfdf3954e98333b1b59
+  size: 39824
+  hash: md5
+  path: GE.csv

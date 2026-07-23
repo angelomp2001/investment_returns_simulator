@@ -1,0 +1,5 @@
+outs:
+- md5: 8f8a514c409c04624f9d5ec790f7f4cc
+  size: 39170
+  hash: md5
+  path: GISYX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: ebbd12176e127a3790e597bc35d1f3f2
+  size: 40814
+  hash: md5
+  path: AMP.csv

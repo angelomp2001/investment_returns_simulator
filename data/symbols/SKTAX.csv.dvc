@@ -1,0 +1,5 @@
+outs:
+- md5: cfce710a9dd7d40bcc6ad99e4370920a
+  size: 39171
+  hash: md5
+  path: SKTAX.csv

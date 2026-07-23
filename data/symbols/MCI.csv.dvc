@@ -1,0 +1,5 @@
+outs:
+- md5: 42c10a4753956999d6ddfac5dbb7cee3
+  size: 38926
+  hash: md5
+  path: MCI.csv

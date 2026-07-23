@@ -1,0 +1,5 @@
+outs:
+- md5: ef95cf97cbec6daf9e6d5d2ffeada8b7
+  size: 37924
+  hash: md5
+  path: KGC.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: faadb98e6d30b3669dd1dd844e90d175
+  size: 39088
+  hash: md5
+  path: ETG.csv

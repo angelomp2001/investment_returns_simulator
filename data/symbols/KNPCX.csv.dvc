@@ -1,0 +1,5 @@
+outs:
+- md5: 6736bfad5b713a4fb64fbcd0a06d1a61
+  size: 39535
+  hash: md5
+  path: KNPCX.csv

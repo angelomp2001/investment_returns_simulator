@@ -1,0 +1,5 @@
+outs:
+- md5: 0921cbac630d125671c3b943e22f86b2
+  size: 39180
+  hash: md5
+  path: CADOX.csv

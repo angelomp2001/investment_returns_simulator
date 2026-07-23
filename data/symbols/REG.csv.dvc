@@ -1,0 +1,5 @@
+outs:
+- md5: 1824e3b1a1b22abeb38fe10fae7160f8
+  size: 39172
+  hash: md5
+  path: REG.csv

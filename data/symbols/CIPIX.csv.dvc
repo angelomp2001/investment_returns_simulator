@@ -1,0 +1,5 @@
+outs:
+- md5: f61106c9ea666c46e736ab80a903f6d7
+  size: 39164
+  hash: md5
+  path: CIPIX.csv

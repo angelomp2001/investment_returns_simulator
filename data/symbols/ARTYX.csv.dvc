@@ -1,0 +1,5 @@
+outs:
+- md5: 4b7194bffd4a562db66835d899f0af7b
+  size: 39168
+  hash: md5
+  path: ARTYX.csv

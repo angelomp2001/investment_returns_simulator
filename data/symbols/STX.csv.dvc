@@ -1,0 +1,5 @@
+outs:
+- md5: 1fed8baaffa5f8af87032baedf7638ab
+  size: 39558
+  hash: md5
+  path: STX.csv

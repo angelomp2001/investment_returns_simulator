@@ -1,0 +1,5 @@
+outs:
+- md5: 56ac48c9d74b76ba19a997b4e881467a
+  size: 39131
+  hash: md5
+  path: DXC.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: d929198cda5907b67a70725d7a1ba3e8
+  size: 37560
+  hash: md5
+  path: SCS.csv

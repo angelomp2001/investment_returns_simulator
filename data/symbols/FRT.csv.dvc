@@ -1,0 +1,5 @@
+outs:
+- md5: 43f2bd5a0e5b5ed9fd69bd5981362ac9
+  size: 39696
+  hash: md5
+  path: FRT.csv

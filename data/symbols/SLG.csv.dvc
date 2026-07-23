@@ -1,0 +1,5 @@
+outs:
+- md5: f957a85aa7048f8308b5975e792f76df
+  size: 39209
+  hash: md5
+  path: SLG.csv

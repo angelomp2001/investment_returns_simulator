@@ -1,0 +1,5 @@
+outs:
+- md5: 7d9547ec96a0578c65339646224cb396
+  size: 39132
+  hash: md5
+  path: CUBI.csv

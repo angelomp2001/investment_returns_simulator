@@ -1,0 +1,5 @@
+outs:
+- md5: 254e25899c5ac246e8209dcd0fd2bccc
+  size: 38033
+  hash: md5
+  path: RWINX.csv

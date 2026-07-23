@@ -1,0 +1,5 @@
+outs:
+- md5: be5dcff83e4d8ed8e215eb8c9c379150
+  size: 37155
+  hash: md5
+  path: SCIA.csv

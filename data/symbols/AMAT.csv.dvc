@@ -1,0 +1,5 @@
+outs:
+- md5: c9caf83e48b55096b9da5acd9659379d
+  size: 40463
+  hash: md5
+  path: AMAT.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 5678d47063e24e85478339f7641501ad
+  size: 39102
+  hash: md5
+  path: BMA.csv

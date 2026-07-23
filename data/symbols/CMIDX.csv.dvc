@@ -1,0 +1,5 @@
+outs:
+- md5: 702e10722b47230ed9f94311e9a9c898
+  size: 39172
+  hash: md5
+  path: CMIDX.csv

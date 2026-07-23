@@ -1,0 +1,5 @@
+outs:
+- md5: 9a86954a39512f36d45ee8b0eefc01db
+  size: 39315
+  hash: md5
+  path: BSX.csv

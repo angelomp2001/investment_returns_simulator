@@ -1,0 +1,5 @@
+outs:
+- md5: 0b3739bec0d32a10e199a1edb41fe884
+  size: 39161
+  hash: md5
+  path: BCH.csv

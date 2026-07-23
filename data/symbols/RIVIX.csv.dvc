@@ -1,0 +1,5 @@
+outs:
+- md5: f38879528b8818a631058509b94a96d9
+  size: 39176
+  hash: md5
+  path: RIVIX.csv

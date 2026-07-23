@@ -1,0 +1,5 @@
+outs:
+- md5: d3f363f47c79e5816b00033e364fecc7
+  size: 39159
+  hash: md5
+  path: FSPCX.csv

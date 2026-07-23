@@ -1,0 +1,5 @@
+outs:
+- md5: 416fc29f8e1ba6db08d4f4e8253b8fa5
+  size: 39180
+  hash: md5
+  path: DFMAX.csv

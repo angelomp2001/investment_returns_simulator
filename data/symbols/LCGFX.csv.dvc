@@ -1,0 +1,5 @@
+outs:
+- md5: d0f06f63ff529f188b5e2a710cc6d17f
+  size: 39182
+  hash: md5
+  path: LCGFX.csv

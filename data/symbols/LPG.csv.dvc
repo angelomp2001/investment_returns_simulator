@@ -1,0 +1,5 @@
+outs:
+- md5: 286439cc255c6c1c5a0673eba8f7af48
+  size: 38526
+  hash: md5
+  path: LPG.csv

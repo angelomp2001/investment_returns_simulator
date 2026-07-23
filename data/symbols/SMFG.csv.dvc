@@ -1,0 +1,5 @@
+outs:
+- md5: b644abf2e2c1b4ab80c47fb0bf7f7a19
+  size: 38125
+  hash: md5
+  path: SMFG.csv

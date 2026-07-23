@@ -1,0 +1,5 @@
+outs:
+- md5: cb6c8f8940374172385dfa08a2bf608e
+  size: 40026
+  hash: md5
+  path: ENTG.csv

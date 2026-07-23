@@ -1,0 +1,5 @@
+outs:
+- md5: 5baafd6888ecc7008e4ce6ed40e15816
+  size: 39690
+  hash: md5
+  path: MSTR.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 7bbe70f5d7758da2587d5d033d4626df
+  size: 37525
+  hash: md5
+  path: MBI.csv

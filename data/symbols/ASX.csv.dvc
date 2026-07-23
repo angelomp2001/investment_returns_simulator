@@ -1,0 +1,5 @@
+outs:
+- md5: 1cbf8fadf21f15376941c2ed6eb4e6e5
+  size: 37878
+  hash: md5
+  path: ASX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 93522a66c7754fe8aab64229f4630c7f
+  size: 39199
+  hash: md5
+  path: PSIFX.csv

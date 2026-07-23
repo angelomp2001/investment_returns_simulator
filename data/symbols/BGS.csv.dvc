@@ -1,0 +1,5 @@
+outs:
+- md5: eacc95810f7d3994fd48485c0cd88be5
+  size: 41530
+  hash: md5
+  path: BGS.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 0dece2de32d76088f0c9951802b6cd88
+  size: 39603
+  hash: md5
+  path: NIC.csv

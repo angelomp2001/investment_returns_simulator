@@ -1,0 +1,5 @@
+outs:
+- md5: b80c8d9e5115dcbeba217b344d38d2df
+  size: 29218912
+  hash: md5
+  path: symbols_data_2025-08-25.csv

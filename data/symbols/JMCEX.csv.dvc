@@ -1,0 +1,5 @@
+outs:
+- md5: 76cf5b92e24d01a855424402d2e03a04
+  size: 39192
+  hash: md5
+  path: JMCEX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 1b39d3760bf273f65e9858363550e35d
+  size: 39403
+  hash: md5
+  path: LRN.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 390c597446c5b4bf5ba98ec1a3a28411
+  size: 39160
+  hash: md5
+  path: CNNE.csv

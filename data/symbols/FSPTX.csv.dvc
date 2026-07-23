@@ -1,0 +1,5 @@
+outs:
+- md5: 6f8fe53ae168e262161bccaea03e6177
+  size: 39163
+  hash: md5
+  path: FSPTX.csv

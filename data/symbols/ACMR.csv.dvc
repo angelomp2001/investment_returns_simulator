@@ -1,0 +1,5 @@
+outs:
+- md5: 1baee026dc449e8f4e5215ca6f16ff69
+  size: 39035
+  hash: md5
+  path: ACMR.csv

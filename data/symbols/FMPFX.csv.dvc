@@ -1,0 +1,5 @@
+outs:
+- md5: 45f88e0c194a84a834ad08200a24aaee
+  size: 39154
+  hash: md5
+  path: FMPFX.csv

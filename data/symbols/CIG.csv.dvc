@@ -1,0 +1,5 @@
+outs:
+- md5: 96cfa0105463c50896655fa03778d268
+  size: 40719
+  hash: md5
+  path: CIG.csv

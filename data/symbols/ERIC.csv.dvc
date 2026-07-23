@@ -1,0 +1,5 @@
+outs:
+- md5: f17ab8fef51f74ab5d33df791f0f05b8
+  size: 37889
+  hash: md5
+  path: ERIC.csv

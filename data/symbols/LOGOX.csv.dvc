@@ -1,0 +1,5 @@
+outs:
+- md5: 45c8e6aceefe70fee09efbd19653d7cb
+  size: 39191
+  hash: md5
+  path: LOGOX.csv

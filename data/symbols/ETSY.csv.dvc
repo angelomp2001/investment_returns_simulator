@@ -1,0 +1,5 @@
+outs:
+- md5: e3bd90ecb55fbad7719a42cc850ba14c
+  size: 39813
+  hash: md5
+  path: ETSY.csv

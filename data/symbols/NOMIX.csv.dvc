@@ -1,0 +1,5 @@
+outs:
+- md5: 4acdfaa27050bd01eea8c0fdabb136bd
+  size: 39136
+  hash: md5
+  path: NOMIX.csv

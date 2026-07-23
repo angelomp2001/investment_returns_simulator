@@ -1,0 +1,5 @@
+outs:
+- md5: 0ebdf5e6e0f811bfd6288a02d22bccd0
+  size: 37523
+  hash: md5
+  path: IGA.csv

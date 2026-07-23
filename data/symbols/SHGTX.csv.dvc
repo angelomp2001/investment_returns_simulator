@@ -1,0 +1,5 @@
+outs:
+- md5: 9f7190e8d8479378cc8cf1ebd6e1e1f6
+  size: 39232
+  hash: md5
+  path: SHGTX.csv

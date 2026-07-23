@@ -1,0 +1,5 @@
+outs:
+- md5: ac74f13f75d36dbbb5f419ce4571f6c1
+  size: 38078
+  hash: md5
+  path: LCORX.csv

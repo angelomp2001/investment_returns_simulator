@@ -1,0 +1,5 @@
+outs:
+- md5: 8bfcdf8d9c3ff1fda2885771f2a992b3
+  size: 40684
+  hash: md5
+  path: GGB.csv

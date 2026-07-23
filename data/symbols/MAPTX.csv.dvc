@@ -1,0 +1,5 @@
+outs:
+- md5: 8b0d546141fe72ba8b654225f09d6cf3
+  size: 39179
+  hash: md5
+  path: MAPTX.csv

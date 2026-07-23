@@ -1,0 +1,5 @@
+outs:
+- md5: a1c298a5166c23e43c014a2ea3412e71
+  size: 38032
+  hash: md5
+  path: DDD.csv

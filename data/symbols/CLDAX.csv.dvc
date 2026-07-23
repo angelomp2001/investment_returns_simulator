@@ -1,0 +1,5 @@
+outs:
+- md5: 7402d108931a7c11d36b69d370ca88b2
+  size: 39173
+  hash: md5
+  path: CLDAX.csv

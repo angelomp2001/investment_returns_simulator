@@ -1,0 +1,5 @@
+outs:
+- md5: cabd2a8394a8a5fcc649fa89e5ae2e85
+  size: 39172
+  hash: md5
+  path: CSMIX.csv

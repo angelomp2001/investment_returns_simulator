@@ -1,0 +1,5 @@
+outs:
+- md5: ce3d92a26b5670a449ea12a4cfe048ee
+  size: 39183
+  hash: md5
+  path: FDTIX.csv

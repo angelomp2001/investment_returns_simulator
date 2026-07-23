@@ -1,0 +1,5 @@
+outs:
+- md5: 07dcf7a677251f2620e2e1f543257d16
+  size: 39180
+  hash: md5
+  path: CAMWX.csv

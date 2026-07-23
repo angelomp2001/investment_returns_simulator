@@ -1,0 +1,5 @@
+outs:
+- md5: 910ce6e5d829f5e010c7eb245989162b
+  size: 38361
+  hash: md5
+  path: EFT.csv

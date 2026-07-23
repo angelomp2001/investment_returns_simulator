@@ -1,0 +1,5 @@
+outs:
+- md5: 0e43ca3d9a43d8d14fc8dd0032889c37
+  size: 39155
+  hash: md5
+  path: CMG.csv

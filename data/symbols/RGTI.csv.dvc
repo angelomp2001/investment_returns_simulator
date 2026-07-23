@@ -1,0 +1,5 @@
+outs:
+- md5: 250a21db410048e561e333101d6c4359
+  size: 36630
+  hash: md5
+  path: RGTI.csv

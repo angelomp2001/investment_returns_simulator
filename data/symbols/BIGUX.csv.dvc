@@ -1,0 +1,5 @@
+outs:
+- md5: 63e9ba592d23556dbdf174636d4ca506
+  size: 39173
+  hash: md5
+  path: BIGUX.csv

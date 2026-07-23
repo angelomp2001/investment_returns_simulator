@@ -1,0 +1,5 @@
+outs:
+- md5: a0aa0c4d26ee8895394ea08abcf7107a
+  size: 39171
+  hash: md5
+  path: FSCRX.csv

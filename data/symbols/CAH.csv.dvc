@@ -1,0 +1,5 @@
+outs:
+- md5: 04ba3e22693debec5ac29d3526e620d0
+  size: 39784
+  hash: md5
+  path: CAH.csv

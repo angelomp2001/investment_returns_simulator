@@ -1,0 +1,5 @@
+outs:
+- md5: ec3a69581edd3970ed6a29024e4bf402
+  size: 39403
+  hash: md5
+  path: SENEA.csv

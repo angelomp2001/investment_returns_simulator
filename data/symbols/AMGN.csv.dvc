@@ -1,0 +1,5 @@
+outs:
+- md5: f2784ddddbfcac76fa8f3cf97b6060f4
+  size: 40810
+  hash: md5
+  path: AMGN.csv

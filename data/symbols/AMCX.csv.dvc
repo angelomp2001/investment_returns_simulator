@@ -1,0 +1,5 @@
+outs:
+- md5: 15d966b6fda87672d981771c975184d6
+  size: 38690
+  hash: md5
+  path: AMCX.csv

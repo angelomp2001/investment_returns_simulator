@@ -1,0 +1,5 @@
+outs:
+- md5: f3a453e4fc0d92763464086d60027c3b
+  size: 36848
+  hash: md5
+  path: SNORX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 2e8ec5a950415d5bfc3207fb1ad1ad19
+  size: 37823
+  hash: md5
+  path: FOSL.csv

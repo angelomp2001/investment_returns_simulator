@@ -1,0 +1,5 @@
+outs:
+- md5: 8ba9b0d9df4e2cca3b9c943102fcc77c
+  size: 39196
+  hash: md5
+  path: NALFX.csv

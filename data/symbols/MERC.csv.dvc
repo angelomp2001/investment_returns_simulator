@@ -1,0 +1,5 @@
+outs:
+- md5: 232b54e33897d06972cbd1131af63012
+  size: 40714
+  hash: md5
+  path: MERC.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: a8e28b068a2227bca2b69a328abb56c5
+  size: 39169
+  hash: md5
+  path: PEGGX.csv

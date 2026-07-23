@@ -1,0 +1,5 @@
+outs:
+- md5: 82ecdf77562211a3ad28bcbc942859c9
+  size: 38095
+  hash: md5
+  path: K.csv

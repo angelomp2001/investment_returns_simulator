@@ -1,0 +1,5 @@
+outs:
+- md5: 9d7905ca277d3e197a4fa553344bb1b3
+  size: 36745
+  hash: md5
+  path: SUP.csv

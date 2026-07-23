@@ -1,0 +1,5 @@
+outs:
+- md5: 48e904b9b27f49a72b2d62c063fe03cc
+  size: 36477
+  hash: md5
+  path: SG.csv

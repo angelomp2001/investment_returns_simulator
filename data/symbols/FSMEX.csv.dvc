@@ -1,0 +1,5 @@
+outs:
+- md5: 5c2bfce176e3a57d73a35eb6a7ce491d
+  size: 39162
+  hash: md5
+  path: FSMEX.csv

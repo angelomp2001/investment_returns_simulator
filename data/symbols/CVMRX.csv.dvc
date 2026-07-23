@@ -1,0 +1,5 @@
+outs:
+- md5: c28854a19d9a4eec5dde53dbf97aeca7
+  size: 39190
+  hash: md5
+  path: CVMRX.csv

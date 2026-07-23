@@ -1,0 +1,5 @@
+outs:
+- md5: 67d9befb7ac8c099cafc383f6e668ffa
+  size: 40211
+  hash: md5
+  path: FSLR.csv

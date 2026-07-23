@@ -1,0 +1,5 @@
+outs:
+- md5: f378bc7fc593d29ce5ffaab4fce412ce
+  size: 39111
+  hash: md5
+  path: DCINX.csv

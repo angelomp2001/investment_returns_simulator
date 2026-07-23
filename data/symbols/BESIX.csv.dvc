@@ -1,0 +1,5 @@
+outs:
+- md5: 244e69c4cb6c07800d893ec89b3711f6
+  size: 39170
+  hash: md5
+  path: BESIX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: b63be40fee374f3b947afe43a3aee5fd
+  size: 39176
+  hash: md5
+  path: MSFAX.csv

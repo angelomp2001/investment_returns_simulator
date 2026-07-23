@@ -1,0 +1,5 @@
+outs:
+- md5: 4179fe6ce5e1e4fbc9533822d2deddfe
+  size: 40347
+  hash: md5
+  path: COF.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 7128d55b90fdd3bbfccce6344f1323e3
+  size: 39179
+  hash: md5
+  path: AMPH.csv

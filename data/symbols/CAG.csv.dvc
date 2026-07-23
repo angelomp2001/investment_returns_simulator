@@ -1,0 +1,5 @@
+outs:
+- md5: cfd18a6d24b12976210f78cf3d5c907f
+  size: 39202
+  hash: md5
+  path: CAG.csv

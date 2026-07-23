@@ -1,0 +1,5 @@
+outs:
+- md5: 96ff96cb541232761d2134dddd9cacd8
+  size: 39173
+  hash: md5
+  path: FRDAX.csv

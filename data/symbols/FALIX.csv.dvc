@@ -1,0 +1,5 @@
+outs:
+- md5: 08be09e6ab2f91d1bf348222b35e68e1
+  size: 38080
+  hash: md5
+  path: FALIX.csv

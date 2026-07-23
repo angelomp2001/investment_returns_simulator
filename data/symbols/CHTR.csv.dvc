@@ -1,0 +1,5 @@
+outs:
+- md5: 2dc2d75bf4f40d677f44c22dcfd4093f
+  size: 40776
+  hash: md5
+  path: CHTR.csv

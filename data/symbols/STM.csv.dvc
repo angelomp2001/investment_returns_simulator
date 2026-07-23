@@ -1,0 +1,5 @@
+outs:
+- md5: d3a7b54aec7791155a97e8f125d6105c
+  size: 39184
+  hash: md5
+  path: STM.csv

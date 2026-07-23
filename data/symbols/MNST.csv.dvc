@@ -1,0 +1,5 @@
+outs:
+- md5: 2ad6cc466af1fa4f31205c4b005696e7
+  size: 39146
+  hash: md5
+  path: MNST.csv

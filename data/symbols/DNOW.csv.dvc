@@ -1,0 +1,5 @@
+outs:
+- md5: 98dd967ff4f1f9e6b953b1c6a6928496
+  size: 38653
+  hash: md5
+  path: DNOW.csv

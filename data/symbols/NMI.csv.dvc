@@ -1,0 +1,5 @@
+outs:
+- md5: 09f19f53d19599e4ca5ae5b5fbd7dc67
+  size: 37718
+  hash: md5
+  path: NMI.csv

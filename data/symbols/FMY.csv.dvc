@@ -1,0 +1,5 @@
+outs:
+- md5: 4a6d6eebae34f8f9598f2d1a2918a5cd
+  size: 38556
+  hash: md5
+  path: FMY.csv

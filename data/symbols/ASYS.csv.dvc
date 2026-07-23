@@ -1,0 +1,5 @@
+outs:
+- md5: e46b9ed6cbf81d87771ea4e7f21c428c
+  size: 37850
+  hash: md5
+  path: ASYS.csv

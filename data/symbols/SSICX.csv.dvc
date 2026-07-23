@@ -1,0 +1,5 @@
+outs:
+- md5: 3fa15ef2ff07f5c360353fa3047f07af
+  size: 39143
+  hash: md5
+  path: SSICX.csv

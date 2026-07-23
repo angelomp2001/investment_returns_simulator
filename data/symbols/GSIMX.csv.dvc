@@ -1,0 +1,5 @@
+outs:
+- md5: 8512e24944c30c5eeceac051a48dc35d
+  size: 39168
+  hash: md5
+  path: GSIMX.csv

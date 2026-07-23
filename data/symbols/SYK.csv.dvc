@@ -1,0 +1,5 @@
+outs:
+- md5: 07640942004fa5e75e193bf407b64b2c
+  size: 40816
+  hash: md5
+  path: SYK.csv

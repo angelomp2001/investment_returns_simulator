@@ -1,0 +1,5 @@
+outs:
+- md5: 0bccbd66d8116ffe2520bd7cc8d5baf0
+  size: 38970
+  hash: md5
+  path: FCTDX.csv

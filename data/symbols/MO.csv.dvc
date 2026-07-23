@@ -1,0 +1,5 @@
+outs:
+- md5: 1315e50d33ac115bc4c3d4dbebfd356f
+  size: 39198
+  hash: md5
+  path: MO.csv

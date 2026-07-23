@@ -1,0 +1,5 @@
+outs:
+- md5: 61bec90ccb58ece1366f39c06e446e6e
+  size: 39166
+  hash: md5
+  path: FOSFX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 12c96ee5fe44cbd5506a5daeb56ddf99
+  size: 39646
+  hash: md5
+  path: AFL.csv

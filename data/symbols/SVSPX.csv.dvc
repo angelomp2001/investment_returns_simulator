@@ -1,0 +1,5 @@
+outs:
+- md5: fd8fc0bf4e1ed13b15ce602f059568f1
+  size: 40842
+  hash: md5
+  path: SVSPX.csv

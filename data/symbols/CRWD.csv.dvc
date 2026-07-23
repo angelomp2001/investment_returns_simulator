@@ -1,0 +1,5 @@
+outs:
+- md5: 05ed156411d02490f7034064d0823edf
+  size: 40641
+  hash: md5
+  path: CRWD.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 1c1b5294eff107f573cbc4f212501d6e
+  size: 40624
+  hash: md5
+  path: AMZN.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: cf768092700da8b0140e4dcfaf871f02
+  size: 39165
+  hash: md5
+  path: SCICX.csv

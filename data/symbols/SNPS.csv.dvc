@@ -1,0 +1,5 @@
+outs:
+- md5: 3a27d04abedfd1cec1519025c842a8cc
+  size: 40804
+  hash: md5
+  path: SNPS.csv

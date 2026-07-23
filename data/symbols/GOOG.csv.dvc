@@ -1,0 +1,5 @@
+outs:
+- md5: 3a0d2f057795ae34f2b0150dfacb1c08
+  size: 40452
+  hash: md5
+  path: GOOG.csv

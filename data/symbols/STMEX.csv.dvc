@@ -1,0 +1,5 @@
+outs:
+- md5: 0d3c2e9c958395bff5ca8edfd0538002
+  size: 39156
+  hash: md5
+  path: STMEX.csv

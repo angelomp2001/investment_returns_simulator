@@ -1,0 +1,5 @@
+outs:
+- md5: 6fdd1c8d4e32b8a9eff98ba507155220
+  size: 40338
+  hash: md5
+  path: CVX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: f9a120b2f88f4688df5637d5178b3ebc
+  size: 36622
+  hash: md5
+  path: CAMRX.csv

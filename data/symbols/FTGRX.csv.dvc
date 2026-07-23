@@ -1,0 +1,5 @@
+outs:
+- md5: 4d41a5f5a2177d9ada39fdc8cee219f8
+  size: 39166
+  hash: md5
+  path: FTGRX.csv

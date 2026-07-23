@@ -1,0 +1,5 @@
+outs:
+- md5: 0f62e85b6624569e4bda6ef3dd9b1498
+  size: 39158
+  hash: md5
+  path: OTCFX.csv

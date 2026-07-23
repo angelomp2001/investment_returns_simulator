@@ -1,0 +1,5 @@
+outs:
+- md5: 500d1af12b0e4e2448f47c5efc2f5180
+  size: 39160
+  hash: md5
+  path: DFSIX.csv

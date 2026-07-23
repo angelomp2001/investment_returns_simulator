@@ -1,0 +1,5 @@
+outs:
+- md5: 42867a6bd57ef48d335e8507b5173d02
+  size: 39101
+  hash: md5
+  path: ASHIX.csv

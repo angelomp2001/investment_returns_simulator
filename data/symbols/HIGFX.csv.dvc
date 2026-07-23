@@ -1,0 +1,5 @@
+outs:
+- md5: 382e2dbfbec68cbb2621171b00b2fc01
+  size: 37521
+  hash: md5
+  path: HIGFX.csv

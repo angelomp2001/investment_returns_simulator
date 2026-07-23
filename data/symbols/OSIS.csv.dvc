@@ -1,0 +1,5 @@
+outs:
+- md5: 8dcd2c56e62d8128566968218b4d537f
+  size: 40030
+  hash: md5
+  path: OSIS.csv

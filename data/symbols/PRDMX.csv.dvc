@@ -1,0 +1,5 @@
+outs:
+- md5: bcc31540de71c4fa736db018050e1571
+  size: 39184
+  hash: md5
+  path: PRDMX.csv

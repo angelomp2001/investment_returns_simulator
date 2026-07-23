@@ -1,0 +1,5 @@
+outs:
+- md5: 8644f2b5c71c0c9caeb129fa650e0e6b
+  size: 38125
+  hash: md5
+  path: BHC.csv

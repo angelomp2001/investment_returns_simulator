@@ -1,0 +1,5 @@
+outs:
+- md5: 37caee2bfcdee51230224b71ab38eb76
+  size: 39162
+  hash: md5
+  path: OSCNX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: ad6cfa38fc4d0c16862f3bfb05fafe5e
+  size: 38288
+  hash: md5
+  path: FICIX.csv

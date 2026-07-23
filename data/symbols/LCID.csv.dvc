@@ -1,0 +1,5 @@
+outs:
+- md5: bfb81367eafab2c1ac215fe34b827a1f
+  size: 37470
+  hash: md5
+  path: LCID.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 26c5e2b663e867782cf72d7579038192
+  size: 34391
+  hash: md5
+  path: KSPI.csv

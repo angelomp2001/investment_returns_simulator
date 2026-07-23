@@ -1,0 +1,5 @@
+outs:
+- md5: 3ee15fce7c3b7c217c3259407044db84
+  size: 40485
+  hash: md5
+  path: SJM.csv

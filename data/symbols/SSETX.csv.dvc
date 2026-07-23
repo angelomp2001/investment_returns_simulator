@@ -1,0 +1,5 @@
+outs:
+- md5: 1d387aa505701d545f730f6ef15560fe
+  size: 38085
+  hash: md5
+  path: SSETX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 1e84c40565061c2e3767e87ef5b62d4b
+  size: 35094
+  hash: md5
+  path: MSGE.csv

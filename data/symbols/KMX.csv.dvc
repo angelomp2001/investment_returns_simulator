@@ -1,0 +1,5 @@
+outs:
+- md5: 4efe26111b3abdfb4d46ccf1775e838d
+  size: 39502
+  hash: md5
+  path: KMX.csv

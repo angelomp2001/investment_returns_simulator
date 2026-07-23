@@ -1,0 +1,5 @@
+outs:
+- md5: d574d7f4ff4bdaf56e18b05b8a0143df
+  size: 37510
+  hash: md5
+  path: GRND.csv

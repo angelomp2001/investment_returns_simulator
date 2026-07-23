@@ -1,0 +1,5 @@
+outs:
+- md5: cc770399d7cd17d75628efc699a21bfd
+  size: 38643
+  hash: md5
+  path: SNAP.csv

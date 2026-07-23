@@ -1,0 +1,5 @@
+outs:
+- md5: 49bb01265f924654bb3bce05380509f5
+  size: 40612
+  hash: md5
+  path: SND.csv

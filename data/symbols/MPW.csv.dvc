@@ -1,0 +1,5 @@
+outs:
+- md5: 998154c1fbaeb96ae556ac207e646509
+  size: 40101
+  hash: md5
+  path: MPW.csv

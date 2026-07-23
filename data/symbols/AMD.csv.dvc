@@ -1,0 +1,5 @@
+outs:
+- md5: b29fe652fe7a98e7f4cf85d226250685
+  size: 40120
+  hash: md5
+  path: AMD.csv

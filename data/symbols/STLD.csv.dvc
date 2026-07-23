@@ -1,0 +1,5 @@
+outs:
+- md5: 9961f34390f022304976c595397b0f5a
+  size: 40007
+  hash: md5
+  path: STLD.csv

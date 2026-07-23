@@ -1,0 +1,5 @@
+outs:
+- md5: 8e343746b65feac4246e672bf8a511b2
+  size: 39021
+  hash: md5
+  path: DFIN.csv

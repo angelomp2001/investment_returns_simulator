@@ -1,0 +1,5 @@
+outs:
+- md5: 0ee1365e21ac7c1fca648d7d402e1c0c
+  size: 38084
+  hash: md5
+  path: CTRA.csv

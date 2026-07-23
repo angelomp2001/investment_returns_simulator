@@ -1,0 +1,5 @@
+outs:
+- md5: ddf35068cf5b2ed87fedc570b1a3fe89
+  size: 39168
+  hash: md5
+  path: CADPX.csv

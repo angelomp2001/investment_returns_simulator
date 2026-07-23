@@ -1,0 +1,5 @@
+outs:
+- md5: 0bbcbd0f6a8da11aabb9fe65ac690ccd
+  size: 36642
+  hash: md5
+  path: GCI.csv

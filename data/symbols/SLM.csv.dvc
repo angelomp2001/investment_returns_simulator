@@ -1,0 +1,5 @@
+outs:
+- md5: b1f067e63f92e4cbcd925fdb4dbdca53
+  size: 38965
+  hash: md5
+  path: SLM.csv

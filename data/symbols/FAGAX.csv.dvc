@@ -1,0 +1,5 @@
+outs:
+- md5: 29f972696a3ccdf4790226a870872716
+  size: 40481
+  hash: md5
+  path: FAGAX.csv

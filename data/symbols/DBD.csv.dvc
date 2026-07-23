@@ -1,0 +1,5 @@
+outs:
+- md5: ebc5eeaae06b1e7af65ad74bc947716c
+  size: 34666
+  hash: md5
+  path: DBD.csv

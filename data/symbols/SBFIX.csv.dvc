@@ -1,0 +1,5 @@
+outs:
+- md5: 9fab72de79fd0118de9466a096df8c6a
+  size: 39187
+  hash: md5
+  path: SBFIX.csv

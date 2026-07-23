@@ -1,0 +1,5 @@
+outs:
+- md5: a73eda23492ff5b475646b390cc911c7
+  size: 38674
+  hash: md5
+  path: CLMT.csv

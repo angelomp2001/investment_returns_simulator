@@ -1,0 +1,5 @@
+outs:
+- md5: 1055b55693272dbf636d805d5cb96557
+  size: 39224
+  hash: md5
+  path: EBAY.csv

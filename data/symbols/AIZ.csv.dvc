@@ -1,0 +1,5 @@
+outs:
+- md5: 0b6da1ea59bd9889c2c32689f2a65644
+  size: 40726
+  hash: md5
+  path: AIZ.csv

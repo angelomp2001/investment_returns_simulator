@@ -1,0 +1,5 @@
+outs:
+- md5: 6c282378e409e4ff91e7b1a433d5d60f
+  size: 40056
+  hash: md5
+  path: QRVO.csv

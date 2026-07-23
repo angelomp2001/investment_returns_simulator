@@ -1,0 +1,5 @@
+outs:
+- md5: 46d5d8562c9cf44afb8065a9db84973c
+  size: 39800
+  hash: md5
+  path: AVGO.csv

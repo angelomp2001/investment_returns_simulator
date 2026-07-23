@@ -1,0 +1,5 @@
+outs:
+- md5: 3c5ede6c544b2814b309cf3c6bc636bd
+  size: 39167
+  hash: md5
+  path: MGM.csv

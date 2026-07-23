@@ -1,0 +1,5 @@
+outs:
+- md5: c381f05f5c86119c0c87f42f9b71a77a
+  size: 39104
+  hash: md5
+  path: SITC.csv

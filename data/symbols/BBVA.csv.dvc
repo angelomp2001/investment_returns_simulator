@@ -1,0 +1,5 @@
+outs:
+- md5: 56e1a99e3d65156e93931aade10c3f19
+  size: 37962
+  hash: md5
+  path: BBVA.csv

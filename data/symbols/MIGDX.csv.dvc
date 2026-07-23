@@ -1,0 +1,5 @@
+outs:
+- md5: 9fc3787b98d4521c094f34dd1eae32c7
+  size: 39184
+  hash: md5
+  path: MIGDX.csv

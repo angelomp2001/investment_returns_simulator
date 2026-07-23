@@ -1,0 +1,5 @@
+outs:
+- md5: 11faa9c6fbe75a9fd0759909982eff74
+  size: 37001
+  hash: md5
+  path: FWRG.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: f7265474b52a7e9eae10135442371a7c
+  size: 40829
+  hash: md5
+  path: RMD.csv

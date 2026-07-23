@@ -1,0 +1,5 @@
+outs:
+- md5: 75c511c6cbbb79ff03827357ea4d5c95
+  size: 39198
+  hash: md5
+  path: CVS.csv

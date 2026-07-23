@@ -1,0 +1,5 @@
+outs:
+- md5: 902145f6f6e9700e52f261b3e7fc64d2
+  size: 36920
+  hash: md5
+  path: SGMO.csv

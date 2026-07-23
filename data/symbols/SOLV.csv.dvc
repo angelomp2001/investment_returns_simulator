@@ -1,0 +1,5 @@
+outs:
+- md5: 87dfcd8105f3231ac47980b79b7c1c79
+  size: 33948
+  hash: md5
+  path: SOLV.csv

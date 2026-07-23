@@ -1,0 +1,5 @@
+outs:
+- md5: 9cf18ef8ba16e606a2d5eaf3c102c5b5
+  size: 39189
+  hash: md5
+  path: NDAQ.csv

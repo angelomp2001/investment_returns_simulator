@@ -1,0 +1,5 @@
+outs:
+- md5: f7eb9c04caa73e91496495c882b76303
+  size: 38144
+  hash: md5
+  path: ANVS.csv

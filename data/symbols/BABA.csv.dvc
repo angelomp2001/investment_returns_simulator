@@ -1,0 +1,5 @@
+outs:
+- md5: 7f0979e82f9ce2960dce4d93c71b40cd
+  size: 40125
+  hash: md5
+  path: BABA.csv

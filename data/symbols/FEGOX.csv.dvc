@@ -1,0 +1,5 @@
+outs:
+- md5: 7b3dd8e129f359a6074c6fc7c51e8e2a
+  size: 39177
+  hash: md5
+  path: FEGOX.csv

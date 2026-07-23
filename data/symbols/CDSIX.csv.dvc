@@ -1,0 +1,5 @@
+outs:
+- md5: b2b107cb96595ce5327ce6bb6057db69
+  size: 39187
+  hash: md5
+  path: CDSIX.csv

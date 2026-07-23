@@ -1,0 +1,5 @@
+outs:
+- md5: 1ff7213155c2475e3f74cc49b0d5e1f8
+  size: 36248
+  hash: md5
+  path: AUR.csv

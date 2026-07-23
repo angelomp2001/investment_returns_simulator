@@ -1,0 +1,5 @@
+outs:
+- md5: 5e72765bac831e9f5265102c885c59bc
+  size: 41162
+  hash: md5
+  path: NFE.csv

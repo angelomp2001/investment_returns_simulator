@@ -1,0 +1,5 @@
+outs:
+- md5: 5f5f028e05546fb8f712947eb32398e6
+  size: 39180
+  hash: md5
+  path: LTC.csv

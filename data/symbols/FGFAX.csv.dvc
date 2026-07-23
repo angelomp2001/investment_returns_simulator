@@ -1,0 +1,5 @@
+outs:
+- md5: 85d5ef629c0b45381b1a1f756fba1774
+  size: 39177
+  hash: md5
+  path: FGFAX.csv

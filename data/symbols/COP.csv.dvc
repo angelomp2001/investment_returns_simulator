@@ -1,0 +1,5 @@
+outs:
+- md5: 72cce064c4d781e79b82e576c9c7732b
+  size: 39801
+  hash: md5
+  path: COP.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 2a32ae7aa9522e4d0a31a20df5634e5f
+  size: 38521
+  hash: md5
+  path: TEVA.csv

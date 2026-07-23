@@ -1,0 +1,5 @@
+outs:
+- md5: 242e333bbe18a09bf2b3695fa68e609c
+  size: 40725
+  hash: md5
+  path: DGX.csv

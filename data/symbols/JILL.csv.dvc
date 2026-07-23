@@ -1,0 +1,5 @@
+outs:
+- md5: 80bf3d835e81217e370750866cdb433f
+  size: 38832
+  hash: md5
+  path: JILL.csv

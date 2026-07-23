@@ -1,0 +1,5 @@
+outs:
+- md5: 873f6d4f3cbe4ae0ca0a1d105b887a71
+  size: 39762
+  hash: md5
+  path: NTRS.csv

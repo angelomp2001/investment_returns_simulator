@@ -1,0 +1,5 @@
+outs:
+- md5: 3bfc05062670a6769b7124c2b53efe7c
+  size: 37795
+  hash: md5
+  path: CRSR.csv

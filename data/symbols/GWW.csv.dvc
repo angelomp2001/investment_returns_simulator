@@ -1,0 +1,5 @@
+outs:
+- md5: 42d1cdd38abd2956358d16e25f1665b6
+  size: 41174
+  hash: md5
+  path: GWW.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 18dcb8bbc965454ef71ac840478dc485
+  size: 39146
+  hash: md5
+  path: NWSA.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: e26eca9956ae6c5884ed4ca1c79247db
+  size: 39186
+  hash: md5
+  path: FOX.csv

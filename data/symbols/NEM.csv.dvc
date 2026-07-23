@@ -1,0 +1,5 @@
+outs:
+- md5: fba3634704eedf81e80c08e60f8026fd
+  size: 39279
+  hash: md5
+  path: NEM.csv

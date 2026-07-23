@@ -1,0 +1,5 @@
+outs:
+- md5: 064ef1ee883a181b0f936ac48df02a60
+  size: 38484
+  hash: md5
+  path: BTTRX.csv

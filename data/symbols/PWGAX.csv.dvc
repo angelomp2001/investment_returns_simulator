@@ -1,0 +1,5 @@
+outs:
+- md5: dfffb4a3cf6840833b9aaed3bd7edffe
+  size: 39100
+  hash: md5
+  path: PWGAX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 6d047bf673a6a6e0252cbbd2572a8b5e
+  size: 35492
+  hash: md5
+  path: SUTAX.csv

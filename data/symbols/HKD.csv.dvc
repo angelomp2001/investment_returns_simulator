@@ -1,0 +1,5 @@
+outs:
+- md5: fcf7d6e5a81a3da23052495f0f7030f4
+  size: 35156
+  hash: md5
+  path: HKD.csv

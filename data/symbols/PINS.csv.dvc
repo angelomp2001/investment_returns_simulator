@@ -1,0 +1,5 @@
+outs:
+- md5: b737bd38e845a837c43d429fadc5446f
+  size: 39155
+  hash: md5
+  path: PINS.csv

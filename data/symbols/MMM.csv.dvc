@@ -1,0 +1,5 @@
+outs:
+- md5: 241386b3853991e9109d69484bc55cfa
+  size: 40294
+  hash: md5
+  path: MMM.csv

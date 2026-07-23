@@ -1,0 +1,5 @@
+outs:
+- md5: 97c320c2d07bdc780f2cb0fe9559c947
+  size: 39154
+  hash: md5
+  path: SEIRX.csv

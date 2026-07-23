@@ -1,0 +1,5 @@
+outs:
+- md5: 664866cb948df24beb44641ebad8606d
+  size: 38921
+  hash: md5
+  path: FSK.csv

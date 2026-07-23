@@ -1,0 +1,5 @@
+outs:
+- md5: a76bc0a888fe4953212d58cf82c0aee1
+  size: 38326
+  hash: md5
+  path: OPRA.csv

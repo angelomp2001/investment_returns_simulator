@@ -1,0 +1,5 @@
+outs:
+- md5: 512b86a57788a7b4bd58955aece8a176
+  size: 40820
+  hash: md5
+  path: INTU.csv

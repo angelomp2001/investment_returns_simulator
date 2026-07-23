@@ -1,0 +1,5 @@
+outs:
+- md5: c9f41a0d7fe75edb6dbfc44202bfb826
+  size: 40700
+  hash: md5
+  path: LFT.csv

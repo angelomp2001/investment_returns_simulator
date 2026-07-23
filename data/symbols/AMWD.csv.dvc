@@ -1,0 +1,5 @@
+outs:
+- md5: 9085699cbe6cb345ac517e461e821ec4
+  size: 38157
+  hash: md5
+  path: AMWD.csv

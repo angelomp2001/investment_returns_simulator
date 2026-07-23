@@ -1,0 +1,5 @@
+outs:
+- md5: 86440fe44b529d57b498accf4cab88bd
+  size: 39001
+  hash: md5
+  path: GBTC.csv

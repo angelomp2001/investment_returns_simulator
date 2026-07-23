@@ -1,0 +1,5 @@
+outs:
+- md5: f640b8a0eea1504813147e63b7b2248b
+  size: 38584
+  hash: md5
+  path: CEE.csv

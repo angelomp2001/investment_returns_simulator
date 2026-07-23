@@ -1,0 +1,5 @@
+outs:
+- md5: 4304792fb6de780c53d6153d51837ef7
+  size: 38372
+  hash: md5
+  path: SMCI.csv

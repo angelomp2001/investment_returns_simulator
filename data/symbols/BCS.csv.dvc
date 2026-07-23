@@ -1,0 +1,5 @@
+outs:
+- md5: 9ddc76fd3ff668a675c27bb099005512
+  size: 38102
+  hash: md5
+  path: BCS.csv

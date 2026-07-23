@@ -1,0 +1,5 @@
+outs:
+- md5: 3e508ac9402b17e76fab4b1385af6f4e
+  size: 37449
+  hash: md5
+  path: CITFX.csv

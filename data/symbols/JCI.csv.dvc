@@ -1,0 +1,5 @@
+outs:
+- md5: 504a5dc0620f9a8b8f2e80ec99f719b8
+  size: 39450
+  hash: md5
+  path: JCI.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 0df2f4e3d5a00de5380c698a84a5a415
+  size: 40349
+  hash: md5
+  path: BTIEX.csv

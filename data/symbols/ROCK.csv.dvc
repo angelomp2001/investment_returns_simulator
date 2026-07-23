@@ -1,0 +1,5 @@
+outs:
+- md5: 32ff87c13cc214cd8f353ca3bcbfb71f
+  size: 39160
+  hash: md5
+  path: ROCK.csv

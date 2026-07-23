@@ -1,0 +1,5 @@
+outs:
+- md5: 772b1d0d4afa530cef366dd64bbe9a1f
+  size: 37319
+  hash: md5
+  path: DOCS.csv

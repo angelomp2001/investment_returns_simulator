@@ -1,0 +1,5 @@
+outs:
+- md5: 669c77dfbdf35cfafcda6eafd259642c
+  size: 40543
+  hash: md5
+  path: ALL.csv

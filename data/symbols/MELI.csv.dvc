@@ -1,0 +1,5 @@
+outs:
+- md5: 2b62c9c1739199567d0058a6b1617554
+  size: 42062
+  hash: md5
+  path: MELI.csv

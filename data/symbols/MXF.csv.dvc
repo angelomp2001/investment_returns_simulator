@@ -1,0 +1,5 @@
+outs:
+- md5: d46fb4977716c14688495e9c5f4ac9cc
+  size: 39008
+  hash: md5
+  path: MXF.csv

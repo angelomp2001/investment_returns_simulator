@@ -1,0 +1,5 @@
+outs:
+- md5: ae86d3aff8a6172a171b6a6bc870fa8f
+  size: 36856
+  hash: md5
+  path: SRAD.csv

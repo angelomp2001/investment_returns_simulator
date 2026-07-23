@@ -1,0 +1,5 @@
+outs:
+- md5: bbcafe208c083c8e3a469318fc4c9250
+  size: 40395
+  hash: md5
+  path: FTRNX.csv

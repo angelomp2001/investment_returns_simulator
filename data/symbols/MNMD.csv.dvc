@@ -1,0 +1,5 @@
+outs:
+- md5: 5d44c37ea0fe73efcc80e07e9c256482
+  size: 36976
+  hash: md5
+  path: MNMD.csv

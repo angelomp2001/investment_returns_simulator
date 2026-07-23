@@ -1,0 +1,5 @@
+outs:
+- md5: 7d6d5cde8bb1f4c75832b5c31e8861b1
+  size: 39169
+  hash: md5
+  path: NMIMX.csv

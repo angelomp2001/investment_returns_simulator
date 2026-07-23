@@ -1,0 +1,5 @@
+outs:
+- md5: 30baf7d5e3e0cc86cac8f0b229f0386c
+  size: 39195
+  hash: md5
+  path: KO.csv

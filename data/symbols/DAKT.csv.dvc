@@ -1,0 +1,5 @@
+outs:
+- md5: 69ada3dc79f6d9f0391fd33787ecd2df
+  size: 38100
+  hash: md5
+  path: DAKT.csv

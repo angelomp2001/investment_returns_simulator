@@ -1,0 +1,5 @@
+outs:
+- md5: 4bec735dec216055ba41c76f31fcb7e1
+  size: 36610
+  hash: md5
+  path: NRGEX.csv

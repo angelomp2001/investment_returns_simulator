@@ -1,0 +1,5 @@
+outs:
+- md5: bb8a5e14c0f531be6e6d20f6cbb91097
+  size: 39141
+  hash: md5
+  path: CLIFX.csv

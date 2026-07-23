@@ -1,0 +1,5 @@
+outs:
+- md5: 75d68016dbcd3b6fb9bf02281d64aee3
+  size: 39182
+  hash: md5
+  path: MINGX.csv

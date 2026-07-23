@@ -1,0 +1,5 @@
+outs:
+- md5: 8bc61a0637f329a9f87652365cd9e380
+  size: 39186
+  hash: md5
+  path: LOB.csv

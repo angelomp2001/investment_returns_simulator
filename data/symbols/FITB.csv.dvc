@@ -1,0 +1,5 @@
+outs:
+- md5: 31ff685f590e9e4d5827fe3522986a93
+  size: 39185
+  hash: md5
+  path: FITB.csv

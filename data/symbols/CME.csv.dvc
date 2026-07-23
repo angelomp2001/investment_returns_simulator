@@ -1,0 +1,5 @@
+outs:
+- md5: ee2807a9dc1545ed03771acae6f70ddf
+  size: 40820
+  hash: md5
+  path: CME.csv

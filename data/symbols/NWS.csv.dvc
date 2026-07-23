@@ -1,0 +1,5 @@
+outs:
+- md5: 5154ea3e86efae64eb60884948cd6064
+  size: 39126
+  hash: md5
+  path: NWS.csv

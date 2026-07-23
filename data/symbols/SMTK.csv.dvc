@@ -1,0 +1,5 @@
+outs:
+- md5: c87e1ae4a29495278d89f01a2c4d0d30
+  size: 33333
+  hash: md5
+  path: SMTK.csv

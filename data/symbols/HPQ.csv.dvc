@@ -1,0 +1,5 @@
+outs:
+- md5: b36f42ed8b5d5480ebd1e69894131a53
+  size: 39170
+  hash: md5
+  path: HPQ.csv

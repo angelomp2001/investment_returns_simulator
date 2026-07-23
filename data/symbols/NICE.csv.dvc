@@ -1,0 +1,5 @@
+outs:
+- md5: af89cb938c1a0fa41ef5751fb04acf08
+  size: 40683
+  hash: md5
+  path: NICE.csv

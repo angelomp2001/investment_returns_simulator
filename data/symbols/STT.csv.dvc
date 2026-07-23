@@ -1,0 +1,5 @@
+outs:
+- md5: a788aa632e07ba019798d01bd10d0bbf
+  size: 39435
+  hash: md5
+  path: STT.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 6d83eb7cc19836845d4af8cd5fa59c4c
+  size: 38912
+  hash: md5
+  path: MEFFX.csv

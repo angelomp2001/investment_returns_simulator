@@ -1,0 +1,5 @@
+outs:
+- md5: a665f1db7dae6c87d5e30b03ba4bd17e
+  size: 40520
+  hash: md5
+  path: ALLE.csv

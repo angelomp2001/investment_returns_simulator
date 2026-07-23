@@ -1,0 +1,5 @@
+outs:
+- md5: 7b5bcff82bdf0c4a5c55216fcb8f52c6
+  size: 39152
+  hash: md5
+  path: FGSAX.csv

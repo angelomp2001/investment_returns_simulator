@@ -1,0 +1,5 @@
+outs:
+- md5: bbda2f8eead854a6cce1865e2df7d87c
+  size: 39182
+  hash: md5
+  path: BIGFX.csv

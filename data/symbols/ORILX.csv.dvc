@@ -1,0 +1,5 @@
+outs:
+- md5: d5c5a53eefb222def2eaf345e40bc938
+  size: 39124
+  hash: md5
+  path: ORILX.csv

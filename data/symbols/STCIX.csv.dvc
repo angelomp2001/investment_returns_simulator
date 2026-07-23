@@ -1,0 +1,5 @@
+outs:
+- md5: f8534cbed5a8310992e99c8860749d4a
+  size: 37662
+  hash: md5
+  path: STCIX.csv

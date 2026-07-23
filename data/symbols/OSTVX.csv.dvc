@@ -1,0 +1,5 @@
+outs:
+- md5: 3f3b453f2ba258b5534fb735a9c29fef
+  size: 39150
+  hash: md5
+  path: OSTVX.csv

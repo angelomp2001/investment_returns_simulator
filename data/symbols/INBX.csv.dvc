@@ -1,0 +1,5 @@
+outs:
+- md5: 3d68156ed63b15a4d0b8650860f296dc
+  size: 33755
+  hash: md5
+  path: INBX.csv

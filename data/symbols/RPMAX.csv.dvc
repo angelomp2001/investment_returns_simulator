@@ -1,0 +1,5 @@
+outs:
+- md5: b31b0a842d0b16d9425806cce81d5715
+  size: 38887
+  hash: md5
+  path: RPMAX.csv

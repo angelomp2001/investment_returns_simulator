@@ -1,0 +1,5 @@
+outs:
+- md5: 6e810b5e0ae58d9686e1d713d6619cd1
+  size: 39181
+  hash: md5
+  path: NICSX.csv

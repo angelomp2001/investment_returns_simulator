@@ -1,0 +1,5 @@
+outs:
+- md5: 007c99958e71e1c2126814d5992d9a97
+  size: 40370
+  hash: md5
+  path: NOK.csv

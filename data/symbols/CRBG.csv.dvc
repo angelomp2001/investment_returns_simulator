@@ -1,0 +1,5 @@
+outs:
+- md5: 6f12a0208bc06f102c57bb175dec849e
+  size: 35829
+  hash: md5
+  path: CRBG.csv

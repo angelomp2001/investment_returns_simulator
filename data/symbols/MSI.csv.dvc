@@ -1,0 +1,5 @@
+outs:
+- md5: 75b8dbb1e03c810bad7e5de74f2cfb2a
+  size: 40830
+  hash: md5
+  path: MSI.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 1c08ff6f0e6605d38f3074b4e623e55a
+  size: 39237
+  hash: md5
+  path: SGTRX.csv

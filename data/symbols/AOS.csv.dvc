@@ -1,0 +1,5 @@
+outs:
+- md5: eaef9a5050088af8a81ddeddc2b1666e
+  size: 39184
+  hash: md5
+  path: AOS.csv

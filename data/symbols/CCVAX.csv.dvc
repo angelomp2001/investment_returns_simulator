@@ -1,0 +1,5 @@
+outs:
+- md5: bb35cdbf8c7de230636e831d7a663f18
+  size: 39192
+  hash: md5
+  path: CCVAX.csv

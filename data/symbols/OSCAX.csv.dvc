@@ -1,0 +1,5 @@
+outs:
+- md5: 978c495cc883c5556cf74e7d068673e9
+  size: 39150
+  hash: md5
+  path: OSCAX.csv

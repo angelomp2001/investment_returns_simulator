@@ -1,0 +1,5 @@
+outs:
+- md5: 5eaf47f18cb36764b0ac7a806f6d860b
+  size: 39187
+  hash: md5
+  path: CMSCX.csv

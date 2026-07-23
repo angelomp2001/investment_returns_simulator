@@ -1,0 +1,5 @@
+outs:
+- md5: bce259ceef8919be257834e2d135472c
+  size: 40812
+  hash: md5
+  path: ITW.csv

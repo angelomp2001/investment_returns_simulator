@@ -1,0 +1,5 @@
+outs:
+- md5: abc55696c2d6a0f0246789193d3bf28e
+  size: 38326
+  hash: md5
+  path: GAIN.csv

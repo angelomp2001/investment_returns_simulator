@@ -1,0 +1,5 @@
+outs:
+- md5: 4673ae607bc8be77bcee76f7541bf6a4
+  size: 37999
+  hash: md5
+  path: APP.csv

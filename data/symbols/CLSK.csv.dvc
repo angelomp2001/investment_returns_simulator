@@ -1,0 +1,5 @@
+outs:
+- md5: 3cbca4563c6164b2982c65ccdc25f5c7
+  size: 38303
+  hash: md5
+  path: CLSK.csv

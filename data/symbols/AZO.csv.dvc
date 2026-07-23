@@ -1,0 +1,5 @@
+outs:
+- md5: 70f670092fb7594c56f5cc18b6e3d3d5
+  size: 42387
+  hash: md5
+  path: AZO.csv

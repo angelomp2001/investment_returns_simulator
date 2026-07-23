@@ -1,0 +1,5 @@
+outs:
+- md5: 20082d79623b388dbec72b349977e9ff
+  size: 40335
+  hash: md5
+  path: DTE.csv

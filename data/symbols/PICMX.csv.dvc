@@ -1,0 +1,5 @@
+outs:
+- md5: 4a6723d33ad7f69a8b68d82801d8f98a
+  size: 39161
+  hash: md5
+  path: PICMX.csv

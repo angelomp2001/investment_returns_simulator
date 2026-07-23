@@ -1,0 +1,5 @@
+outs:
+- md5: 59dd83d6470cd3edccd5df8b0433933e
+  size: 40808
+  hash: md5
+  path: HUM.csv

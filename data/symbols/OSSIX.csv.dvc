@@ -1,0 +1,5 @@
+outs:
+- md5: 805fdac843873e8f7d5630465de60014
+  size: 39164
+  hash: md5
+  path: OSSIX.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: f91bb020ec2917b119706a2abfc04ffe
+  size: 38022
+  hash: md5
+  path: LSLTX.csv

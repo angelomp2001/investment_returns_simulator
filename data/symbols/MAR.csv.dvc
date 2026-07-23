@@ -1,0 +1,5 @@
+outs:
+- md5: b921546b885f0ad72b1c9ca265db38ca
+  size: 40664
+  hash: md5
+  path: MAR.csv

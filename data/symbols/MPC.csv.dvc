@@ -1,0 +1,5 @@
+outs:
+- md5: 63e1ce69b074809460f5a1a5edf7a3b3
+  size: 40126
+  hash: md5
+  path: MPC.csv

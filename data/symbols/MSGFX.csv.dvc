@@ -1,0 +1,5 @@
+outs:
+- md5: 1b099d613d75177dea66b945e38f9773
+  size: 39173
+  hash: md5
+  path: MSGFX.csv

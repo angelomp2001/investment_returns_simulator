@@ -1,0 +1,5 @@
+outs:
+- md5: 7a984f21d0a92875e38091b09017431b
+  size: 40745
+  hash: md5
+  path: KMB.csv

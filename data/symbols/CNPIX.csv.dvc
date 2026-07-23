@@ -1,0 +1,5 @@
+outs:
+- md5: 1e67110263a26d83f0e6e17b805c9f63
+  size: 39214
+  hash: md5
+  path: CNPIX.csv

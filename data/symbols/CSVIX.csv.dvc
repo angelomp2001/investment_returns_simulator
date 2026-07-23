@@ -1,0 +1,5 @@
+outs:
+- md5: 9cbe408a2759bf3704a7bd6af4ba1e29
+  size: 39154
+  hash: md5
+  path: CSVIX.csv

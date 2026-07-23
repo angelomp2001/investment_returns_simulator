@@ -1,0 +1,5 @@
+outs:
+- md5: 33b87512760e84af7f06fee615584b2c
+  size: 39166
+  hash: md5
+  path: SGENX.csv

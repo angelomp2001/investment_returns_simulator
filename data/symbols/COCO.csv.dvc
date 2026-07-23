@@ -1,0 +1,5 @@
+outs:
+- md5: 13ee1601c918bbab2af4e5f35367cc13
+  size: 36887
+  hash: md5
+  path: COCO.csv

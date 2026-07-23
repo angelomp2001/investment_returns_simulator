@@ -1,0 +1,5 @@
+outs:
+- md5: 5d7e4a2308191fdfad2bdd7e448c0713
+  size: 40820
+  hash: md5
+  path: CMI.csv

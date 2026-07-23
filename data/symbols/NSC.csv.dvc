@@ -1,0 +1,5 @@
+outs:
+- md5: 99f4d5e634b7b80c91dec6e82782c58f
+  size: 40811
+  hash: md5
+  path: NSC.csv

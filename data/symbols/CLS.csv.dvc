@@ -1,0 +1,5 @@
+outs:
+- md5: e1c630389f9dbce6b598176286a8c86b
+  size: 38960
+  hash: md5
+  path: CLS.csv

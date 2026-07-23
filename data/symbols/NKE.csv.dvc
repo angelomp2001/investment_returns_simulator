@@ -1,0 +1,5 @@
+outs:
+- md5: 0bcba1a6cf029a41cb962a627fa2f0e9
+  size: 39941
+  hash: md5
+  path: NKE.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 49243f010b65f05f2c8cd0668a2629b6
+  size: 39192
+  hash: md5
+  path: JCNNX.csv

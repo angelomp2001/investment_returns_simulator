@@ -1,0 +1,5 @@
+outs:
+- md5: 9bf93284b7a22b0b328434fd42c733ec
+  size: 39174
+  hash: md5
+  path: GAM.csv

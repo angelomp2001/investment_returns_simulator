@@ -1,0 +1,5 @@
+outs:
+- md5: 707b94c9f85939abd850bc39d4489db5
+  size: 40658
+  hash: md5
+  path: QCOM.csv

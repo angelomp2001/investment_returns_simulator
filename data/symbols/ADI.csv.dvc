@@ -1,0 +1,5 @@
+outs:
+- md5: 8a6906d895c10e4268c5e36e8fd82218
+  size: 40732
+  hash: md5
+  path: ADI.csv

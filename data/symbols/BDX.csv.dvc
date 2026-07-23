@@ -1,0 +1,5 @@
+outs:
+- md5: d1970325dc391f51b95a67a46510a69f
+  size: 40829
+  hash: md5
+  path: BDX.csv

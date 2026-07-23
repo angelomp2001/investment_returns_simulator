@@ -1,0 +1,5 @@
+outs:
+- md5: 49ddb25cd1e24dc4289ecd89c37c32c2
+  size: 39161
+  hash: md5
+  path: CAMUX.csv

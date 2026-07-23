@@ -1,0 +1,5 @@
+outs:
+- md5: 22dd67dd04223f88aef91c1ca4fec95a
+  size: 38888
+  hash: md5
+  path: STNE.csv

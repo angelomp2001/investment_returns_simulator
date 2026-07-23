@@ -1,0 +1,5 @@
+outs:
+- md5: 7af2e49ca8c84c112ccfbeb97f2ae829
+  size: 40731
+  hash: md5
+  path: CLX.csv

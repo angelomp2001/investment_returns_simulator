@@ -1,0 +1,5 @@
+outs:
+- md5: 961d1c4279dfd84583d3e404851c4680
+  size: 39175
+  hash: md5
+  path: FSCIX.csv

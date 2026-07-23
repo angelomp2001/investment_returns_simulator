@@ -1,0 +1,5 @@
+outs:
+- md5: 61498867c604008773fd7a96d6c901e0
+  size: 37753
+  hash: md5
+  path: IAG.csv

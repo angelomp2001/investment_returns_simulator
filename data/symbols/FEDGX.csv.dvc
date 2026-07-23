@@ -1,0 +1,5 @@
+outs:
+- md5: 61ff0116632744cc5b2ee1d5b555f9ca
+  size: 39111
+  hash: md5
+  path: FEDGX.csv

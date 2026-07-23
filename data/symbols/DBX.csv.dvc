@@ -1,0 +1,5 @@
+outs:
+- md5: b370d7a55440d8a6d3b80b783e195035
+  size: 39155
+  hash: md5
+  path: DBX.csv

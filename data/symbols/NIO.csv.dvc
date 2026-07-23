@@ -1,0 +1,5 @@
+outs:
+- md5: c6e0a38ff9e382704b33d6889da82fb7
+  size: 38211
+  hash: md5
+  path: NIO.csv

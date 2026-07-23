@@ -1,0 +1,5 @@
+outs:
+- md5: 3dac7606b5ece1243a6e6c0197013cd6
+  size: 38789
+  hash: md5
+  path: SSYS.csv

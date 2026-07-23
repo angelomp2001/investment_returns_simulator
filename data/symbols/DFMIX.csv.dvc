@@ -1,0 +1,5 @@
+outs:
+- md5: 4d8d44279d56b5c9e865ec2c4bbc7010
+  size: 39175
+  hash: md5
+  path: DFMIX.csv

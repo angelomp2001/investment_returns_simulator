@@ -1,0 +1,5 @@
+outs:
+- md5: a278f4567e12beb53a9729a9eb20ab9d
+  size: 40242
+  hash: md5
+  path: CTAS.csv

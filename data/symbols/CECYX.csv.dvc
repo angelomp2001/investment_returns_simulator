@@ -1,0 +1,5 @@
+outs:
+- md5: 0ef13f0fcc630282cccdf76894856e35
+  size: 39160
+  hash: md5
+  path: CECYX.csv

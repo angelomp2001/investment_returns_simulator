@@ -1,0 +1,5 @@
+outs:
+- md5: a3292fab4153d6bea19d7c46f62db31d
+  size: 39029
+  hash: md5
+  path: SESMF.csv

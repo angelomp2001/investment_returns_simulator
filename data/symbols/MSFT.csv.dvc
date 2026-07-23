@@ -1,0 +1,5 @@
+outs:
+- md5: 53dbd3e8c841b20e5ac68d7bf03b1816
+  size: 40830
+  hash: md5
+  path: MSFT.csv

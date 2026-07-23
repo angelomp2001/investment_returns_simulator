@@ -1,0 +1,5 @@
+outs:
+- md5: 3aecd2e94e6146f885a666691c701a97
+  size: 39210
+  hash: md5
+  path: INTC.csv
